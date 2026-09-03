@@ -1,0 +1,815 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Art by Zurc</title>
+<meta name="description" content="A catalogue of handmade pottery by Art by Zurc, Asheville, North Carolina.">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Art by Zurc">
+<meta property="og:description" content="Handmade pottery, Asheville, North Carolina.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Cpath d='M16 5c-2 3-3 5-3 7 0 2-4 5-4 10 0 6 3 10 7 10s7-4 7-10c0-5-4-8-4-10 0-2-1-4-3-7z' fill='%23c9ab92'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;1,6..72,300&display=swap">
+<style>
+:root{
+  --paper:#ffffff;
+  --ink:#1a1512;
+  --muted:#8b817a;
+  --line:#ece7e1;
+  --clay:#9a4a2c;
+  --clay-soft:#f6efe9;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+  -webkit-text-size-adjust:100%;
+}
+img{max-width:100%}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--clay);outline-offset:3px}
+
+.masthead{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:.35rem;
+  padding:3.25rem 1.25rem 2.5rem;
+  background:var(--paper);
+}
+.mark{
+  margin:0;
+  font-weight:200;
+  font-size:clamp(1.6rem,4.4vw,2.4rem);
+  letter-spacing:.02em;
+  line-height:1.1;
+  text-align:center;
+  text-wrap:balance;
+  cursor:default;
+  -webkit-user-select:none;
+  user-select:none;
+}
+.trade{
+  margin:0;
+  font-family:var(--sans);
+  font-size:.66rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--muted);
+  text-align:center;
+}
+
+.grid{column-count:4;column-gap:0;padding:0;margin:0}
+@media (max-width:1240px){.grid{column-count:3}}
+@media (max-width:820px){.grid{column-count:2}}
+.piece{
+  break-inside:avoid;
+  -webkit-column-break-inside:avoid;
+  page-break-inside:avoid;
+  margin:0;padding:0;display:block;
+}
+.shot{
+  display:block;width:100%;padding:0;margin:0;border:0;
+  background:none;cursor:zoom-in;line-height:0;
+}
+.shot img{display:block;width:100%;height:auto;vertical-align:bottom;background:#f5f2ee}
+.piece figcaption{
+  font-style:italic;
+  font-size:.9rem;
+  line-height:1.35;
+  color:var(--muted);
+  padding:.7rem 1rem 1.5rem;
+  text-align:center;
+}
+.grid.no-titles .piece figcaption{display:none}
+.grid.no-titles .piece{line-height:0}
+
+.colophon{padding:3.5rem 1.25rem 4rem;text-align:center}
+.colophon a,.colophon span{
+  font-family:var(--sans);
+  font-size:.78rem;
+  letter-spacing:.1em;
+  color:var(--muted);
+  text-decoration:none;
+  border-bottom:1px solid var(--line);
+  padding-bottom:2px;
+}
+.colophon a:hover{color:var(--ink)}
+
+.blank{padding:5rem 1.5rem 7rem;text-align:center;color:var(--muted);font-size:1.05rem;font-style:italic}
+
+.viewer{
+  position:fixed;inset:0;z-index:40;background:var(--paper);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:1.1rem;padding:3.5rem 1.25rem 2.5rem;cursor:zoom-out;
+}
+.viewer[hidden]{display:none}
+.viewer img{max-width:min(100%,1100px);max-height:78vh;width:auto;height:auto;object-fit:contain}
+.viewer .vtitle{font-style:italic;font-size:1rem;color:var(--muted);text-align:center;max-width:34rem;margin:0}
+.xclose{
+  position:absolute;top:.75rem;right:.9rem;width:2.6rem;height:2.6rem;
+  border:0;border-radius:50%;background:none;color:var(--muted);
+  font-size:1.5rem;line-height:1;cursor:pointer;
+}
+.xclose:hover{color:var(--ink)}
+.vnav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  border:0;background:none;color:var(--muted);
+  font-size:1.9rem;line-height:1;padding:1rem .8rem;cursor:pointer;
+}
+.vnav:hover{color:var(--ink)}
+.vprev{left:.15rem}
+.vnext{right:.15rem}
+
+/* ---------- studio ---------- */
+.studio{
+  position:fixed;inset:0;z-index:60;background:var(--paper);
+  overflow-y:auto;font-family:var(--sans);color:var(--ink);
+}
+.studio[hidden]{display:none}
+.studio-inner{
+  max-width:44rem;margin:0 auto;padding:1.5rem 1.25rem 6rem;
+  display:flex;flex-direction:column;gap:1.5rem;
+}
+.studio-bar{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding-bottom:.9rem;border-bottom:1px solid var(--line);
+}
+.studio-bar h2{margin:0;font-family:var(--serif);font-weight:300;font-size:1.35rem}
+.link-btn{
+  border:0;background:none;color:var(--muted);font-size:.85rem;cursor:pointer;
+  text-decoration:underline;text-underline-offset:3px;padding:.35rem;
+}
+.link-btn:hover{color:var(--ink)}
+.block{display:flex;flex-direction:column;gap:.7rem}
+.block > h3{
+  margin:0;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);font-weight:600;
+}
+.drop{
+  border:1px dashed #d9d2ca;border-radius:2px;background:var(--clay-soft);
+  padding:1.6rem 1.1rem;text-align:center;
+  display:flex;flex-direction:column;gap:.5rem;align-items:center;
+}
+.drop p{margin:0;font-size:.85rem;color:var(--muted);line-height:1.5;max-width:30rem}
+.btn{
+  border:1px solid var(--clay);background:var(--clay);color:#fff;border-radius:2px;
+  padding:.7rem 1.15rem;font-size:.9rem;font-weight:500;cursor:pointer;
+}
+.btn:hover{background:#87401f;border-color:#87401f}
+.btn[disabled]{opacity:.45;cursor:default}
+.btn.ghost{background:none;color:var(--clay)}
+.btn.ghost:hover{background:var(--clay-soft);color:var(--clay)}
+.rows{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+.row{
+  display:grid;grid-template-columns:58px 1fr auto;gap:.85rem;align-items:center;
+  padding:.7rem 0;border-bottom:1px solid var(--line);
+}
+.row img{width:58px;height:58px;object-fit:cover;display:block;background:#f3f0ec}
+.row input[type=text]{
+  width:100%;border:0;border-bottom:1px solid var(--line);background:none;
+  padding:.45rem .1rem;font-family:var(--serif);font-size:1rem;color:var(--ink);
+}
+.row input[type=text]:focus{border-bottom-color:var(--clay);outline:none}
+.rowtools{display:flex;gap:.15rem;align-items:center}
+.icon{
+  border:0;background:none;color:var(--muted);width:2rem;height:2rem;
+  font-size:1rem;line-height:1;cursor:pointer;border-radius:2px;
+}
+.icon:hover{background:#f5f2ee;color:var(--ink)}
+.icon.danger:hover{color:var(--clay)}
+.tag{
+  font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--clay);background:var(--clay-soft);padding:.2rem .4rem;border-radius:2px;
+}
+.field{display:flex;flex-direction:column;gap:.3rem}
+.field label{font-size:.78rem;color:var(--muted)}
+.field input[type=text],.field input[type=password]{
+  border:1px solid var(--line);border-radius:2px;padding:.6rem .7rem;
+  font-family:var(--sans);font-size:.95rem;background:var(--paper);color:var(--ink);
+}
+.field input:focus{border-color:var(--clay);outline:none}
+.check{display:flex;align-items:center;gap:.6rem;font-size:.9rem}
+.check input{width:1.05rem;height:1.05rem;accent-color:var(--clay)}
+.note{font-size:.8rem;color:var(--muted);line-height:1.55;margin:0}
+.note.warn{color:var(--clay)}
+.inline{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.savebar{
+  position:sticky;bottom:0;background:var(--paper);border-top:1px solid var(--line);
+  padding:.9rem 0 1.1rem;display:flex;align-items:center;gap:1rem;
+  justify-content:space-between;flex-wrap:wrap;
+}
+.savebar .btn{padding:.8rem 1.6rem}
+details.help{border-top:1px solid var(--line);padding-top:.8rem}
+details.help summary{cursor:pointer;font-size:.82rem;color:var(--muted)}
+details.help ol{margin:.7rem 0 0;padding-left:1.1rem;font-size:.82rem;color:var(--muted);line-height:1.75}
+details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font-size:.78rem}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ------------------------------------------------------------------
+     Art by Zurc — photo catalogue
+     Photos and titles live in catalogue.json in this site's repository.
+     The studio (tap the name five times, or add #studio to the address)
+     commits new photos straight to the repository with a GitHub token
+     that is kept only in this browser.
+  ------------------------------------------------------------------ */
+
+  var REPO = { owner: "ethanfuhrmeister-source", repo: "art-by-zurc", branch: "main" };
+  var TOKEN_KEY = "zurc.gh.token";
+  var REPO_KEY = "zurc.gh.repo";
+  var API = "https://api.github.com";
+
+  function svg(inner, w, h) {
+    var s = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 " + w + " " + h + "'>" +
+      "<rect width='" + w + "' height='" + h + "' fill='#efe8df'/>" + inner + "</svg>";
+    return "data:image/svg+xml," + encodeURIComponent(s);
+  }
+
+  var EXAMPLES = [
+    { id: "ex1", example: true, w: 800, h: 1040, title: "Tall vase, ash glaze",
+      url: svg("<path d='M400 130c-38 62-64 108-64 164 0 58-86 116-86 246 0 158 68 274 150 274s150-116 150-274c0-130-86-188-86-246 0-56-26-102-64-164z' fill='#c9ab92'/><ellipse cx='400' cy='131' rx='64' ry='15' fill='#b6957a'/>", 800, 1040) },
+    { id: "ex2", example: true, w: 800, h: 620, title: "Wide serving bowl",
+      url: svg("<path d='M132 286h536c0 172-116 258-268 258S132 458 132 286z' fill='#c9ab92'/><ellipse cx='400' cy='286' rx='268' ry='52' fill='#b6957a'/><ellipse cx='400' cy='286' rx='232' ry='42' fill='#efe8df'/>", 800, 620) },
+    { id: "ex3", example: true, w: 800, h: 800, title: "Mug, salt fired",
+      url: svg("<path d='M566 336h44c46 0 80 36 80 82s-34 82-80 82h-44z' fill='none' stroke='#c9ab92' stroke-width='40'/><path d='M232 268h336v260c0 62-50 112-112 112H344c-62 0-112-50-112-112z' fill='#c9ab92'/><ellipse cx='400' cy='268' rx='168' ry='34' fill='#b6957a'/>", 800, 800) },
+    { id: "ex4", example: true, w: 800, h: 720, title: "Shallow plate, iron slip",
+      url: svg("<circle cx='400' cy='360' r='276' fill='#c9ab92'/><circle cx='400' cy='360' r='218' fill='#d8c0aa'/><circle cx='400' cy='360' r='96' fill='#c9ab92'/>", 800, 720) }
+  ];
+
+  var DEFAULT_STATE = {
+    name: "Art by Zurc",
+    trade: "Handmade pottery · Asheville, NC",
+    contact: "",
+    showTitles: true,
+    photos: []
+  };
+
+  var state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+  var showingExamples = false;
+  var root = document.getElementById("root");
+  var viewIndex = -1;
+  var studioOpen = false;
+  var busy = false;
+  var message = null;
+  var tapCount = 0;
+  var tapTimer = null;
+  var pendingDeletes = [];
+
+  /* ---------------- helpers ---------------- */
+  function esc(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  }
+  function uid() {
+    return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+  }
+  function slug(s) {
+    return String(s || "piece").toLowerCase().replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "").slice(0, 40) || "piece";
+  }
+  function contactHref(v) {
+    var t = String(v || "").trim();
+    if (!t) return "";
+    if (/^https?:\/\//i.test(t)) return t;
+    if (t.indexOf("@") > 0) return "mailto:" + t;
+    if (/[0-9]{7}/.test(t.replace(/[^0-9]/g, ""))) return "tel:" + t.replace(/[^0-9+]/g, "");
+    return "";
+  }
+  function displayList() {
+    return showingExamples && !state.photos.length ? EXAMPLES : state.photos;
+  }
+  function srcOf(p) { return p.url || p.file; }
+
+  function repoConf() {
+    try {
+      var saved = JSON.parse(localStorage.getItem(REPO_KEY) || "null");
+      if (saved && saved.owner && saved.repo) return saved;
+    } catch (e) {}
+    return REPO;
+  }
+  function token() {
+    try { return localStorage.getItem(TOKEN_KEY) || ""; } catch (e) { return ""; }
+  }
+
+  /* ---------------- load ---------------- */
+  function load() {
+    fetch("catalogue.json?t=" + Date.now(), { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw new Error("no catalogue"); return r.json(); })
+      .then(function (data) {
+        if (data && Array.isArray(data.photos)) {
+          state = {
+            name: data.name || DEFAULT_STATE.name,
+            trade: data.trade == null ? DEFAULT_STATE.trade : data.trade,
+            contact: data.contact || "",
+            showTitles: data.showTitles !== false,
+            photos: data.photos
+          };
+        }
+        showingExamples = !state.photos.length;
+        renderPage();
+      })
+      .catch(function () {
+        showingExamples = true;
+        renderPage();
+      });
+  }
+
+  /* ---------------- public page ---------------- */
+  function renderPage() {
+    var list = displayList();
+    var h = "";
+    h += '<header class="masthead">';
+    h += '<h1 class="mark" id="mark">' + esc(state.name) + "</h1>";
+    if (state.trade) h += '<p class="trade">' + esc(state.trade) + "</p>";
+    h += "</header>";
+
+    if (!list.length) {
+      h += '<p class="blank">New pieces are on their way.</p>';
+    } else {
+      h += '<div class="grid' + (state.showTitles ? "" : " no-titles") + '">';
+      for (var i = 0; i < list.length; i++) {
+        var p = list[i];
+        var dim = p.w && p.h ? ' width="' + p.w + '" height="' + p.h + '"' : "";
+        h += '<figure class="piece">';
+        h += '<button class="shot" data-open="' + i + '" aria-label="' + esc(p.title || "View piece") + '">';
+        h += '<img src="' + esc(srcOf(p)) + '" alt="' + esc(p.title || "Pottery piece") + '"' + dim + ' loading="lazy" decoding="async">';
+        h += "</button>";
+        h += "<figcaption>" + esc(p.title || "") + "</figcaption>";
+        h += "</figure>";
+      }
+      h += "</div>";
+    }
+
+    var href = contactHref(state.contact);
+    h += '<footer class="colophon">';
+    if (state.contact) {
+      h += href ? '<a href="' + esc(href) + '">' + esc(state.contact) + "</a>"
+                : "<span>" + esc(state.contact) + "</span>";
+    }
+    h += "</footer>";
+
+    h += '<div class="viewer" id="viewer" hidden>';
+    h += '<button class="xclose" id="vclose" aria-label="Close">×</button>';
+    h += '<button class="vnav vprev" id="vprev" aria-label="Previous">‹</button>';
+    h += '<button class="vnav vnext" id="vnext" aria-label="Next">›</button>';
+    h += '<img id="vimg" src="" alt="">';
+    h += '<p class="vtitle" id="vtitle"></p>';
+    h += "</div>";
+    h += '<div class="studio" id="studio" hidden></div>';
+
+    root.innerHTML = h;
+
+    root.querySelectorAll("[data-open]").forEach(function (b) {
+      b.addEventListener("click", function () { openViewer(+b.getAttribute("data-open")); });
+    });
+    var mark = document.getElementById("mark");
+    if (mark) mark.addEventListener("click", secretTap);
+    document.getElementById("vclose").addEventListener("click", closeViewer);
+    document.getElementById("viewer").addEventListener("click", function (e) {
+      if (e.target.id === "viewer" || e.target.id === "vimg" || e.target.id === "vtitle") closeViewer();
+    });
+    document.getElementById("vprev").addEventListener("click", function (e) { e.stopPropagation(); step(-1); });
+    document.getElementById("vnext").addEventListener("click", function (e) { e.stopPropagation(); step(1); });
+    if (studioOpen) renderStudio();
+  }
+
+  function openViewer(i) {
+    var list = displayList();
+    var p = list[i];
+    if (!p) return;
+    viewIndex = i;
+    document.getElementById("vimg").src = srcOf(p);
+    document.getElementById("vimg").alt = p.title || "Pottery piece";
+    document.getElementById("vtitle").textContent = p.title || "";
+    document.getElementById("viewer").hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+  function closeViewer() {
+    document.getElementById("viewer").hidden = true;
+    document.body.style.overflow = "";
+    viewIndex = -1;
+  }
+  function step(d) {
+    var n = displayList().length;
+    if (viewIndex < 0 || !n) return;
+    openViewer((viewIndex + d + n) % n);
+  }
+  document.addEventListener("keydown", function (e) {
+    if (viewIndex > -1) {
+      if (e.key === "Escape") closeViewer();
+      if (e.key === "ArrowLeft") step(-1);
+      if (e.key === "ArrowRight") step(1);
+    } else if (studioOpen && e.key === "Escape") closeStudio();
+  });
+
+  /* ---------------- studio entry ---------------- */
+  function secretTap() {
+    tapCount++;
+    clearTimeout(tapTimer);
+    tapTimer = setTimeout(function () { tapCount = 0; }, 1400);
+    if (tapCount >= 5) { tapCount = 0; openStudio(); }
+  }
+  function openStudio() {
+    studioOpen = true;
+    message = null;
+    document.body.style.overflow = "hidden";
+    renderStudio();
+  }
+  function closeStudio() {
+    studioOpen = false;
+    document.body.style.overflow = "";
+    var el = document.getElementById("studio");
+    if (el) el.hidden = true;
+  }
+  function checkHash() {
+    if ((location.hash || "").toLowerCase().indexOf("studio") > -1) openStudio();
+  }
+
+  /* ---------------- studio ---------------- */
+  function renderStudio() {
+    var el = document.getElementById("studio");
+    if (!el) return;
+    el.hidden = false;
+    var conf = repoConf();
+    var hasToken = !!token();
+    var unsaved = state.photos.filter(function (p) { return p.pending; }).length;
+
+    var h = '<div class="studio-inner">';
+    h += '<div class="studio-bar"><h2>Your studio</h2>' +
+         '<button class="link-btn" id="s-close">Back to catalogue</button></div>';
+
+    if (!hasToken) {
+      h += '<div class="block"><h3>One-time setup</h3>';
+      h += '<p class="note">This device needs a key before it can publish. Paste the access token below — it is saved in this browser only, never sent anywhere except GitHub.</p>';
+      h += '<div class="field"><label for="s-token">GitHub access token</label>' +
+           '<input type="password" id="s-token" autocomplete="off" spellcheck="false" placeholder="github_pat_..."></div>';
+      h += '<div class="field"><label for="s-repo">Repository (owner/name)</label>' +
+           '<input type="text" id="s-repo" value="' + esc(conf.owner + "/" + conf.repo) + '" spellcheck="false"></div>';
+      h += '<div class="inline"><button class="btn" id="s-savetoken">Save on this device</button>' +
+           '<button class="link-btn" id="s-test">Test it</button></div>';
+      h += "</div>";
+    }
+
+    h += '<div class="block"><h3>Add photos</h3>';
+    h += '<div class="drop"><input type="file" id="s-file" accept="image/*" multiple hidden>';
+    h += '<button class="btn" id="s-pick">Choose photos</button>';
+    h += "<p>Pick as many as you like from your phone or computer. Big camera photos are fine — they are shrunk for the web automatically.</p></div>";
+    h += "</div>";
+
+    h += '<div class="block"><h3>Your pieces (' + state.photos.length + ")</h3>";
+    if (!state.photos.length) {
+      h += '<p class="note">Nothing published yet. The clay-coloured drawings on the catalogue are placeholders — they disappear the moment your first photo goes up.</p>';
+    } else {
+      h += '<div class="rows">';
+      for (var i = 0; i < state.photos.length; i++) {
+        var p = state.photos[i];
+        h += '<div class="row">';
+        h += '<img src="' + esc(srcOf(p)) + '" alt="">';
+        h += "<span>";
+        h += '<input type="text" data-title="' + i + '" value="' + esc(p.title || "") + '" placeholder="Title of this piece">';
+        if (p.pending) h += '<span class="tag">not published yet</span>';
+        h += "</span>";
+        h += '<span class="rowtools">';
+        h += '<button class="icon" data-up="' + i + '" aria-label="Move up"' + (i === 0 ? " disabled" : "") + ">↑</button>";
+        h += '<button class="icon" data-down="' + i + '" aria-label="Move down"' + (i === state.photos.length - 1 ? " disabled" : "") + ">↓</button>";
+        h += '<button class="icon danger" data-del="' + i + '" aria-label="Remove">×</button>';
+        h += "</span></div>";
+      }
+      h += "</div>";
+    }
+    h += "</div>";
+
+    h += '<div class="block"><h3>Heading and contact</h3>';
+    h += '<div class="field"><label for="s-name">Name at the top</label>' +
+         '<input type="text" id="s-name" value="' + esc(state.name) + '"></div>';
+    h += '<div class="field"><label for="s-trade">Small line underneath</label>' +
+         '<input type="text" id="s-trade" value="' + esc(state.trade || "") + '"></div>';
+    h += '<div class="field"><label for="s-contact">Contact at the bottom (email or phone)</label>' +
+         '<input type="text" id="s-contact" value="' + esc(state.contact || "") + '"></div>';
+    h += '<label class="check"><input type="checkbox" id="s-titles"' + (state.showTitles ? " checked" : "") +
+         "> Show titles under the photos</label>";
+    h += "</div>";
+
+    if (message) h += '<p class="note' + (message.bad ? " warn" : "") + '">' + esc(message.text) + "</p>";
+
+    h += '<details class="help"><summary>Where does the token come from?</summary><ol>' +
+         "<li>On github.com, open Settings → Developer settings → Personal access tokens → Fine-grained tokens.</li>" +
+         "<li>Generate a new token. Under Repository access choose <b>Only select repositories</b> and pick <code>" +
+         esc(conf.owner + "/" + conf.repo) + "</code>.</li>" +
+         "<li>Under Repository permissions set <b>Contents</b> to <b>Read and write</b>. Leave everything else alone.</li>" +
+         "<li>Generate it, copy the token, and paste it into the box above on the device that will be adding photos.</li>" +
+         "</ol></details>";
+
+    h += '<div class="savebar">';
+    h += '<span class="note">' + (unsaved ? unsaved + " photo" + (unsaved > 1 ? "s" : "") + " waiting to go up." :
+         "Changes go live about a minute after you publish.") + "</span>";
+    h += '<button class="btn" id="s-save"' + (busy || !hasToken ? " disabled" : "") + ">" +
+         (busy ? "Publishing…" : "Publish to the website") + "</button>";
+    h += "</div></div>";
+
+    el.innerHTML = h;
+    wireStudio(el);
+  }
+
+  function wireStudio(el) {
+    el.querySelector("#s-close").addEventListener("click", closeStudio);
+
+    var save = el.querySelector("#s-savetoken");
+    if (save) {
+      save.addEventListener("click", function () {
+        var t = el.querySelector("#s-token").value.trim();
+        var r = el.querySelector("#s-repo").value.trim().split("/");
+        if (!t) { message = { text: "Paste the token first.", bad: true }; renderStudio(); return; }
+        try {
+          localStorage.setItem(TOKEN_KEY, t);
+          if (r.length === 2 && r[0] && r[1]) {
+            localStorage.setItem(REPO_KEY, JSON.stringify({ owner: r[0], repo: r[1], branch: REPO.branch }));
+          }
+          message = { text: "Saved on this device. You can add photos now." };
+        } catch (e) {
+          message = { text: "This browser will not let the key be saved. Turn off private browsing and try again.", bad: true };
+        }
+        renderStudio();
+      });
+    }
+    var test = el.querySelector("#s-test");
+    if (test) {
+      test.addEventListener("click", function () {
+        var t = el.querySelector("#s-token").value.trim() || token();
+        var r = el.querySelector("#s-repo").value.trim().split("/");
+        var conf = r.length === 2 && r[0] ? { owner: r[0], repo: r[1] } : repoConf();
+        message = { text: "Checking…" };
+        renderStudio();
+        fetch(API + "/repos/" + conf.owner + "/" + conf.repo, {
+          headers: { Authorization: "Bearer " + t, Accept: "application/vnd.github+json" }
+        }).then(function (res) {
+          message = res.ok
+            ? { text: "The key works." }
+            : { text: "GitHub said no (" + res.status + "). Check the token and the repository name.", bad: true };
+          renderStudio();
+        }).catch(function () {
+          message = { text: "Could not reach GitHub. Check the connection.", bad: true };
+          renderStudio();
+        });
+      });
+    }
+
+    var file = el.querySelector("#s-file");
+    el.querySelector("#s-pick").addEventListener("click", function () { file.click(); });
+    file.addEventListener("change", function () { intake(file.files); });
+
+    el.querySelectorAll("[data-title]").forEach(function (inp) {
+      inp.addEventListener("input", function () {
+        state.photos[+inp.getAttribute("data-title")].title = inp.value;
+      });
+    });
+    el.querySelectorAll("[data-up]").forEach(function (b) {
+      b.addEventListener("click", function () { move(+b.getAttribute("data-up"), -1); });
+    });
+    el.querySelectorAll("[data-down]").forEach(function (b) {
+      b.addEventListener("click", function () { move(+b.getAttribute("data-down"), 1); });
+    });
+    el.querySelectorAll("[data-del]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var p = state.photos.splice(+b.getAttribute("data-del"), 1)[0];
+        if (p && p.file && !p.pending) pendingDeletes.push(p.file);
+        showingExamples = !state.photos.length;
+        renderPage(); renderStudio();
+      });
+    });
+
+    el.querySelector("#s-name").addEventListener("input", function (e) {
+      state.name = e.target.value; refreshBehind();
+    });
+    el.querySelector("#s-trade").addEventListener("input", function (e) {
+      state.trade = e.target.value; refreshBehind();
+    });
+    el.querySelector("#s-contact").addEventListener("input", function (e) {
+      state.contact = e.target.value; refreshBehind();
+    });
+    el.querySelector("#s-titles").addEventListener("change", function (e) {
+      state.showTitles = e.target.checked; refreshBehind();
+    });
+    el.querySelector("#s-save").addEventListener("click", publish);
+  }
+
+  function refreshBehind() {
+    var el = document.getElementById("studio");
+    var keep = el ? el.innerHTML : "";
+    renderPage();
+    var again = document.getElementById("studio");
+    if (again) { again.hidden = false; again.innerHTML = keep; wireStudio(again); }
+  }
+
+  function move(i, d) {
+    var j = i + d;
+    if (j < 0 || j >= state.photos.length) return;
+    var t = state.photos[i]; state.photos[i] = state.photos[j]; state.photos[j] = t;
+    renderPage(); renderStudio();
+  }
+
+  /* ---------------- photo intake ---------------- */
+  function shrink(file, maxEdge, quality) {
+    return new Promise(function (resolve, reject) {
+      var work = window.createImageBitmap
+        ? createImageBitmap(file, { imageOrientation: "from-image" })
+            .catch(function () { return createImageBitmap(file); })
+        : Promise.reject(new Error("unsupported"));
+      work.then(function (bmp) {
+        var scale = Math.min(1, maxEdge / Math.max(bmp.width, bmp.height));
+        var w = Math.max(1, Math.round(bmp.width * scale));
+        var h = Math.max(1, Math.round(bmp.height * scale));
+        var c = document.createElement("canvas");
+        c.width = w; c.height = h;
+        var ctx = c.getContext("2d");
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, w, h);
+        ctx.drawImage(bmp, 0, 0, w, h);
+        if (bmp.close) bmp.close();
+        resolve({ url: c.toDataURL("image/jpeg", quality), w: w, h: h });
+      }).catch(reject);
+    });
+  }
+
+  function intake(files) {
+    if (!files || !files.length) return;
+    var list = Array.prototype.slice.call(files).filter(function (f) { return /^image\//.test(f.type); });
+    if (!list.length) {
+      message = { text: "Those were not photos. Try JPEG, PNG or HEIC images.", bad: true };
+      renderStudio(); return;
+    }
+    message = { text: "Preparing " + list.length + " photo" + (list.length > 1 ? "s" : "") + "…" };
+    renderStudio();
+
+    var done = 0, failed = 0;
+    (function next(i) {
+      if (i >= list.length) {
+        message = failed
+          ? { text: done + " added, " + failed + " could not be read.", bad: true }
+          : { text: done + " photo" + (done > 1 ? "s" : "") + " ready. Give each a title, then publish.", bad: false };
+        showingExamples = false;
+        renderPage(); renderStudio();
+        return;
+      }
+      shrink(list[i], 1600, 0.8).then(function (img) {
+        return img.url.length > 1200000 ? shrink(list[i], 1300, 0.7) : img;
+      }).then(function (img) {
+        state.photos.push({
+          id: uid(), title: "", url: img.url, w: img.w, h: img.h, pending: true,
+          type: "image/jpeg"
+        });
+        done++; next(i + 1);
+      }).catch(function () { failed++; next(i + 1); });
+    })(0);
+  }
+
+  /* ---------------- publishing to GitHub ---------------- */
+  function ghHeaders() {
+    return {
+      Authorization: "Bearer " + token(),
+      Accept: "application/vnd.github+json",
+      "Content-Type": "application/json",
+      "X-GitHub-Api-Version": "2022-11-28"
+    };
+  }
+  function contentsUrl(conf, path) {
+    return API + "/repos/" + conf.owner + "/" + conf.repo + "/contents/" + path;
+  }
+  function getSha(conf, path) {
+    return fetch(contentsUrl(conf, path) + "?ref=" + conf.branch + "&t=" + Date.now(),
+      { headers: ghHeaders(), cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { return j && j.sha ? j.sha : null; })
+      .catch(function () { return null; });
+  }
+  function putFile(conf, path, base64, msg, sha) {
+    var body = { message: msg, content: base64, branch: conf.branch };
+    if (sha) body.sha = sha;
+    return fetch(contentsUrl(conf, path), {
+      method: "PUT", headers: ghHeaders(), body: JSON.stringify(body)
+    }).then(function (r) {
+      if (!r.ok) return r.json().catch(function () { return {}; }).then(function (j) {
+        throw new Error((j && j.message) || ("GitHub " + r.status));
+      });
+      return r.json();
+    });
+  }
+  function deleteFile(conf, path) {
+    return getSha(conf, path).then(function (sha) {
+      if (!sha) return null;
+      return fetch(contentsUrl(conf, path), {
+        method: "DELETE", headers: ghHeaders(),
+        body: JSON.stringify({ message: "Remove " + path, sha: sha, branch: conf.branch })
+      });
+    }).catch(function () { return null; });
+  }
+  function b64(dataUrl) { return dataUrl.slice(dataUrl.indexOf(",") + 1); }
+  function utf8b64(str) {
+    return btoa(String.fromCharCode.apply(null, new TextEncoder().encode(str)));
+  }
+
+  function publish() {
+    if (busy) return;
+    if (!token()) {
+      message = { text: "This device has no key yet — set one up at the top.", bad: true };
+      renderStudio(); return;
+    }
+    busy = true;
+    var conf = repoConf();
+    var newOnes = state.photos.filter(function (p) { return p.pending; });
+    var step = 0;
+
+    function progress(t) { message = { text: t }; renderStudio(); }
+    progress(newOnes.length ? "Uploading photos…" : "Publishing…");
+
+    (function upload(i) {
+      if (i >= newOnes.length) return finish();
+      var p = newOnes[i];
+      var path = "photos/" + new Date().toISOString().slice(0, 10) + "-" + slug(p.title) + "-" + p.id + ".jpg";
+      progress("Uploading photo " + (++step) + " of " + newOnes.length + "…");
+      putFile(conf, path, b64(p.url), "Add " + path)
+        .then(function () {
+          p.file = path;
+          delete p.url;
+          delete p.pending;
+          upload(i + 1);
+        })
+        .catch(function (err) { fail(err); });
+    })(0);
+
+    function finish() {
+      progress("Saving the catalogue…");
+      var data = {
+        name: state.name,
+        trade: state.trade,
+        contact: state.contact,
+        showTitles: state.showTitles,
+        photos: state.photos.map(function (p) {
+          return { file: p.file, title: p.title || "", w: p.w, h: p.h };
+        })
+      };
+      getSha(conf, "catalogue.json")
+        .then(function (sha) {
+          return putFile(conf, "catalogue.json", utf8b64(JSON.stringify(data, null, 2)),
+            "Update catalogue", sha);
+        })
+        .then(function () {
+          var dead = pendingDeletes.slice();
+          pendingDeletes = [];
+          return Promise.all(dead.map(function (f) { return deleteFile(conf, f); }));
+        })
+        .then(function () {
+          busy = false;
+          message = { text: "Published. The website updates in about a minute." };
+          showingExamples = !state.photos.length;
+          renderPage(); renderStudio();
+        })
+        .catch(function (err) { fail(err); });
+    }
+
+    function fail(err) {
+      busy = false;
+      var m = String((err && err.message) || err || "");
+      var text;
+      if (/401|Bad credentials/i.test(m)) {
+        text = "The key was refused. It may have expired — make a new token and save it again.";
+      } else if (/403|404/.test(m)) {
+        text = "No permission to write to this repository. Check the token covers " +
+               conf.owner + "/" + conf.repo + " with Contents set to read and write.";
+      } else if (/409|conflict/i.test(m)) {
+        text = "Someone changed the catalogue at the same time. Try publishing again.";
+      } else {
+        text = "Publishing stopped: " + m + ". Your photos are still here — try again.";
+      }
+      message = { text: text, bad: true };
+      renderPage(); renderStudio();
+    }
+  }
+
+  /* ---------------- go ---------------- */
+  load();
+  checkHash();
+  window.addEventListener("hashchange", checkHash);
+})();
+</script>
+</body>
+</html>
