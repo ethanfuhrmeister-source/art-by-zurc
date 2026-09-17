@@ -1,68 +1,332 @@
 {
-    "name": "Zurc Catalogue",
+  "name": "Zurc Catalogue",
   "trade": "Handmade pottery · Asheville, NC",
   "contact": "",
   "showTitles": false,
   "photos": [
     {
-      "file": "photos/2026-09-16-aurora-mu4kctr2h4pqy.jpg",
-      "title": "Aurora",
-      "w": 1600,
-      "h": 1547
-    },
-    {
-      "file": "photos/2026-09-16-piece-mu4kctwqfgumq.jpg",
+      "file": "photos/2026-09-17-piece-mu63z4cabejv3.jpg",
       "title": "",
       "w": 1600,
-      "h": 1077
+      "h": 1153
     },
     {
-      "file": "photos/2026-09-16-piece-mu4kcu1ynryg9.jpg",
+      "file": "photos/2026-09-17-piece-mu63z4g5yspc1.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 1245
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z4mcrivmy.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 711
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z4r15vajv.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 1120
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z4xj8zve7.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 1155
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z54hzsdrz.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 1132
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z597s18wr.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 1223
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z5fkknck9.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 1135
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z5lxy0hqc.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 1197
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z5qpv29y9.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 1014
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z5u6l928c.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 1002
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z5z9zytv3.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 1115
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z64594gs3.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 999
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z6am6tszf.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 905
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z6e937g7w.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 1237
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z6iz17o0h.jpg",
+      "title": "",
+      "w": 1290,
+      "h": 1600
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z6nka9m1w.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 1046
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z6s5j4o8e.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 922
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z6yc29awv.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 960
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z71xpjd5h.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 992
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z75om0q0w.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 1142
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z7as13d3d.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 1005
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z7fnm8ilp.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 956
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z7jy7q84b.jpg",
+      "title": "",
+      "w": 1379,
+      "h": 1600
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z7o4q4qyd.jpg",
+      "title": "",
+      "w": 1546,
+      "h": 1600
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z7s5vzzhu.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 1434
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z7uz7bniw.jpg",
+      "title": "",
+      "w": 1320,
+      "h": 1234
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z7xx26t0u.jpg",
+      "title": "",
+      "w": 1318,
+      "h": 1160
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z81kg07yo.jpg",
+      "title": "",
+      "w": 1401,
+      "h": 1448
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z87l4wta3.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 822
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z8djmnnuk.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 1027
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z8k1869gh.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 1206
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z8p14ka5x.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 1128
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z8t2loyhe.jpg",
+      "title": "",
+      "w": 1546,
+      "h": 1600
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z8xkirjzr.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 993
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z92moce4g.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 1205
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z96zj3ufq.jpg",
+      "title": "",
+      "w": 1217,
+      "h": 1600
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z9b5vbdpd.jpg",
+      "title": "",
+      "w": 1348,
+      "h": 1600
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z9f6vuil7.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 795
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z9k4s2dvr.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 1014
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z9of7gnhq.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 931
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z9tvmema2.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 950
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63z9xci8ge6.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 870
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63za22rqiwu.jpg",
+      "title": "",
+      "w": 1583,
+      "h": 1600
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63za6rlqexp.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 1340
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63zabge4b6j.jpg",
+      "title": "",
+      "w": 1600,
+      "h": 811
+    },
+    {
+      "file": "photos/2026-09-17-piece-mu63zahpxcen6.jpg",
       "title": "",
       "w": 1600,
       "h": 1059
     },
     {
-      "file": "photos/2026-09-16-piece-mu4kcu8teqrki.jpg",
+      "file": "photos/2026-09-17-piece-mu63zaoc071vs.jpg",
       "title": "",
       "w": 1600,
       "h": 1080
     },
     {
-      "file": "photos/2026-09-16-piece-mu4kcuf32alci.jpg",
+      "file": "photos/2026-09-17-piece-mu63zaudh7n2b.jpg",
       "title": "",
       "w": 1600,
-      "h": 898
+      "h": 813
     },
     {
-      "file": "photos/2026-09-16-piece-mu4kcukyjm8my.jpg",
+      "file": "photos/2026-09-17-piece-mu63zb1avg24d.jpg",
       "title": "",
       "w": 1600,
       "h": 1139
     },
     {
-      "file": "photos/2026-09-16-piece-mu4kcuqduovz8.jpg",
+      "file": "photos/2026-09-17-piece-mu63zb7dat4hp.jpg",
       "title": "",
       "w": 1600,
       "h": 1029
     },
     {
-      "file": "photos/2026-09-16-piece-mu4kcutffwsja.jpg",
+      "file": "photos/2026-09-17-piece-mu63zbb9icrw5.jpg",
       "title": "",
       "w": 1600,
-      "h": 607
+      "h": 638
     },
     {
-      "file": "photos/2026-09-16-piece-mu4kcuxwg9rpm.jpg",
+      "file": "photos/2026-09-17-piece-mu63zbhpjh72o.jpg",
       "title": "",
       "w": 1600,
-      "h": 898
+      "h": 1235
     },
     {
-      "file": "photos/2026-09-16-piece-mu4kcv2t34a2f.jpg",
+      "file": "photos/2026-09-17-piece-mu63zbo0obz5g.jpg",
       "title": "",
       "w": 1600,
-      "h": 898
+      "h": 995
     }
   ]
 }
