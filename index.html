@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Art by Zurc</title>
-<meta name="description" content="A catalogue of handmade pottery by Art by Zurc, Asheville, North Carolina.">
+<title>Zurc Catalog</title>
+<meta name="description" content="Zurc Catalog — an inventory of handmade pottery by Zurc, Asheville, North Carolina.">
 <meta name="robots" content="index, follow">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Art by Zurc">
+<meta property="og:title" content="Zurc Catalog">
 <meta property="og:description" content="Handmade pottery, Asheville, North Carolina.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Cpath d='M16 5c-2 3-3 5-3 7 0 2-4 5-4 10 0 6 3 10 7 10s7-4 7-10c0-5-4-8-4-10 0-2-1-4-3-7z' fill='%23c9ab92'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,6 +23,7 @@
   --clay-soft:#f6efe9;
   --serif:"Newsreader",Georgia,"Times New Roman",serif;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   color-scheme:light;
 }
 *{box-sizing:border-box}
@@ -40,92 +41,112 @@ button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--clay);outline-offset:3px}
 
 .masthead{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:.35rem;
-  padding:3.25rem 1.25rem 2.5rem;
-  background:var(--paper);
+  display:flex;flex-direction:column;align-items:center;gap:.35rem;
+  padding:3.25rem 1.25rem 1.5rem;background:var(--paper);
 }
 .mark{
-  margin:0;
-  font-weight:200;
-  font-size:clamp(1.6rem,4.4vw,2.4rem);
-  letter-spacing:.02em;
-  line-height:1.1;
-  text-align:center;
-  text-wrap:balance;
-  cursor:default;
-  -webkit-user-select:none;
-  user-select:none;
+  margin:0;font-weight:200;font-size:clamp(1.6rem,4.4vw,2.4rem);
+  letter-spacing:.02em;line-height:1.1;text-align:center;text-wrap:balance;
+  cursor:default;-webkit-user-select:none;user-select:none;
 }
 .trade{
-  margin:0;
-  font-family:var(--sans);
-  font-size:.66rem;
-  letter-spacing:.22em;
-  text-transform:uppercase;
-  color:var(--muted);
-  text-align:center;
+  margin:0;font-family:var(--sans);font-size:.66rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--muted);text-align:center;
 }
 
-.grid{column-count:4;column-gap:0;padding:0;margin:0}
+/* ---------- filter bar ---------- */
+.filters{
+  display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;
+  padding:0 1.25rem 2rem;font-family:var(--sans);
+}
+.chip{
+  border:1px solid var(--line);background:none;color:var(--muted);
+  border-radius:999px;padding:.4rem .95rem;font-size:.76rem;letter-spacing:.06em;
+  cursor:pointer;
+}
+.chip:hover{color:var(--ink);border-color:#ded7cf}
+.chip[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+
+/* ---------- grid ---------- */
+.grid{column-count:4;column-gap:1.4rem;padding:0 1.4rem;margin:0}
 @media (max-width:1240px){.grid{column-count:3}}
-@media (max-width:820px){.grid{column-count:2}}
+@media (max-width:820px){.grid{column-count:2;column-gap:1rem;padding:0 1rem}}
+@media (max-width:460px){.grid{column-count:1}}
 .piece{
-  break-inside:avoid;
-  -webkit-column-break-inside:avoid;
-  page-break-inside:avoid;
-  margin:0;padding:0;display:block;
+  break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;
+  margin:0 0 2.2rem;padding:0;display:block;
 }
 .shot{
-  display:block;width:100%;padding:0;margin:0;border:0;
+  position:relative;display:block;width:100%;padding:0;margin:0;border:0;
   background:none;cursor:zoom-in;line-height:0;
 }
 .shot img{display:block;width:100%;height:auto;vertical-align:bottom;background:#f5f2ee}
-.piece figcaption{
-  font-style:italic;
-  font-size:.9rem;
-  line-height:1.35;
-  color:var(--muted);
-  padding:.7rem 1rem 1.5rem;
-  text-align:center;
+.piece.is-sold .shot img{opacity:.5}
+.count{
+  position:absolute;right:.5rem;bottom:.5rem;
+  font-family:var(--sans);font-size:.66rem;letter-spacing:.06em;
+  background:rgba(255,255,255,.92);color:var(--muted);
+  padding:.2rem .45rem;border-radius:2px;line-height:1.3;
 }
-.grid.no-titles .piece figcaption{display:none}
-.grid.no-titles .piece{line-height:0}
+.stamp{
+  position:absolute;left:.5rem;top:.5rem;
+  font-family:var(--sans);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
+  background:var(--ink);color:var(--paper);padding:.25rem .5rem;border-radius:2px;line-height:1.3;
+}
+.meta{padding:.6rem .1rem 0;text-align:left;line-height:1.45}
+.sku{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;
+  color:var(--muted);text-transform:uppercase;
+}
+.name{font-style:italic;font-size:.98rem;color:var(--ink);margin:.1rem 0 0}
+.price{font-family:var(--sans);font-size:.8rem;color:var(--muted);margin:.2rem 0 0}
+.price.is-sold{color:var(--clay)}
+.grid.no-titles .name{display:none}
 
 .colophon{padding:3.5rem 1.25rem 4rem;text-align:center}
 .colophon a,.colophon span{
-  font-family:var(--sans);
-  font-size:.78rem;
-  letter-spacing:.1em;
-  color:var(--muted);
-  text-decoration:none;
-  border-bottom:1px solid var(--line);
-  padding-bottom:2px;
+  font-family:var(--sans);font-size:.78rem;letter-spacing:.1em;color:var(--muted);
+  text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;
 }
 .colophon a:hover{color:var(--ink)}
-
 .blank{padding:5rem 1.5rem 7rem;text-align:center;color:var(--muted);font-size:1.05rem;font-style:italic}
 
+/* ---------- viewer ---------- */
 .viewer{
   position:fixed;inset:0;z-index:40;background:var(--paper);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:1.1rem;padding:3.5rem 1.25rem 2.5rem;cursor:zoom-out;
+  display:flex;flex-direction:column;align-items:center;
+  gap:.9rem;padding:3.25rem 1.25rem 2rem;overflow-y:auto;
 }
 .viewer[hidden]{display:none}
-.viewer img{max-width:min(100%,1100px);max-height:78vh;width:auto;height:auto;object-fit:contain}
-.viewer .vtitle{font-style:italic;font-size:1rem;color:var(--muted);text-align:center;max-width:34rem;margin:0}
+.vstage{
+  flex:1;display:flex;align-items:center;justify-content:center;
+  width:100%;min-height:0;position:relative;
+}
+.vstage img{max-width:min(100%,1000px);max-height:64vh;width:auto;height:auto;object-fit:contain}
+.vthumbs{display:flex;gap:.45rem;justify-content:center;flex-wrap:wrap;max-width:44rem}
+.vthumbs button{
+  border:1px solid transparent;background:none;padding:0;cursor:pointer;line-height:0;border-radius:2px;
+}
+.vthumbs button[aria-current=true]{border-color:var(--clay)}
+.vthumbs img{width:54px;height:54px;object-fit:cover;display:block;background:#f3f0ec}
+.vmeta{text-align:center;max-width:34rem;display:flex;flex-direction:column;gap:.3rem;padding-bottom:1rem}
+.vmeta .sku{font-size:.74rem}
+.vmeta h2{margin:0;font-weight:300;font-size:1.25rem;font-style:italic}
+.vmeta .price{font-size:.95rem}
+.vmeta .desc{font-size:.92rem;color:var(--muted);line-height:1.6;margin:.35rem 0 0}
+.vmeta .soldline{
+  font-family:var(--sans);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--clay);
+}
 .xclose{
-  position:absolute;top:.75rem;right:.9rem;width:2.6rem;height:2.6rem;
-  border:0;border-radius:50%;background:none;color:var(--muted);
+  position:fixed;top:.75rem;right:.9rem;width:2.6rem;height:2.6rem;z-index:2;
+  border:0;border-radius:50%;background:var(--paper);color:var(--muted);
   font-size:1.5rem;line-height:1;cursor:pointer;
 }
 .xclose:hover{color:var(--ink)}
 .vnav{
-  position:absolute;top:50%;transform:translateY(-50%);
-  border:0;background:none;color:var(--muted);
-  font-size:1.9rem;line-height:1;padding:1rem .8rem;cursor:pointer;
+  position:fixed;top:50%;transform:translateY(-50%);z-index:2;
+  border:0;background:none;color:var(--muted);font-size:1.9rem;line-height:1;
+  padding:1rem .8rem;cursor:pointer;
 }
 .vnav:hover{color:var(--ink)}
 .vprev{left:.15rem}
@@ -138,7 +159,7 @@ button{font:inherit;color:inherit}
 }
 .studio[hidden]{display:none}
 .studio-inner{
-  max-width:44rem;margin:0 auto;padding:1.5rem 1.25rem 6rem;
+  max-width:46rem;margin:0 auto;padding:1.5rem 1.25rem 7rem;
   display:flex;flex-direction:column;gap:1.5rem;
 }
 .studio-bar{
@@ -158,7 +179,7 @@ button{font:inherit;color:inherit}
 }
 .drop{
   border:1px dashed #d9d2ca;border-radius:2px;background:var(--clay-soft);
-  padding:1.6rem 1.1rem;text-align:center;
+  padding:1.5rem 1.1rem;text-align:center;
   display:flex;flex-direction:column;gap:.5rem;align-items:center;
 }
 .drop p{margin:0;font-size:.85rem;color:var(--muted);line-height:1.5;max-width:30rem}
@@ -170,35 +191,60 @@ button{font:inherit;color:inherit}
 .btn[disabled]{opacity:.45;cursor:default}
 .btn.ghost{background:none;color:var(--clay)}
 .btn.ghost:hover{background:var(--clay-soft);color:var(--clay)}
+.btn.plain{border-color:var(--line);background:none;color:var(--ink)}
+.btn.plain:hover{background:#f7f4f0;border-color:#ded7cf}
+
+/* piece list */
 .rows{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
-.row{
+.prow{
   display:grid;grid-template-columns:58px 1fr auto;gap:.85rem;align-items:center;
-  padding:.7rem 0;border-bottom:1px solid var(--line);
+  padding:.65rem 0;border-bottom:1px solid var(--line);
+  background:none;border-left:0;border-right:0;border-top:0;
+  width:100%;text-align:left;cursor:pointer;font:inherit;color:inherit;
 }
-.row img{width:58px;height:58px;object-fit:cover;display:block;background:#f3f0ec}
-.row input[type=text]{
-  width:100%;border:0;border-bottom:1px solid var(--line);background:none;
-  padding:.45rem .1rem;font-family:var(--serif);font-size:1rem;color:var(--ink);
+.prow:hover{background:#faf8f6}
+.prow img{width:58px;height:58px;object-fit:cover;display:block;background:#f3f0ec}
+.prow .pl-sku{font-family:var(--mono);font-size:.7rem;color:var(--muted);letter-spacing:.06em}
+.prow .pl-title{font-family:var(--serif);font-style:italic;font-size:1rem;margin:.1rem 0 0}
+.prow .pl-sub{font-size:.74rem;color:var(--muted);margin:.15rem 0 0}
+.pillbox{display:flex;gap:.35rem;align-items:center}
+.pill{
+  font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.2rem .45rem;border-radius:2px;white-space:nowrap;
 }
-.row input[type=text]:focus{border-bottom-color:var(--clay);outline:none}
-.rowtools{display:flex;gap:.15rem;align-items:center}
+.pill.sold{background:var(--ink);color:var(--paper)}
+.pill.new{background:var(--clay-soft);color:var(--clay)}
+.pill.qty{background:#f3f0ec;color:var(--muted)}
+
+/* piece editor */
+.photostrip{display:flex;flex-wrap:wrap;gap:.6rem}
+.pcell{position:relative;width:96px}
+.pcell img{width:96px;height:96px;object-fit:cover;display:block;background:#f3f0ec;border-radius:2px}
+.pcell.cover img{outline:2px solid var(--clay);outline-offset:-2px}
+.pcelltools{display:flex;justify-content:center;gap:.05rem;margin-top:.15rem}
+.covertag{
+  position:absolute;left:0;top:0;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--clay);color:#fff;padding:.12rem .3rem;
+}
 .icon{
-  border:0;background:none;color:var(--muted);width:2rem;height:2rem;
-  font-size:1rem;line-height:1;cursor:pointer;border-radius:2px;
+  border:0;background:none;color:var(--muted);width:1.9rem;height:1.8rem;
+  font-size:.95rem;line-height:1;cursor:pointer;border-radius:2px;
 }
 .icon:hover{background:#f5f2ee;color:var(--ink)}
 .icon.danger:hover{color:var(--clay)}
-.tag{
-  font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--clay);background:var(--clay-soft);padding:.2rem .4rem;border-radius:2px;
-}
+.icon[disabled]{opacity:.3;cursor:default}
 .field{display:flex;flex-direction:column;gap:.3rem}
 .field label{font-size:.78rem;color:var(--muted)}
-.field input[type=text],.field input[type=password]{
+.field input[type=text],.field input[type=password],.field textarea,.field select{
   border:1px solid var(--line);border-radius:2px;padding:.6rem .7rem;
   font-family:var(--sans);font-size:.95rem;background:var(--paper);color:var(--ink);
 }
-.field input:focus{border-color:var(--clay);outline:none}
+.field textarea{min-height:4.5rem;resize:vertical;line-height:1.5}
+.field input:focus,.field textarea:focus{border-color:var(--clay);outline:none}
+.field .hint{font-size:.72rem;color:var(--muted)}
+.field input.bad{border-color:var(--clay);background:#fdf6f2}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+@media (max-width:560px){.two{grid-template-columns:1fr}}
 .check{display:flex;align-items:center;gap:.6rem;font-size:.9rem}
 .check input{width:1.05rem;height:1.05rem;accent-color:var(--clay)}
 .note{font-size:.8rem;color:var(--muted);line-height:1.55;margin:0}
@@ -214,6 +260,63 @@ details.help{border-top:1px solid var(--line);padding-top:.8rem}
 details.help summary{cursor:pointer;font-size:.82rem;color:var(--muted)}
 details.help ol{margin:.7rem 0 0;padding-left:1.1rem;font-size:.82rem;color:var(--muted);line-height:1.75}
 details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font-size:.78rem}
+.qrpreview{display:flex;align-items:center;gap:.9rem}
+.qrpreview svg{width:88px;height:88px;display:block}
+
+/* ---------- print sheet ---------- */
+.printview{
+  position:fixed;inset:0;z-index:70;background:#f3f0ec;overflow-y:auto;
+  font-family:var(--sans);color:var(--ink);
+}
+.printview[hidden]{display:none}
+.printbar{
+  position:sticky;top:0;z-index:2;background:var(--paper);border-bottom:1px solid var(--line);
+  padding:.8rem 1.1rem;display:flex;gap:.9rem;align-items:center;justify-content:space-between;flex-wrap:wrap;
+}
+.printbar .opts{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;font-size:.84rem;color:var(--muted)}
+.sheet{
+  background:var(--paper);max-width:8.5in;margin:1.2rem auto;padding:.55in .5in;
+  box-shadow:0 1px 6px rgba(0,0,0,.09);
+}
+.sheet-head{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;
+  border-bottom:1.5px solid var(--ink);padding-bottom:.5rem;margin-bottom:.85rem;
+}
+.sheet-head h1{margin:0;font-family:var(--serif);font-weight:300;font-size:1.5rem}
+.sheet-head .sub{font-size:.72rem;color:var(--muted);letter-spacing:.06em;text-align:right;line-height:1.6}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem}
+.pgrid.cols2{grid-template-columns:repeat(2,1fr)}
+.pgrid.cols4{grid-template-columns:repeat(4,1fr)}
+.pcard{
+  border:1px solid var(--line);border-radius:2px;padding:.4rem;
+  display:flex;flex-direction:column;gap:.3rem;
+  break-inside:avoid;page-break-inside:avoid;
+}
+.pcard .thumb{width:100%;aspect-ratio:1/1;object-fit:cover;background:#f3f0ec;display:block}
+.pcard .prow2{display:flex;gap:.4rem;align-items:flex-start;justify-content:space-between}
+.pcard .info{min-width:0;flex:1}
+.pcard .c-sku{font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;font-weight:600}
+.pcard .c-title{font-family:var(--serif);font-style:italic;font-size:.78rem;line-height:1.3;margin:.1rem 0 0;
+  overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.pcard .c-meta{font-size:.66rem;color:var(--muted);margin:.12rem 0 0;line-height:1.4}
+.pcard .c-sold{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--ink);
+  padding:.1rem .3rem;display:inline-block;margin-top:.15rem}
+.pcard svg.qr{width:58px;height:58px;display:block;flex:0 0 auto}
+.sheet-foot{margin-top:.8rem;padding-top:.4rem;border-top:1px solid var(--line);
+  font-size:.64rem;color:var(--muted);display:flex;justify-content:space-between}
+
+@media print{
+  @page{margin:.45in}
+  html,body{background:#fff}
+  body>*{display:none!important}
+  body>.printview{display:block!important;position:static;inset:auto;overflow:visible;background:#fff}
+  .printbar{display:none!important}
+  .sheet{box-shadow:none;margin:0;max-width:none;padding:0;width:auto}
+  .pcard{border-color:#ccc}
+  .pcard .thumb{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .pcard .c-sold{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .sheet-head{margin-bottom:.6rem}
+}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -225,11 +328,11 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   "use strict";
 
   /* ------------------------------------------------------------------
-     Art by Zurc — photo catalogue
-     Photos and titles live in catalogue.json in this site's repository.
-     The studio (tap the name five times, or add #studio to the address)
-     commits new photos straight to the repository with a GitHub token
-     that is kept only in this browser.
+     Zurc Catalog — pottery inventory
+     Pieces, photos and item numbers live in catalogue.json in this
+     site's repository. The studio (tap the name five times, or add
+     #studio to the address) commits changes straight to the repository
+     with a GitHub token that is kept only in this browser.
   ------------------------------------------------------------------ */
 
   var REPO = { owner: "ethanfuhrmeister-source", repo: "art-by-zurc", branch: "main" };
@@ -237,41 +340,280 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   var REPO_KEY = "zurc.gh.repo";
   var API = "https://api.github.com";
 
-  function svg(inner, w, h) {
-    var s = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 " + w + " " + h + "'>" +
-      "<rect width='" + w + "' height='" + h + "' fill='#efe8df'/>" + inner + "</svg>";
-    return "data:image/svg+xml," + encodeURIComponent(s);
+  /* Minimal QR encoder — byte mode, versions 1-10, ECC level M (falls back to L). */
+  function qrMatrix(text) {
+    var TOTAL = [0,26,44,70,100,134,172,196,242,292,346];
+    var ECB = { M:[0,10,16,26,18,24,16,18,22,22,26], L:[0,7,10,15,20,26,18,20,24,30,18] };
+    var NB  = { M:[0,1,1,1,2,2,4,4,4,5,5],           L:[0,1,1,1,1,1,2,2,2,2,4] };
+    var ALIGN = [null,[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50]];
+    var ECLBITS = { L:1, M:0, Q:3, H:2 };
+
+    /* ---- GF(256) ---- */
+    var EXP = new Uint8Array(512), LOG = new Uint8Array(256);
+    (function(){ var x=1; for(var i=0;i<255;i++){ EXP[i]=x; LOG[x]=i; x<<=1; if(x&0x100) x^=0x11D; }
+      for(var j=255;j<512;j++) EXP[j]=EXP[j-255]; })();
+    function gmul(a,b){ return (a===0||b===0)?0:EXP[LOG[a]+LOG[b]]; }
+    function genPoly(n){
+      var p=[1];
+      for(var i=0;i<n;i++){
+        var q=new Array(p.length+1).fill(0);
+        for(var j=0;j<p.length;j++){ q[j]^=gmul(p[j],1); q[j+1]^=gmul(p[j],EXP[i]); }
+        p=q;
+      }
+      return p;
+    }
+    function ecc(data,n){
+      var g=genPoly(n), res=new Array(n).fill(0);
+      for(var i=0;i<data.length;i++){
+        var f=data[i]^res[0];
+        res.shift(); res.push(0);
+        for(var j=0;j<n;j++) res[j]^=gmul(g[j+1],f);
+      }
+      return res;
+    }
+
+    /* ---- utf8 bytes ---- */
+    var bytes=[];
+    for(var i=0;i<text.length;i++){
+      var c=text.charCodeAt(i);
+      if(c<0x80) bytes.push(c);
+      else if(c<0x800){ bytes.push(0xC0|(c>>6),0x80|(c&63)); }
+      else if(c<0xD800||c>=0xE000){ bytes.push(0xE0|(c>>12),0x80|((c>>6)&63),0x80|(c&63)); }
+      else { i++; var cp=0x10000+(((c&0x3FF)<<10)|(text.charCodeAt(i)&0x3FF));
+             bytes.push(0xF0|(cp>>18),0x80|((cp>>12)&63),0x80|((cp>>6)&63),0x80|(cp&63)); }
+    }
+
+    /* ---- pick version + ecl ---- */
+    function capacity(v,ecl){ return TOTAL[v]-ECB[ecl][v]*NB[ecl][v]; }
+    var ver=0, ecl="M";
+    var levels=["M","L"];
+    outer:
+    for(var li=0; li<levels.length; li++){
+      for(var v=1;v<=10;v++){
+        var cc = v<10 ? 8 : 16;
+        var need = Math.ceil((4+cc+bytes.length*8)/8);
+        if(need<=capacity(v,levels[li])){ ver=v; ecl=levels[li]; break outer; }
+      }
+    }
+    if(!ver) throw new Error("too much data for a QR of this size");
+
+    /* ---- bitstream ---- */
+    var bits=[];
+    function push(val,len){ for(var i=len-1;i>=0;i--) bits.push((val>>i)&1); }
+    push(4,4);
+    push(bytes.length, ver<10?8:16);
+    for(var bi=0;bi<bytes.length;bi++) push(bytes[bi],8);
+    var cap = capacity(ver,ecl)*8;
+    for(var t=0;t<4&&bits.length<cap;t++) bits.push(0);
+    while(bits.length%8) bits.push(0);
+    var pads=[0xEC,0x11], pi=0;
+    while(bits.length<cap){ push(pads[pi++%2],8); }
+
+    var dataCw=[];
+    for(var k=0;k<bits.length;k+=8){
+      var b=0; for(var m=0;m<8;m++) b=(b<<1)|bits[k+m];
+      dataCw.push(b);
+    }
+
+    /* ---- interleave blocks ---- */
+    var nb=NB[ecl][ver], ecn=ECB[ecl][ver];
+    var raw=dataCw.length, shortLen=Math.floor(raw/nb), longCount=raw%nb;
+    var dBlocks=[], eBlocks=[], off=0;
+    for(var b2=0;b2<nb;b2++){
+      var len=shortLen+(b2>=nb-longCount?1:0);
+      var blk=dataCw.slice(off,off+len); off+=len;
+      dBlocks.push(blk); eBlocks.push(ecc(blk,ecn));
+    }
+    var final=[];
+    for(var c2=0;c2<shortLen+1;c2++)
+      for(var b3=0;b3<nb;b3++)
+        if(c2<dBlocks[b3].length) final.push(dBlocks[b3][c2]);
+    for(var c3=0;c3<ecn;c3++)
+      for(var b4=0;b4<nb;b4++) final.push(eBlocks[b4][c3]);
+
+    /* ---- matrix ---- */
+    var size=ver*4+17;
+    var mod=[], fn=[];
+    for(var r=0;r<size;r++){ mod.push(new Array(size).fill(0)); fn.push(new Array(size).fill(0)); }
+    function setF(r,c,v){ mod[r][c]=v; fn[r][c]=1; }
+
+    function finder(r,c){
+      for(var dr=-1;dr<=7;dr++) for(var dc=-1;dc<=7;dc++){
+        var rr=r+dr, cc2=c+dc;
+        if(rr<0||rr>=size||cc2<0||cc2>=size) continue;
+        var inside = dr>=0&&dr<=6&&dc>=0&&dc<=6;
+        var v=0;
+        if(inside){
+          var d=Math.max(Math.abs(dr-3),Math.abs(dc-3));
+          v=(d!==2)?1:0;
+        }
+        setF(rr,cc2,v);
+      }
+    }
+    finder(0,0); finder(0,size-7); finder(size-7,0);
+
+    for(var t2=8;t2<size-8;t2++){ setF(6,t2,t2%2===0?1:0); setF(t2,6,t2%2===0?1:0); }
+
+    var ap=ALIGN[ver];
+    for(var ai=0;ai<ap.length;ai++) for(var aj=0;aj<ap.length;aj++){
+      var ar=ap[ai], ac=ap[aj];
+      if((ar===6&&ac===6)||(ar===6&&ac===size-7)||(ar===size-7&&ac===6)) continue;
+      for(var dr2=-2;dr2<=2;dr2++) for(var dc2=-2;dc2<=2;dc2++){
+        var d2=Math.max(Math.abs(dr2),Math.abs(dc2));
+        setF(ar+dr2,ac+dc2,d2!==1?1:0);
+      }
+    }
+
+    setF(size-8,8,1); /* dark module */
+
+    /* The 15 format cells, twice over, as [row,col] in bit order 0..14.
+       placeFormat writes exactly these, so reservation can never drift from it. */
+    function fmtCells(){
+      var a=[], b=[], i;
+      for(i=0;i<=5;i++) a.push([i,8]);
+      a.push([7,8],[8,8],[8,7]);
+      for(i=9;i<15;i++) a.push([8,14-i]);
+      for(i=0;i<8;i++) b.push([8,size-1-i]);
+      for(i=8;i<15;i++) b.push([size-15+i,8]);
+      return [a,b];
+    }
+    fmtCells().forEach(function(copy){
+      copy.forEach(function(rc){ if(!fn[rc[0]][rc[1]]) setF(rc[0],rc[1],0); });
+    });
+    if(ver>=7){
+      for(var vb=0;vb<18;vb++){
+        var rr3=Math.floor(vb/3), cc3=vb%3;
+        setF(size-11+cc3,rr3,0); setF(rr3,size-11+cc3,0);
+      }
+    }
+
+    /* ---- place data ---- */
+    var idx=0, bitPos=0;
+    function nextBit(){
+      if(idx>=final.length) return 0;
+      var bit=(final[idx]>>(7-bitPos))&1;
+      bitPos++; if(bitPos===8){ bitPos=0; idx++; }
+      return bit;
+    }
+    var upward=true;
+    for(var col=size-1;col>0;col-=2){
+      if(col===6) col=5;
+      for(var rowi=0;rowi<size;rowi++){
+        var row=upward?size-1-rowi:rowi;
+        for(var s=0;s<2;s++){
+          var cc4=col-s;
+          if(fn[row][cc4]) continue;
+          mod[row][cc4]=nextBit();
+        }
+      }
+      upward=!upward;
+    }
+
+    /* ---- masks ---- */
+    function maskFn(m){
+      return [
+        function(r,c){return (r+c)%2===0;},
+        function(r){return r%2===0;},
+        function(r,c){return c%3===0;},
+        function(r,c){return (r+c)%3===0;},
+        function(r,c){return (Math.floor(r/2)+Math.floor(c/3))%2===0;},
+        function(r,c){return (r*c)%2+(r*c)%3===0;},
+        function(r,c){return ((r*c)%2+(r*c)%3)%2===0;},
+        function(r,c){return ((r+c)%2+(r*c)%3)%2===0;}
+      ][m];
+    }
+    function applyMask(grid,m){
+      var fnm=maskFn(m), g=grid.map(function(x){return x.slice();});
+      for(var r=0;r<size;r++) for(var c=0;c<size;c++)
+        if(!fn[r][c] && fnm(r,c)) g[r][c]^=1;
+      return g;
+    }
+    function fmtBits(m){
+      var d=(ECLBITS[ecl]<<3)|m, rem=d;
+      for(var i=0;i<10;i++) rem=(rem<<1)^(((rem>>9)&1)*0x537);
+      return ((d<<10)|rem)^0x5412;
+    }
+    function placeFormat(g,m){
+      var bitsF=fmtBits(m);
+      fmtCells().forEach(function(copy){
+        copy.forEach(function(rc,bit){ g[rc[0]][rc[1]]=(bitsF>>bit)&1; });
+      });
+      g[size-8][8]=1;
+      if(ver>=7){
+        var d2=ver, rem2=ver;
+        for(var i6=0;i6<12;i6++) rem2=(rem2<<1)^(((rem2>>11)&1)*0x1F25);
+        var vbits=(d2<<12)|rem2;
+        for(var i7=0;i7<18;i7++){
+          var b=(vbits>>i7)&1, rr=Math.floor(i7/3), cc=i7%3;
+          g[size-11+cc][rr]=b; g[rr][size-11+cc]=b;
+        }
+      }
+    }
+    function penalty(g){
+      var p=0, r, c, i;
+      for(r=0;r<size;r++){
+        var run=1;
+        for(c=1;c<size;c++){
+          if(g[r][c]===g[r][c-1]) run++;
+          else { if(run>=5) p+=run-2; run=1; }
+        }
+        if(run>=5) p+=run-2;
+      }
+      for(c=0;c<size;c++){
+        var run2=1;
+        for(r=1;r<size;r++){
+          if(g[r][c]===g[r-1][c]) run2++;
+          else { if(run2>=5) p+=run2-2; run2=1; }
+        }
+        if(run2>=5) p+=run2-2;
+      }
+      for(r=0;r<size-1;r++) for(c=0;c<size-1;c++){
+        var s2=g[r][c]+g[r][c+1]+g[r+1][c]+g[r+1][c+1];
+        if(s2===0||s2===4) p+=3;
+      }
+      var pat1=[1,0,1,1,1,0,1,0,0,0,0], pat2=[0,0,0,0,1,0,1,1,1,0,1];
+      for(r=0;r<size;r++) for(c=0;c<=size-11;c++){
+        var ok1=true, ok2=true;
+        for(i=0;i<11;i++){ if(g[r][c+i]!==pat1[i]) ok1=false; if(g[r][c+i]!==pat2[i]) ok2=false; }
+        if(ok1) p+=40; if(ok2) p+=40;
+      }
+      for(c=0;c<size;c++) for(r=0;r<=size-11;r++){
+        var o1=true,o2=true;
+        for(i=0;i<11;i++){ if(g[r+i][c]!==pat1[i]) o1=false; if(g[r+i][c]!==pat2[i]) o2=false; }
+        if(o1) p+=40; if(o2) p+=40;
+      }
+      var dark=0;
+      for(r=0;r<size;r++) for(c=0;c<size;c++) dark+=g[r][c];
+      var pct=dark*100/(size*size);
+      p+=Math.floor(Math.abs(pct-50)/5)*10;
+      return p;
+    }
+
+    var best=null, bestP=Infinity, bestM=0;
+    for(var m2=0;m2<8;m2++){
+      var g2=applyMask(mod,m2);
+      placeFormat(g2,m2);
+      var pen=penalty(g2);
+      if(pen<bestP){ bestP=pen; best=g2; bestM=m2; }
+    }
+    return best;
   }
 
-  var EXAMPLES = [
-    { id: "ex1", example: true, w: 800, h: 1040, title: "Tall vase, ash glaze",
-      url: svg("<path d='M400 130c-38 62-64 108-64 164 0 58-86 116-86 246 0 158 68 274 150 274s150-116 150-274c0-130-86-188-86-246 0-56-26-102-64-164z' fill='#c9ab92'/><ellipse cx='400' cy='131' rx='64' ry='15' fill='#b6957a'/>", 800, 1040) },
-    { id: "ex2", example: true, w: 800, h: 620, title: "Wide serving bowl",
-      url: svg("<path d='M132 286h536c0 172-116 258-268 258S132 458 132 286z' fill='#c9ab92'/><ellipse cx='400' cy='286' rx='268' ry='52' fill='#b6957a'/><ellipse cx='400' cy='286' rx='232' ry='42' fill='#efe8df'/>", 800, 620) },
-    { id: "ex3", example: true, w: 800, h: 800, title: "Mug, salt fired",
-      url: svg("<path d='M566 336h44c46 0 80 36 80 82s-34 82-80 82h-44z' fill='none' stroke='#c9ab92' stroke-width='40'/><path d='M232 268h336v260c0 62-50 112-112 112H344c-62 0-112-50-112-112z' fill='#c9ab92'/><ellipse cx='400' cy='268' rx='168' ry='34' fill='#b6957a'/>", 800, 800) },
-    { id: "ex4", example: true, w: 800, h: 720, title: "Shallow plate, iron slip",
-      url: svg("<circle cx='400' cy='360' r='276' fill='#c9ab92'/><circle cx='400' cy='360' r='218' fill='#d8c0aa'/><circle cx='400' cy='360' r='96' fill='#c9ab92'/>", 800, 720) }
-  ];
-
-  var DEFAULT_STATE = {
-    name: "Art by Zurc",
-    trade: "Handmade pottery · Asheville, NC",
-    contact: "",
-    showTitles: true,
-    photos: []
-  };
-
-  var state = JSON.parse(JSON.stringify(DEFAULT_STATE));
-  var showingExamples = false;
-  var root = document.getElementById("root");
-  var viewIndex = -1;
-  var studioOpen = false;
-  var busy = false;
-  var message = null;
-  var tapCount = 0;
-  var tapTimer = null;
-  var pendingDeletes = [];
+  /* ---------------- QR as SVG ---------------- */
+  function qrSvg(text, cls) {
+    var m;
+    try { m = qrMatrix(text); } catch (e) { return ""; }
+    var n = m.length, q = 2, size = n + q * 2, d = "";
+    for (var r = 0; r < n; r++) {
+      for (var c = 0; c < n; c++) {
+        if (m[r][c]) d += "M" + (c + q) + " " + (r + q) + "h1v1h-1z";
+      }
+    }
+    return '<svg class="' + (cls || "") + '" viewBox="0 0 ' + size + " " + size +
+      '" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" role="img" aria-label="QR code">' +
+      '<rect width="' + size + '" height="' + size + '" fill="#ffffff"/>' +
+      '<path d="' + d + '" fill="#1a1512"/></svg>';
+  }
 
   /* ---------------- helpers ---------------- */
   function esc(s) {
@@ -294,67 +636,182 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     if (/[0-9]{7}/.test(t.replace(/[^0-9]/g, ""))) return "tel:" + t.replace(/[^0-9+]/g, "");
     return "";
   }
-  function displayList() {
-    return showingExamples && !state.photos.length ? EXAMPLES : state.photos;
+  function priceNum(p) {
+    var n = parseFloat(String(p == null ? "" : p).replace(/[^0-9.]/g, ""));
+    return isFinite(n) ? n : 0;
   }
-  function srcOf(p) { return p.url || p.file; }
+  function money(n) {
+    return "$" + n.toFixed(2).replace(/\.00$/, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+  function siteBase() {
+    var b = String(state.siteUrl || "").trim();
+    if (b) return b.replace(/#.*$/, "").replace(/\/+$/, "") + "/";
+    return location.origin + location.pathname;
+  }
+  function pieceUrl(sku) {
+    return siteBase() + "#" + encodeURIComponent(sku);
+  }
+  function localPreview() {
+    return !state.siteUrl && (location.protocol === "file:" ||
+      /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname));
+  }
+  function photoSrc(ph) { return ph.url || ph.file; }
+  function cover(p) { return p.photos && p.photos.length ? p.photos[0] : null; }
+  function padNum(n) { return String(n).length >= 4 ? String(n) : ("000" + n).slice(-4); }
+  function makeSku() {
+    var pre = (state.skuPrefix || "ZC").replace(/\s+/g, "");
+    var n = state.nextSku || 1, sku;
+    do { sku = pre + "-" + padNum(n); n++; } while (skuTaken(sku, null));
+    state.nextSku = n;
+    return sku;
+  }
+  function skuTaken(sku, exceptId) {
+    var k = String(sku || "").trim().toLowerCase();
+    for (var i = 0; i < state.pieces.length; i++) {
+      var p = state.pieces[i];
+      if (p.id !== exceptId && String(p.sku || "").trim().toLowerCase() === k) return true;
+    }
+    return false;
+  }
+  function findBySku(sku) {
+    var k = String(sku || "").trim().toLowerCase();
+    for (var i = 0; i < state.pieces.length; i++) {
+      if (String(state.pieces[i].sku || "").trim().toLowerCase() === k) return i;
+    }
+    return -1;
+  }
 
-  function repoConf() {
-    try {
-      var saved = JSON.parse(localStorage.getItem(REPO_KEY) || "null");
-      if (saved && saved.owner && saved.repo) return saved;
-    } catch (e) {}
-    return REPO;
-  }
-  function token() {
-    try { return localStorage.getItem(TOKEN_KEY) || ""; } catch (e) { return ""; }
+  var DEFAULT_STATE = {
+    version: 2,
+    name: "Zurc Catalog",
+    trade: "Handmade pottery · Asheville, NC",
+    contact: "",
+    showTitles: false,
+    showPrices: true,
+    skuPrefix: "ZC",
+    siteUrl: "",
+    nextSku: 1,
+    pieces: []
+  };
+
+  var state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+  var root = document.getElementById("root");
+  var filter = "all";
+  var viewPiece = -1, viewPhoto = 0;
+  var studioOpen = false, studioView = "list", editingId = null;
+  var printOpen = false, printCols = 3, printSold = true, printQr = true;
+  var busy = false, message = null;
+  var tapCount = 0, tapTimer = null;
+  var pendingDeletes = [];
+
+  /* ---------------- load + migrate ---------------- */
+  function normalise(data) {
+    var s = JSON.parse(JSON.stringify(DEFAULT_STATE));
+    if (!data || typeof data !== "object") return s;
+    if (data.name) s.name = data.name;
+    if (data.trade != null) s.trade = data.trade;
+    s.contact = data.contact || "";
+    s.showTitles = data.showTitles === true;
+    s.showPrices = data.showPrices !== false;
+    s.skuPrefix = data.skuPrefix || "ZC";
+    s.siteUrl = data.siteUrl || "";
+
+    if (Array.isArray(data.pieces)) {
+      s.pieces = data.pieces.map(function (p) {
+        return {
+          id: p.id || uid(),
+          sku: p.sku || "",
+          title: p.title || "",
+          price: p.price == null ? "" : String(p.price),
+          size: p.size || "",
+          notes: p.notes || "",
+          sold: p.sold === true,
+          photos: (Array.isArray(p.photos) ? p.photos : []).map(function (ph) {
+            return { file: ph.file, url: ph.url, w: ph.w, h: ph.h, pending: ph.pending };
+          }).filter(function (ph) { return ph.file || ph.url; })
+        };
+      });
+    } else if (Array.isArray(data.photos)) {
+      /* older catalogue: one photo per piece */
+      s.pieces = data.photos.map(function (ph, i) {
+        return {
+          id: uid(), sku: (s.skuPrefix + "-" + padNum(i + 1)),
+          title: ph.title || "", price: "", size: "", notes: "", sold: false,
+          photos: [{ file: ph.file, w: ph.w, h: ph.h }]
+        };
+      });
+    }
+    /* any piece missing an item number gets one */
+    var maxN = 0;
+    s.pieces.forEach(function (p) {
+      var m = /(\d+)\s*$/.exec(p.sku || "");
+      if (m) maxN = Math.max(maxN, parseInt(m[1], 10));
+    });
+    s.nextSku = Math.max(data.nextSku || 1, maxN + 1);
+    state = s;
+    s.pieces.forEach(function (p) { if (!String(p.sku).trim()) p.sku = makeSku(); });
+    return s;
   }
 
-  /* ---------------- load ---------------- */
   function load() {
     fetch("catalogue.json?t=" + Date.now(), { cache: "no-store" })
       .then(function (r) { if (!r.ok) throw new Error("no catalogue"); return r.json(); })
-      .then(function (data) {
-        if (data && Array.isArray(data.photos)) {
-          state = {
-            name: data.name || DEFAULT_STATE.name,
-            trade: data.trade == null ? DEFAULT_STATE.trade : data.trade,
-            contact: data.contact || "",
-            showTitles: data.showTitles !== false,
-            photos: data.photos
-          };
-        }
-        showingExamples = !state.photos.length;
-        renderPage();
-      })
-      .catch(function () {
-        showingExamples = true;
-        renderPage();
-      });
+      .then(function (data) { normalise(data); renderPage(); openFromHash(); })
+      .catch(function () { renderPage(); openFromHash(); });
   }
 
-  /* ---------------- public page ---------------- */
+  /* ---------------- public catalogue ---------------- */
+  function visible() {
+    return state.pieces.filter(function (p) {
+      if (filter === "available") return !p.sold;
+      if (filter === "sold") return p.sold;
+      return true;
+    });
+  }
+
   function renderPage() {
-    var list = displayList();
+    var list = visible();
+    var soldCount = state.pieces.filter(function (p) { return p.sold; }).length;
     var h = "";
     h += '<header class="masthead">';
     h += '<h1 class="mark" id="mark">' + esc(state.name) + "</h1>";
     if (state.trade) h += '<p class="trade">' + esc(state.trade) + "</p>";
     h += "</header>";
 
+    if (soldCount && state.pieces.length) {
+      h += '<div class="filters">';
+      [["all", "Everything", state.pieces.length],
+       ["available", "Available", state.pieces.length - soldCount],
+       ["sold", "Sold", soldCount]].forEach(function (f) {
+        h += '<button class="chip" data-filter="' + f[0] + '" aria-pressed="' +
+             (filter === f[0]) + '">' + esc(f[1]) + " · " + f[2] + "</button>";
+      });
+      h += "</div>";
+    }
+
     if (!list.length) {
-      h += '<p class="blank">New pieces are on their way.</p>';
+      h += '<p class="blank">' + (state.pieces.length ? "Nothing here just now."
+            : "New pieces are on their way.") + "</p>";
     } else {
       h += '<div class="grid' + (state.showTitles ? "" : " no-titles") + '">';
       for (var i = 0; i < list.length; i++) {
-        var p = list[i];
-        var dim = p.w && p.h ? ' width="' + p.w + '" height="' + p.h + '"' : "";
-        h += '<figure class="piece">';
-        h += '<button class="shot" data-open="' + i + '" aria-label="' + esc(p.title || "View piece") + '">';
-        h += '<img src="' + esc(srcOf(p)) + '" alt="' + esc(p.title || "Pottery piece") + '"' + dim + ' loading="lazy" decoding="async">';
+        var p = list[i], ph = cover(p);
+        if (!ph) continue;
+        var dim = ph.w && ph.h ? ' width="' + ph.w + '" height="' + ph.h + '"' : "";
+        h += '<figure class="piece' + (p.sold ? " is-sold" : "") + '">';
+        h += '<button class="shot" data-open="' + esc(p.id) + '" aria-label="' +
+             esc((p.title || "Piece") + " " + p.sku) + '">';
+        h += '<img src="' + esc(photoSrc(ph)) + '" alt="' + esc(p.title || "Pottery piece") + '"' +
+             dim + ' loading="lazy" decoding="async">';
+        if (p.sold) h += '<span class="stamp">Sold</span>';
+        if (p.photos.length > 1) h += '<span class="count">' + p.photos.length + " photos</span>";
         h += "</button>";
-        h += "<figcaption>" + esc(p.title || "") + "</figcaption>";
-        h += "</figure>";
+        h += '<figcaption class="meta">';
+        h += '<span class="sku">' + esc(p.sku) + "</span>";
+        if (p.title) h += '<p class="name">' + esc(p.title) + "</p>";
+        if (p.sold) h += '<p class="price is-sold">Sold</p>';
+        else if (state.showPrices && p.price) h += '<p class="price">' + esc(p.price) + "</p>";
+        h += "</figcaption></figure>";
       }
       h += "</div>";
     }
@@ -367,59 +824,230 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     }
     h += "</footer>";
 
-    h += '<div class="viewer" id="viewer" hidden>';
-    h += '<button class="xclose" id="vclose" aria-label="Close">×</button>';
-    h += '<button class="vnav vprev" id="vprev" aria-label="Previous">‹</button>';
-    h += '<button class="vnav vnext" id="vnext" aria-label="Next">›</button>';
-    h += '<img id="vimg" src="" alt="">';
-    h += '<p class="vtitle" id="vtitle"></p>';
-    h += "</div>";
+    h += '<div class="viewer" id="viewer" hidden></div>';
     h += '<div class="studio" id="studio" hidden></div>';
+    h += '<div class="printview" id="printview" hidden></div>';
 
     root.innerHTML = h;
 
     root.querySelectorAll("[data-open]").forEach(function (b) {
-      b.addEventListener("click", function () { openViewer(+b.getAttribute("data-open")); });
+      b.addEventListener("click", function () { openPiece(b.getAttribute("data-open")); });
+    });
+    root.querySelectorAll("[data-filter]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        filter = b.getAttribute("data-filter"); renderPage();
+      });
     });
     var mark = document.getElementById("mark");
     if (mark) mark.addEventListener("click", secretTap);
-    document.getElementById("vclose").addEventListener("click", closeViewer);
-    document.getElementById("viewer").addEventListener("click", function (e) {
-      if (e.target.id === "viewer" || e.target.id === "vimg" || e.target.id === "vtitle") closeViewer();
-    });
-    document.getElementById("vprev").addEventListener("click", function (e) { e.stopPropagation(); step(-1); });
-    document.getElementById("vnext").addEventListener("click", function (e) { e.stopPropagation(); step(1); });
+
+    if (viewPiece > -1) renderViewer();
     if (studioOpen) renderStudio();
+    if (printOpen) renderPrint();
   }
 
-  function openViewer(i) {
-    var list = displayList();
-    var p = list[i];
-    if (!p) return;
-    viewIndex = i;
-    document.getElementById("vimg").src = srcOf(p);
-    document.getElementById("vimg").alt = p.title || "Pottery piece";
-    document.getElementById("vtitle").textContent = p.title || "";
-    document.getElementById("viewer").hidden = false;
+  /* ---------------- viewer ---------------- */
+  function openPiece(id) {
+    var idx = -1;
+    for (var i = 0; i < state.pieces.length; i++) if (state.pieces[i].id === id) idx = i;
+    if (idx < 0) return;
+    viewPiece = idx; viewPhoto = 0;
     document.body.style.overflow = "hidden";
+    setHash(state.pieces[idx].sku);
+    renderViewer();
   }
   function closeViewer() {
-    document.getElementById("viewer").hidden = true;
+    viewPiece = -1;
     document.body.style.overflow = "";
-    viewIndex = -1;
+    var el = document.getElementById("viewer");
+    if (el) el.hidden = true;
+    setHash("");
   }
-  function step(d) {
-    var n = displayList().length;
-    if (viewIndex < 0 || !n) return;
-    openViewer((viewIndex + d + n) % n);
+  function setHash(v) {
+    var url = location.pathname + location.search + (v ? "#" + encodeURIComponent(v) : "");
+    try { history.replaceState(null, "", url); } catch (e) {}
   }
+  function stepPiece(d) {
+    var n = state.pieces.length;
+    if (viewPiece < 0 || !n) return;
+    viewPiece = (viewPiece + d + n) % n;
+    viewPhoto = 0;
+    setHash(state.pieces[viewPiece].sku);
+    renderViewer();
+  }
+  function stepPhoto(d) {
+    var p = state.pieces[viewPiece];
+    if (!p || p.photos.length < 2) return;
+    viewPhoto = (viewPhoto + d + p.photos.length) % p.photos.length;
+    renderViewer();
+  }
+
+  function renderViewer() {
+    var el = document.getElementById("viewer");
+    if (!el) return;
+    var p = state.pieces[viewPiece];
+    if (!p) { el.hidden = true; return; }
+    el.hidden = false;
+    var ph = p.photos[viewPhoto] || p.photos[0];
+    var many = p.photos.length > 1;
+
+    var h = "";
+    h += '<button class="xclose" id="vclose" aria-label="Close">×</button>';
+    if (state.pieces.length > 1) {
+      h += '<button class="vnav vprev" id="vprev" aria-label="Previous piece">‹</button>';
+      h += '<button class="vnav vnext" id="vnext" aria-label="Next piece">›</button>';
+    }
+    h += '<div class="vstage">';
+    h += '<img id="vimg" src="' + esc(photoSrc(ph)) + '" alt="' + esc(p.title || "Pottery piece") +
+         '"' + (many ? ' style="cursor:pointer"' : "") + ">";
+    h += "</div>";
+
+    if (many) {
+      h += '<div class="vthumbs">';
+      for (var i = 0; i < p.photos.length; i++) {
+        h += '<button data-photo="' + i + '" aria-current="' + (i === viewPhoto) +
+             '" aria-label="Photo ' + (i + 1) + '"><img src="' + esc(photoSrc(p.photos[i])) +
+             '" alt="" loading="lazy"></button>';
+      }
+      h += "</div>";
+    }
+
+    h += '<div class="vmeta">';
+    h += '<span class="sku">' + esc(p.sku) + "</span>";
+    if (p.title) h += "<h2>" + esc(p.title) + "</h2>";
+    if (p.sold) h += '<p class="soldline">Sold</p>';
+    else if (state.showPrices && p.price) h += '<p class="price">' + esc(p.price) + "</p>";
+    if (p.size) h += '<p class="desc">' + esc(p.size) + "</p>";
+    if (p.notes) h += '<p class="desc">' + esc(p.notes) + "</p>";
+    h += "</div>";
+    el.innerHTML = h;
+
+    el.querySelector("#vclose").addEventListener("click", closeViewer);
+    var prev = el.querySelector("#vprev"), next = el.querySelector("#vnext");
+    if (prev) prev.addEventListener("click", function (e) { e.stopPropagation(); stepPiece(-1); });
+    if (next) next.addEventListener("click", function (e) { e.stopPropagation(); stepPiece(1); });
+    if (many) {
+      el.querySelector("#vimg").addEventListener("click", function () { stepPhoto(1); });
+      el.querySelectorAll("[data-photo]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          viewPhoto = +b.getAttribute("data-photo"); renderViewer();
+        });
+      });
+    }
+    el.addEventListener("click", function (e) {
+      if (e.target === el || e.target.className === "vstage") closeViewer();
+    });
+  }
+
   document.addEventListener("keydown", function (e) {
-    if (viewIndex > -1) {
+    if (printOpen) { if (e.key === "Escape") closePrint(); return; }
+    if (viewPiece > -1) {
       if (e.key === "Escape") closeViewer();
-      if (e.key === "ArrowLeft") step(-1);
-      if (e.key === "ArrowRight") step(1);
+      if (e.key === "ArrowLeft") stepPiece(-1);
+      if (e.key === "ArrowRight") stepPiece(1);
+      if (e.key === "ArrowUp") { e.preventDefault(); stepPhoto(-1); }
+      if (e.key === "ArrowDown") { e.preventDefault(); stepPhoto(1); }
     } else if (studioOpen && e.key === "Escape") closeStudio();
   });
+
+  /* ---------------- print sheet ---------------- */
+  function openPrint() {
+    printOpen = true;
+    document.body.style.overflow = "hidden";
+    renderPrint();
+  }
+  function closePrint() {
+    printOpen = false;
+    document.body.style.overflow = studioOpen ? "hidden" : "";
+    var el = document.getElementById("printview");
+    if (el) el.hidden = true;
+  }
+  function renderPrint() {
+    var el = document.getElementById("printview");
+    if (!el) return;
+    el.hidden = false;
+    var list = state.pieces.filter(function (p) { return printSold || !p.sold; });
+    var sold = list.filter(function (p) { return p.sold; }).length;
+    var value = list.reduce(function (a, p) { return a + (p.sold ? 0 : priceNum(p.price)); }, 0);
+    var today = new Date().toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+
+    var h = '<div class="printbar">';
+    h += '<div class="opts">';
+    h += '<label class="check"><input type="checkbox" id="p-sold"' + (printSold ? " checked" : "") +
+         "> Include sold</label>";
+    h += '<label class="check"><input type="checkbox" id="p-qr"' + (printQr ? " checked" : "") +
+         "> Include QR codes</label>";
+    h += '<label class="check">Per row&nbsp;<select id="p-cols">';
+    [2, 3, 4].forEach(function (c) {
+      h += '<option value="' + c + '"' + (printCols === c ? " selected" : "") + ">" + c + "</option>";
+    });
+    h += "</select></label>";
+    h += "</div>";
+    h += '<div class="inline"><button class="btn plain" id="p-close">Close</button>' +
+         '<button class="btn" id="p-print">Print</button></div>';
+    h += "</div>";
+
+    h += '<div class="sheet">';
+    h += '<div class="sheet-head"><h1>' + esc(state.name) + "</h1>";
+    h += '<div class="sub">' + esc(today) + "<br>" + list.length + " piece" + (list.length === 1 ? "" : "s") +
+         (sold ? " · " + sold + " sold" : "") +
+         (value ? "<br>Available value " + esc(money(value)) : "") + "</div></div>";
+
+    if (printQr && localPreview()) {
+      h += '<p class="note warn" style="margin:0 0 .6rem">These QR codes point at ' +
+           esc(location.origin + location.pathname) + ', which only works on this computer. ' +
+           'Set the website address in the studio before printing tags you mean to keep.</p>';
+    }
+    if (!list.length) {
+      h += '<p class="note">Nothing to print yet.</p>';
+    } else {
+      h += '<div class="pgrid' + (printCols === 2 ? " cols2" : printCols === 4 ? " cols4" : "") + '">';
+      list.forEach(function (p) {
+        var ph = cover(p);
+        h += '<div class="pcard">';
+        h += ph ? '<img class="thumb" src="' + esc(photoSrc(ph)) + '" alt="">'
+                : '<div class="thumb"></div>';
+        h += '<div class="prow2"><div class="info">';
+        h += '<div class="c-sku">' + esc(p.sku) + "</div>";
+        if (p.title) h += '<p class="c-title">' + esc(p.title) + "</p>";
+        var bits = [];
+        if (p.price) bits.push(esc(p.price));
+        if (p.size) bits.push(esc(p.size));
+        if (p.photos.length > 1) bits.push(p.photos.length + " photos");
+        if (bits.length) h += '<p class="c-meta">' + bits.join(" · ") + "</p>";
+        if (p.sold) h += '<span class="c-sold">Sold</span>';
+        h += "</div>";
+        if (printQr) h += qrSvg(pieceUrl(p.sku), "qr");
+        h += "</div></div>";
+      });
+      h += "</div>";
+    }
+    h += '<div class="sheet-foot"><span>' + esc(state.name) + "</span><span>" + esc(today) + "</span></div>";
+    h += "</div>";
+
+    el.innerHTML = h;
+    el.querySelector("#p-close").addEventListener("click", closePrint);
+    el.querySelector("#p-print").addEventListener("click", function () { window.print(); });
+    el.querySelector("#p-sold").addEventListener("change", function (e) {
+      printSold = e.target.checked; renderPrint();
+    });
+    el.querySelector("#p-qr").addEventListener("change", function (e) {
+      printQr = e.target.checked; renderPrint();
+    });
+    el.querySelector("#p-cols").addEventListener("change", function (e) {
+      printCols = +e.target.value; renderPrint();
+    });
+  }
+
+  /* ---------------- hash routing ---------------- */
+  function openFromHash() {
+    var raw = decodeURIComponent((location.hash || "").replace(/^#/, "")).trim();
+    if (!raw) return;
+    if (/^studio$/i.test(raw)) { openStudio(); return; }
+    if (/^print$/i.test(raw)) { openPrint(); return; }
+    var i = findBySku(raw);
+    if (i > -1) { viewPiece = i; viewPhoto = 0; document.body.style.overflow = "hidden"; renderViewer(); }
+  }
 
   /* ---------------- studio entry ---------------- */
   function secretTap() {
@@ -429,8 +1057,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     if (tapCount >= 5) { tapCount = 0; openStudio(); }
   }
   function openStudio() {
-    studioOpen = true;
-    message = null;
+    studioOpen = true; studioView = "list"; message = null;
     document.body.style.overflow = "hidden";
     renderStudio();
   }
@@ -439,23 +1066,56 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     document.body.style.overflow = "";
     var el = document.getElementById("studio");
     if (el) el.hidden = true;
+    renderPage();
   }
-  function checkHash() {
-    if ((location.hash || "").toLowerCase().indexOf("studio") > -1) openStudio();
+  function repoConf() {
+    try {
+      var saved = JSON.parse(localStorage.getItem(REPO_KEY) || "null");
+      if (saved && saved.owner && saved.repo) return saved;
+    } catch (e) {}
+    return REPO;
+  }
+  function token() {
+    try { return localStorage.getItem(TOKEN_KEY) || ""; } catch (e) { return ""; }
+  }
+  function editing() {
+    for (var i = 0; i < state.pieces.length; i++) if (state.pieces[i].id === editingId) return state.pieces[i];
+    return null;
+  }
+  function pendingCount() {
+    var n = 0;
+    state.pieces.forEach(function (p) {
+      p.photos.forEach(function (ph) { if (ph.pending) n++; });
+    });
+    return n;
   }
 
-  /* ---------------- studio ---------------- */
   function renderStudio() {
     var el = document.getElementById("studio");
     if (!el) return;
     el.hidden = false;
-    var conf = repoConf();
-    var hasToken = !!token();
-    var unsaved = state.photos.filter(function (p) { return p.pending; }).length;
+    el.innerHTML = '<div class="studio-inner">' +
+      (studioView === "piece" && editing() ? pieceEditorHtml() : listHtml()) + "</div>";
+    if (studioView === "piece" && editing()) wirePieceEditor(el); else wireList(el);
+  }
 
-    var h = '<div class="studio-inner">';
-    h += '<div class="studio-bar"><h2>Your studio</h2>' +
-         '<button class="link-btn" id="s-close">Back to catalogue</button></div>';
+  function saveBarHtml() {
+    var unsaved = pendingCount();
+    var h = '<div class="savebar">';
+    h += '<span class="note">' + (unsaved
+      ? unsaved + " photo" + (unsaved > 1 ? "s" : "") + " waiting to go up."
+      : "Changes go live about a minute after you publish.") + "</span>";
+    h += '<button class="btn" id="s-save"' + (busy || !token() ? " disabled" : "") + ">" +
+         (busy ? "Publishing…" : "Publish to the website") + "</button>";
+    h += "</div>";
+    return h;
+  }
+
+  /* ---------------- studio: list ---------------- */
+  function listHtml() {
+    var conf = repoConf(), hasToken = !!token();
+    var h = '<div class="studio-bar"><h2>Your studio</h2>' +
+            '<button class="link-btn" id="s-close">Back to catalogue</button></div>';
 
     if (!hasToken) {
       h += '<div class="block"><h3>One-time setup</h3>';
@@ -469,33 +1129,26 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       h += "</div>";
     }
 
-    h += '<div class="block"><h3>Add photos</h3>';
+    h += '<div class="block"><h3>Add pieces</h3>';
     h += '<div class="drop"><input type="file" id="s-file" accept="image/*" multiple hidden>';
     h += '<button class="btn" id="s-pick">Choose photos</button>';
-    h += "<p>Pick as many as you like from your phone or computer. Big camera photos are fine — they are shrunk for the web automatically.</p></div>";
+    h += "<p>Each photo starts a new piece with its own item number. To put several photos on one piece, open that piece and add them there. Big camera photos are fine — they are shrunk for the web automatically.</p></div>";
     h += "</div>";
 
-    h += '<div class="block"><h3>Your pieces (' + state.photos.length + ")</h3>";
-    if (!state.photos.length) {
-      h += '<p class="note">Nothing published yet. The clay-coloured drawings on the catalogue are placeholders — they disappear the moment your first photo goes up.</p>';
+    var sold = state.pieces.filter(function (p) { return p.sold; }).length;
+    h += '<div class="block"><h3>Inventory (' + state.pieces.length +
+         (sold ? " · " + sold + " sold" : "") + ")</h3>";
+    if (!state.pieces.length) {
+      h += '<p class="note">Nothing in the inventory yet. Add a few photos above to get started.</p>';
     } else {
-      h += '<div class="rows">';
-      for (var i = 0; i < state.photos.length; i++) {
-        var p = state.photos[i];
-        h += '<div class="row">';
-        h += '<img src="' + esc(srcOf(p)) + '" alt="">';
-        h += "<span>";
-        h += '<input type="text" data-title="' + i + '" value="' + esc(p.title || "") + '" placeholder="Title of this piece">';
-        if (p.pending) h += '<span class="tag">not published yet</span>';
-        h += "</span>";
-        h += '<span class="rowtools">';
-        h += '<button class="icon" data-up="' + i + '" aria-label="Move up"' + (i === 0 ? " disabled" : "") + ">↑</button>";
-        h += '<button class="icon" data-down="' + i + '" aria-label="Move down"' + (i === state.photos.length - 1 ? " disabled" : "") + ">↓</button>";
-        h += '<button class="icon danger" data-del="' + i + '" aria-label="Remove">×</button>';
-        h += "</span></div>";
-      }
-      h += "</div>";
+      h += '<div class="field"><input type="text" id="s-search" placeholder="Search item number or title" spellcheck="false"></div>';
+      h += '<div class="rows" id="s-rows">' + rowsHtml("") + "</div>";
     }
+    h += "</div>";
+
+    h += '<div class="block"><h3>Printing</h3>';
+    h += '<div class="inline"><button class="btn plain" id="s-print">Print the inventory</button>';
+    h += '<span class="note">Photos, item numbers and QR codes on paper.</span></div>';
     h += "</div>";
 
     h += '<div class="block"><h3>Heading and contact</h3>';
@@ -505,8 +1158,18 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
          '<input type="text" id="s-trade" value="' + esc(state.trade || "") + '"></div>';
     h += '<div class="field"><label for="s-contact">Contact at the bottom (email or phone)</label>' +
          '<input type="text" id="s-contact" value="' + esc(state.contact || "") + '"></div>';
+    h += '<div class="field"><label for="s-prefix">Item numbers start with</label>' +
+         '<input type="text" id="s-prefix" value="' + esc(state.skuPrefix || "ZC") +
+         '" spellcheck="false"><span class="hint">New pieces are numbered ' +
+         esc((state.skuPrefix || "ZC") + "-" + padNum(state.nextSku || 1)) + ", and so on.</span></div>";
+    h += '<div class="field"><label for="s-site">Website address for QR codes</label>' +
+         '<input type="text" id="s-site" value="' + esc(state.siteUrl || "") +
+         '" spellcheck="false" placeholder="' + esc(location.origin + location.pathname) +
+         '"><span class="hint">Leave blank to use whatever address this page is open at. Set it if you ever print from a copy on your own computer, so the codes still point at the real website.</span></div>';
     h += '<label class="check"><input type="checkbox" id="s-titles"' + (state.showTitles ? " checked" : "") +
-         "> Show titles under the photos</label>";
+         "> Show titles on the catalogue</label>";
+    h += '<label class="check"><input type="checkbox" id="s-prices"' + (state.showPrices ? " checked" : "") +
+         "> Show prices on the catalogue</label>";
     h += "</div>";
 
     if (message) h += '<p class="note' + (message.bad ? " warn" : "") + '">' + esc(message.text) + "</p>";
@@ -516,21 +1179,42 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
          "<li>Generate a new token. Under Repository access choose <b>Only select repositories</b> and pick <code>" +
          esc(conf.owner + "/" + conf.repo) + "</code>.</li>" +
          "<li>Under Repository permissions set <b>Contents</b> to <b>Read and write</b>. Leave everything else alone.</li>" +
-         "<li>Generate it, copy the token, and paste it into the box above on the device that will be adding photos.</li>" +
+         "<li>Generate it, copy the token, and paste it into the box above on the device that will be adding pieces.</li>" +
          "</ol></details>";
 
-    h += '<div class="savebar">';
-    h += '<span class="note">' + (unsaved ? unsaved + " photo" + (unsaved > 1 ? "s" : "") + " waiting to go up." :
-         "Changes go live about a minute after you publish.") + "</span>";
-    h += '<button class="btn" id="s-save"' + (busy || !hasToken ? " disabled" : "") + ">" +
-         (busy ? "Publishing…" : "Publish to the website") + "</button>";
-    h += "</div></div>";
-
-    el.innerHTML = h;
-    wireStudio(el);
+    h += '<p class="note">Everything you publish here is public, including prices and which pieces are sold.</p>';
+    h += saveBarHtml();
+    return h;
   }
 
-  function wireStudio(el) {
+  function rowsHtml(q) {
+    var term = String(q || "").trim().toLowerCase();
+    var h = "", shown = 0;
+    for (var i = 0; i < state.pieces.length; i++) {
+      var p = state.pieces[i];
+      if (term && (p.sku + " " + p.title).toLowerCase().indexOf(term) < 0) continue;
+      shown++;
+      var ph = cover(p);
+      var isNew = p.photos.some(function (x) { return x.pending; });
+      h += '<button class="prow" data-edit="' + esc(p.id) + '">';
+      h += ph ? '<img src="' + esc(photoSrc(ph)) + '" alt="">' : '<img alt="">';
+      h += "<span><span class=\"pl-sku\">" + esc(p.sku) + "</span>";
+      h += '<p class="pl-title">' + esc(p.title || "Untitled") + "</p>";
+      var sub = [];
+      if (p.price) sub.push(esc(p.price));
+      if (p.size) sub.push(esc(p.size));
+      h += '<p class="pl-sub">' + (sub.length ? sub.join(" · ") : "&nbsp;") + "</p></span>";
+      h += '<span class="pillbox">';
+      if (p.photos.length > 1) h += '<span class="pill qty">' + p.photos.length + "</span>";
+      if (isNew) h += '<span class="pill new">new</span>';
+      if (p.sold) h += '<span class="pill sold">sold</span>';
+      h += "</span></button>";
+    }
+    if (!shown) h = '<p class="note" style="padding:.8rem 0">Nothing matches that.</p>';
+    return h;
+  }
+
+  function wireList(el) {
     el.querySelector("#s-close").addEventListener("click", closeStudio);
 
     var save = el.querySelector("#s-savetoken");
@@ -544,7 +1228,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
           if (r.length === 2 && r[0] && r[1]) {
             localStorage.setItem(REPO_KEY, JSON.stringify({ owner: r[0], repo: r[1], branch: REPO.branch }));
           }
-          message = { text: "Saved on this device. You can add photos now." };
+          message = { text: "Saved on this device. You can add pieces now." };
         } catch (e) {
           message = { text: "This browser will not let the key be saved. Turn off private browsing and try again.", bad: true };
         }
@@ -557,13 +1241,11 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         var t = el.querySelector("#s-token").value.trim() || token();
         var r = el.querySelector("#s-repo").value.trim().split("/");
         var conf = r.length === 2 && r[0] ? { owner: r[0], repo: r[1] } : repoConf();
-        message = { text: "Checking…" };
-        renderStudio();
+        message = { text: "Checking…" }; renderStudio();
         fetch(API + "/repos/" + conf.owner + "/" + conf.repo, {
           headers: { Authorization: "Bearer " + t, Accept: "application/vnd.github+json" }
         }).then(function (res) {
-          message = res.ok
-            ? { text: "The key works." }
+          message = res.ok ? { text: "The key works." }
             : { text: "GitHub said no (" + res.status + "). Check the token and the repository name.", bad: true };
           renderStudio();
         }).catch(function () {
@@ -575,56 +1257,175 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
 
     var file = el.querySelector("#s-file");
     el.querySelector("#s-pick").addEventListener("click", function () { file.click(); });
-    file.addEventListener("change", function () { intake(file.files); });
+    file.addEventListener("change", function () { intake(file.files, null); });
 
-    el.querySelectorAll("[data-title]").forEach(function (inp) {
-      inp.addEventListener("input", function () {
-        state.photos[+inp.getAttribute("data-title")].title = inp.value;
+    var search = el.querySelector("#s-search");
+    if (search) {
+      search.addEventListener("input", function () {
+        var box = el.querySelector("#s-rows");
+        box.innerHTML = rowsHtml(search.value);
+        bindRows(box);
       });
-    });
-    el.querySelectorAll("[data-up]").forEach(function (b) {
-      b.addEventListener("click", function () { move(+b.getAttribute("data-up"), -1); });
-    });
-    el.querySelectorAll("[data-down]").forEach(function (b) {
-      b.addEventListener("click", function () { move(+b.getAttribute("data-down"), 1); });
-    });
-    el.querySelectorAll("[data-del]").forEach(function (b) {
+    }
+    var rows = el.querySelector("#s-rows");
+    if (rows) bindRows(rows);
+
+    el.querySelector("#s-print").addEventListener("click", openPrint);
+
+    bindText(el, "#s-name", function (v) { state.name = v; });
+    bindText(el, "#s-trade", function (v) { state.trade = v; });
+    bindText(el, "#s-contact", function (v) { state.contact = v; });
+    bindText(el, "#s-prefix", function (v) { state.skuPrefix = v.replace(/\s+/g, ""); });
+    bindText(el, "#s-site", function (v) { state.siteUrl = v.trim(); });
+    el.querySelector("#s-titles").addEventListener("change", function (e) { state.showTitles = e.target.checked; });
+    el.querySelector("#s-prices").addEventListener("change", function (e) { state.showPrices = e.target.checked; });
+    el.querySelector("#s-save").addEventListener("click", publish);
+  }
+  function bindRows(box) {
+    box.querySelectorAll("[data-edit]").forEach(function (b) {
       b.addEventListener("click", function () {
-        var p = state.photos.splice(+b.getAttribute("data-del"), 1)[0];
-        if (p && p.file && !p.pending) pendingDeletes.push(p.file);
-        showingExamples = !state.photos.length;
-        renderPage(); renderStudio();
+        editingId = b.getAttribute("data-edit");
+        studioView = "piece"; message = null;
+        renderStudio();
+        var el = document.getElementById("studio");
+        if (el) el.scrollTop = 0;
       });
     });
+  }
+  function bindText(el, sel, fn) {
+    var n = el.querySelector(sel);
+    if (n) n.addEventListener("input", function () { fn(n.value); });
+  }
 
-    el.querySelector("#s-name").addEventListener("input", function (e) {
-      state.name = e.target.value; refreshBehind();
+  /* ---------------- studio: one piece ---------------- */
+  function pieceEditorHtml() {
+    var p = editing();
+    var h = '<div class="studio-bar"><h2>' + esc(p.sku || "Piece") + "</h2>" +
+            '<button class="link-btn" id="e-back">All pieces</button></div>';
+
+    h += '<div class="block"><h3>Photos (' + p.photos.length + ")</h3>";
+    if (!p.photos.length) {
+      h += '<p class="note">This piece has no photos yet.</p>';
+    } else {
+      h += '<div class="photostrip">';
+      for (var i = 0; i < p.photos.length; i++) {
+        var ph = p.photos[i];
+        h += '<div class="pcell' + (i === 0 ? " cover" : "") + '">';
+        h += '<img src="' + esc(photoSrc(ph)) + '" alt="">';
+        if (i === 0) h += '<span class="covertag">Cover</span>';
+        h += '<div class="pcelltools">';
+        h += '<button class="icon" data-pleft="' + i + '" aria-label="Move earlier"' +
+             (i === 0 ? " disabled" : "") + ">‹</button>";
+        h += '<button class="icon" data-pright="' + i + '" aria-label="Move later"' +
+             (i === p.photos.length - 1 ? " disabled" : "") + ">›</button>";
+        h += '<button class="icon danger" data-pdel="' + i + '" aria-label="Remove photo">×</button>';
+        h += "</div></div>";
+      }
+      h += "</div>";
+    }
+    h += '<div class="inline"><input type="file" id="e-file" accept="image/*" multiple hidden>' +
+         '<button class="btn ghost" id="e-add">Add photos to this piece</button>' +
+         '<span class="note">The first photo is the one the catalogue shows.</span></div>';
+    h += "</div>";
+
+    h += '<div class="block"><h3>Item number</h3>';
+    h += '<div class="qrpreview"><span id="e-qr">' + qrSvg(pieceUrl(p.sku)) + "</span>";
+    h += '<div class="field" style="flex:1"><input type="text" id="e-sku" value="' + esc(p.sku) +
+         '" spellcheck="false"><span class="hint" id="e-skuhint">Scanning the code opens this piece on the website.</span></div>';
+    h += "</div></div>";
+
+    h += '<div class="block"><h3>Details</h3>';
+    h += '<div class="field"><label for="e-title">Title</label>' +
+         '<input type="text" id="e-title" value="' + esc(p.title || "") + '" placeholder="Tall vase, ash glaze"></div>';
+    h += '<div class="two">';
+    h += '<div class="field"><label for="e-price">Price</label>' +
+         '<input type="text" id="e-price" value="' + esc(p.price || "") + '" placeholder="$85"></div>';
+    h += '<div class="field"><label for="e-size">Size</label>' +
+         '<input type="text" id="e-size" value="' + esc(p.size || "") + '" placeholder="9 in tall"></div>';
+    h += "</div>";
+    h += '<div class="field"><label for="e-notes">Notes</label>' +
+         '<textarea id="e-notes" placeholder="Glaze, clay body, firing — anything worth remembering.">' +
+         esc(p.notes || "") + "</textarea></div>";
+    h += '<label class="check"><input type="checkbox" id="e-sold"' + (p.sold ? " checked" : "") +
+         "> Sold</label>";
+    h += '<p class="note">Sold pieces stay on the catalogue with a Sold mark.</p>';
+    h += "</div>";
+
+    if (message) h += '<p class="note' + (message.bad ? " warn" : "") + '">' + esc(message.text) + "</p>";
+
+    h += '<div class="block"><h3>Remove</h3><div class="inline">' +
+         '<button class="btn plain" id="e-del">Delete this piece</button>' +
+         '<span class="note">Its photos come off the website when you publish.</span></div></div>';
+
+    h += saveBarHtml();
+    return h;
+  }
+
+  function wirePieceEditor(el) {
+    var p = editing();
+    el.querySelector("#e-back").addEventListener("click", function () {
+      studioView = "list"; editingId = null; message = null; renderStudio();
     });
-    el.querySelector("#s-trade").addEventListener("input", function (e) {
-      state.trade = e.target.value; refreshBehind();
+
+    el.querySelectorAll("[data-pleft]").forEach(function (b) {
+      b.addEventListener("click", function () { movePhoto(p, +b.getAttribute("data-pleft"), -1); });
     });
-    el.querySelector("#s-contact").addEventListener("input", function (e) {
-      state.contact = e.target.value; refreshBehind();
+    el.querySelectorAll("[data-pright]").forEach(function (b) {
+      b.addEventListener("click", function () { movePhoto(p, +b.getAttribute("data-pright"), 1); });
     });
-    el.querySelector("#s-titles").addEventListener("change", function (e) {
-      state.showTitles = e.target.checked; refreshBehind();
+    el.querySelectorAll("[data-pdel]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var i = +b.getAttribute("data-pdel"), ph = p.photos[i];
+        if (ph && ph.file && !ph.pending) pendingDeletes.push(ph.file);
+        p.photos.splice(i, 1);
+        renderStudio();
+      });
     });
+    var file = el.querySelector("#e-file");
+    el.querySelector("#e-add").addEventListener("click", function () { file.click(); });
+    file.addEventListener("change", function () { intake(file.files, p.id); });
+
+    var sku = el.querySelector("#e-sku"), hint = el.querySelector("#e-skuhint"),
+        qrBox = el.querySelector("#e-qr");
+    sku.addEventListener("input", function () {
+      var v = sku.value.trim();
+      if (!v) {
+        sku.classList.add("bad");
+        hint.textContent = "Every piece needs an item number.";
+      } else if (skuTaken(v, p.id)) {
+        sku.classList.add("bad");
+        hint.textContent = "Another piece already uses that number.";
+      } else {
+        sku.classList.remove("bad");
+        hint.textContent = "Scanning the code opens this piece on the website.";
+        p.sku = v;
+        qrBox.innerHTML = qrSvg(pieceUrl(v));
+      }
+    });
+
+    bindText(el, "#e-title", function (v) { p.title = v; });
+    bindText(el, "#e-price", function (v) { p.price = v; });
+    bindText(el, "#e-size", function (v) { p.size = v; });
+    bindText(el, "#e-notes", function (v) { p.notes = v; });
+    el.querySelector("#e-sold").addEventListener("change", function (e) { p.sold = e.target.checked; });
+
+    el.querySelector("#e-del").addEventListener("click", function () {
+      if (!window.confirm("Delete " + p.sku + " and its photos?")) return;
+      p.photos.forEach(function (ph) { if (ph.file && !ph.pending) pendingDeletes.push(ph.file); });
+      state.pieces = state.pieces.filter(function (x) { return x.id !== p.id; });
+      studioView = "list"; editingId = null;
+      message = { text: p.sku + " removed. Publish to take it off the website." };
+      renderStudio();
+    });
+
     el.querySelector("#s-save").addEventListener("click", publish);
   }
 
-  function refreshBehind() {
-    var el = document.getElementById("studio");
-    var keep = el ? el.innerHTML : "";
-    renderPage();
-    var again = document.getElementById("studio");
-    if (again) { again.hidden = false; again.innerHTML = keep; wireStudio(again); }
-  }
-
-  function move(i, d) {
+  function movePhoto(p, i, d) {
     var j = i + d;
-    if (j < 0 || j >= state.photos.length) return;
-    var t = state.photos[i]; state.photos[i] = state.photos[j]; state.photos[j] = t;
-    renderPage(); renderStudio();
+    if (j < 0 || j >= p.photos.length) return;
+    var t = p.photos[i]; p.photos[i] = p.photos[j]; p.photos[j] = t;
+    renderStudio();
   }
 
   /* ---------------- photo intake ---------------- */
@@ -650,7 +1451,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     });
   }
 
-  function intake(files) {
+  function intake(files, pieceId) {
     if (!files || !files.length) return;
     var list = Array.prototype.slice.call(files).filter(function (f) { return /^image\//.test(f.type); });
     if (!list.length) {
@@ -665,18 +1466,24 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       if (i >= list.length) {
         message = failed
           ? { text: done + " added, " + failed + " could not be read.", bad: true }
-          : { text: done + " photo" + (done > 1 ? "s" : "") + " ready. Give each a title, then publish.", bad: false };
-        showingExamples = false;
-        renderPage(); renderStudio();
+          : { text: done + " photo" + (done > 1 ? "s" : "") + " ready. Publish when you are done.", bad: false };
+        renderStudio();
         return;
       }
       shrink(list[i], 1600, 0.8).then(function (img) {
         return img.url.length > 1200000 ? shrink(list[i], 1300, 0.7) : img;
       }).then(function (img) {
-        state.photos.push({
-          id: uid(), title: "", url: img.url, w: img.w, h: img.h, pending: true,
-          type: "image/jpeg"
-        });
+        var photo = { id: uid(), url: img.url, w: img.w, h: img.h, pending: true };
+        if (pieceId) {
+          for (var k = 0; k < state.pieces.length; k++) {
+            if (state.pieces[k].id === pieceId) state.pieces[k].photos.push(photo);
+          }
+        } else {
+          state.pieces.push({
+            id: uid(), sku: makeSku(), title: "", price: "", size: "", notes: "",
+            sold: false, photos: [photo]
+          });
+        }
         done++; next(i + 1);
       }).catch(function () { failed++; next(i + 1); });
     })(0);
@@ -731,26 +1538,42 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     if (busy) return;
     if (!token()) {
       message = { text: "This device has no key yet — set one up at the top.", bad: true };
-      renderStudio(); return;
+      studioView = "list"; renderStudio(); return;
     }
+    var blank = state.pieces.filter(function (p) { return !String(p.sku || "").trim(); });
+    blank.forEach(function (p) { p.sku = makeSku(); });
+    var seen = {}, dupe = null;
+    state.pieces.forEach(function (p) {
+      var k = String(p.sku).trim().toLowerCase();
+      if (seen[k]) dupe = p.sku; else seen[k] = 1;
+    });
+    if (dupe) {
+      message = { text: "Two pieces share the item number " + dupe + ". Give one of them a different number.", bad: true };
+      studioView = "list"; renderStudio(); return;
+    }
+
     busy = true;
     var conf = repoConf();
-    var newOnes = state.photos.filter(function (p) { return p.pending; });
+    var jobs = [];
+    state.pieces.forEach(function (p) {
+      p.photos.forEach(function (ph) { if (ph.pending && ph.url) jobs.push({ piece: p, photo: ph }); });
+    });
     var step = 0;
 
     function progress(t) { message = { text: t }; renderStudio(); }
-    progress(newOnes.length ? "Uploading photos…" : "Publishing…");
+    progress(jobs.length ? "Uploading photos…" : "Publishing…");
 
     (function upload(i) {
-      if (i >= newOnes.length) return finish();
-      var p = newOnes[i];
-      var path = "photos/" + new Date().toISOString().slice(0, 10) + "-" + slug(p.title) + "-" + p.id + ".jpg";
-      progress("Uploading photo " + (++step) + " of " + newOnes.length + "…");
-      putFile(conf, path, b64(p.url), "Add " + path)
+      if (i >= jobs.length) return finish();
+      var job = jobs[i], ph = job.photo;
+      var path = "photos/" + new Date().toISOString().slice(0, 10) + "-" +
+                 slug(job.piece.sku) + "-" + (ph.id || uid()) + ".jpg";
+      progress("Uploading photo " + (++step) + " of " + jobs.length + "…");
+      putFile(conf, path, b64(ph.url), "Add " + path)
         .then(function () {
-          p.file = path;
-          delete p.url;
-          delete p.pending;
+          ph.file = path;
+          delete ph.url;
+          delete ph.pending;
           upload(i + 1);
         })
         .catch(function (err) { fail(err); });
@@ -759,12 +1582,22 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     function finish() {
       progress("Saving the catalogue…");
       var data = {
+        version: 2,
         name: state.name,
         trade: state.trade,
         contact: state.contact,
         showTitles: state.showTitles,
-        photos: state.photos.map(function (p) {
-          return { file: p.file, title: p.title || "", w: p.w, h: p.h };
+        showPrices: state.showPrices,
+        skuPrefix: state.skuPrefix,
+        siteUrl: state.siteUrl,
+        nextSku: state.nextSku,
+        pieces: state.pieces.map(function (p) {
+          return {
+            id: p.id, sku: p.sku, title: p.title || "", price: p.price || "",
+            size: p.size || "", notes: p.notes || "", sold: !!p.sold,
+            photos: p.photos.filter(function (ph) { return ph.file; })
+              .map(function (ph) { return { file: ph.file, w: ph.w, h: ph.h }; })
+          };
         })
       };
       getSha(conf, "catalogue.json")
@@ -780,8 +1613,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         .then(function () {
           busy = false;
           message = { text: "Published. The website updates in about a minute." };
-          showingExamples = !state.photos.length;
-          renderPage(); renderStudio();
+          renderStudio();
         })
         .catch(function (err) { fail(err); });
     }
@@ -798,17 +1630,18 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       } else if (/409|conflict/i.test(m)) {
         text = "Someone changed the catalogue at the same time. Try publishing again.";
       } else {
-        text = "Publishing stopped: " + m + ". Your photos are still here — try again.";
+        text = "Publishing stopped: " + m + ". Your work is still here — try again.";
       }
       message = { text: text, bad: true };
-      renderPage(); renderStudio();
+      renderStudio();
     }
   }
 
   /* ---------------- go ---------------- */
   load();
-  checkHash();
-  window.addEventListener("hashchange", checkHash);
+  window.addEventListener("hashchange", function () {
+    if (!studioOpen && !printOpen) openFromHash();
+  });
 })();
 </script>
 </body>
