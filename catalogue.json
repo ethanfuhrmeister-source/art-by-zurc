@@ -3,7 +3,6 @@
   "name": "Zurc Catalog",
   "trade": "Handmade pottery · Asheville, NC",
   "contact": "",
-  "showTitles": false,
   "showPrices": true,
   "skuPrefix": "ZC",
   "siteUrl": "https://ethanfuhrmeister-source.github.io/art-by-zurc/",

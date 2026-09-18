@@ -98,10 +98,11 @@ button{font:inherit;color:inherit}
   font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;
   color:var(--muted);text-transform:uppercase;
 }
-.name{font-style:italic;font-size:.98rem;color:var(--ink);margin:.1rem 0 0}
+.titleline{display:flex;align-items:baseline;gap:.45rem;flex-wrap:wrap}
+.titleline .sep{color:#cfc7bf;font-size:.8rem}
+.name{font-style:italic;font-size:.98rem;color:var(--ink);margin:0}
 .price{font-family:var(--sans);font-size:.8rem;color:var(--muted);margin:.2rem 0 0}
 .price.is-sold{color:var(--clay)}
-.grid.no-titles .name{display:none}
 
 .colophon{padding:3.5rem 1.25rem 4rem;text-align:center}
 .colophon a,.colophon span{
@@ -686,7 +687,6 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     name: "Zurc Catalog",
     trade: "Handmade pottery · Asheville, NC",
     contact: "",
-    showTitles: false,
     showPrices: true,
     skuPrefix: "ZC",
     siteUrl: "",
@@ -711,7 +711,6 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     if (data.name) s.name = data.name;
     if (data.trade != null) s.trade = data.trade;
     s.contact = data.contact || "";
-    s.showTitles = data.showTitles === true;
     s.showPrices = data.showPrices !== false;
     s.skuPrefix = data.skuPrefix || "ZC";
     s.siteUrl = data.siteUrl || "";
@@ -793,7 +792,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       h += '<p class="blank">' + (state.pieces.length ? "Nothing here just now."
             : "New pieces are on their way.") + "</p>";
     } else {
-      h += '<div class="grid' + (state.showTitles ? "" : " no-titles") + '">';
+      h += '<div class="grid">';
       for (var i = 0; i < list.length; i++) {
         var p = list[i], ph = cover(p);
         if (!ph) continue;
@@ -807,8 +806,11 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         if (p.photos.length > 1) h += '<span class="count">' + p.photos.length + " photos</span>";
         h += "</button>";
         h += '<figcaption class="meta">';
-        h += '<span class="sku">' + esc(p.sku) + "</span>";
-        if (p.title) h += '<p class="name">' + esc(p.title) + "</p>";
+        h += '<span class="titleline"><span class="sku">' + esc(p.sku) + "</span>";
+        if (p.title) {
+          h += '<span class="sep">·</span><span class="name">' + esc(p.title) + "</span>";
+        }
+        h += "</span>";
         if (p.sold) h += '<p class="price is-sold">Sold</p>';
         else if (state.showPrices && p.price) h += '<p class="price">' + esc(p.price) + "</p>";
         h += "</figcaption></figure>";
@@ -1166,8 +1168,6 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
          '<input type="text" id="s-site" value="' + esc(state.siteUrl || "") +
          '" spellcheck="false" placeholder="' + esc(location.origin + location.pathname) +
          '"><span class="hint">Leave blank to use whatever address this page is open at. Set it if you ever print from a copy on your own computer, so the codes still point at the real website.</span></div>';
-    h += '<label class="check"><input type="checkbox" id="s-titles"' + (state.showTitles ? " checked" : "") +
-         "> Show titles on the catalogue</label>";
     h += '<label class="check"><input type="checkbox" id="s-prices"' + (state.showPrices ? " checked" : "") +
          "> Show prices on the catalogue</label>";
     h += "</div>";
@@ -1277,7 +1277,6 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     bindText(el, "#s-contact", function (v) { state.contact = v; });
     bindText(el, "#s-prefix", function (v) { state.skuPrefix = v.replace(/\s+/g, ""); });
     bindText(el, "#s-site", function (v) { state.siteUrl = v.trim(); });
-    el.querySelector("#s-titles").addEventListener("change", function (e) { state.showTitles = e.target.checked; });
     el.querySelector("#s-prices").addEventListener("change", function (e) { state.showPrices = e.target.checked; });
     el.querySelector("#s-save").addEventListener("click", publish);
   }
@@ -1336,7 +1335,8 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
 
     h += '<div class="block"><h3>Details</h3>';
     h += '<div class="field"><label for="e-title">Title</label>' +
-         '<input type="text" id="e-title" value="' + esc(p.title || "") + '" placeholder="Tall vase, ash glaze"></div>';
+         '<input type="text" id="e-title" value="' + esc(p.title || "") + '" placeholder="Tall vase, ash glaze">' +
+         '<span class="hint">Shown on the catalogue next to the item number.</span></div>';
     h += '<div class="two">';
     h += '<div class="field"><label for="e-price">Price</label>' +
          '<input type="text" id="e-price" value="' + esc(p.price || "") + '" placeholder="$85"></div>';
@@ -1586,7 +1586,6 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         name: state.name,
         trade: state.trade,
         contact: state.contact,
-        showTitles: state.showTitles,
         showPrices: state.showPrices,
         skuPrefix: state.skuPrefix,
         siteUrl: state.siteUrl,
