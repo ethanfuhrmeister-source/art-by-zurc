@@ -13,7 +13,6 @@ Buyers see what exists, what it costs and what is already sold, then get in touc
 | `index.html` | The whole site — catalogue, piece viewer, print sheet and the studio. No build step, no dependencies. |
 | `catalogue.json` | The inventory itself. Every piece, its item number, details and photo list. |
 | `photos/` | The photographs. |
-| `worker/` | Optional Cloudflare Worker so the studio can sign in with a password instead of a GitHub token. |
 
 ## The inventory
 
@@ -63,37 +62,15 @@ do sometimes clear it.
 
 ## The publishing service
 
-`worker/` is a small Cloudflare Worker that holds the GitHub token so the potter
-doesn't have to. It does two things: exchange the studio password for a 30-day
-session, and forward signed-in requests to GitHub. It refuses anything outside this
-repository's contents, so the token cannot be used to reach anything else.
+The password option is a small Cloudflare Worker that holds the GitHub token so the
+potter doesn't have to. It lives in its own repository —
+[zurc-catalog-studio](https://github.com/ethanfuhrmeister-source/zurc-catalog-studio) —
+which has the deployment and maintenance instructions.
 
-Deploy it once:
-
-```sh
-cd worker
-npx wrangler login
-npx wrangler secret put STUDIO_PASSWORD     # what she will type
-npx wrangler secret put GITHUB_TOKEN        # the fine-grained token described above
-npx wrangler secret put SESSION_SECRET      # any long random string
-npx wrangler deploy
-```
-
-For `SESSION_SECRET`, `openssl rand -base64 32` is fine. `REPO` and `ALLOWED_ORIGIN`
-are plain settings in `worker/wrangler.toml` — change them if the repo or site
-address ever moves.
-
-Then put the deployed URL (`https://zurc-catalog-studio.<subdomain>.workers.dev`)
-into *Publishing service address* in the studio and publish once. If you have no
-token to hand for that first publish, edit `apiUrl` in `catalogue.json` directly on
-github.com instead.
-
-Changing the password later is `npx wrangler secret put STUDIO_PASSWORD` followed by
-`npx wrangler deploy`; changing `SESSION_SECRET` additionally signs everyone out.
-
-> The Worker slows down wrong-password guesses but does not lock anyone out, so use a
-> genuinely strong password. If you want hard rate limiting, add a Cloudflare rate
-> limiting rule on `/login`.
+Once it is deployed, put its URL (`https://zurc-catalog-studio.<subdomain>.workers.dev`)
+into *Publishing service address* in the studio and publish once. If you have no token
+to hand for that first publish, edit `apiUrl` in `catalogue.json` directly on github.com
+instead.
 
 ## Printing the inventory
 
