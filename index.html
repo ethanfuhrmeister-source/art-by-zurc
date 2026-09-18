@@ -338,6 +338,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
 
   var REPO = { owner: "ethanfuhrmeister-source", repo: "art-by-zurc", branch: "main" };
   var TOKEN_KEY = "zurc.gh.token";
+  var SESSION_KEY = "zurc.session";
   var REPO_KEY = "zurc.gh.repo";
   var API = "https://api.github.com";
 
@@ -690,6 +691,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     showPrices: true,
     skuPrefix: "ZC",
     siteUrl: "",
+    apiUrl: "",
     nextSku: 1,
     pieces: []
   };
@@ -700,7 +702,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   var viewPiece = -1, viewPhoto = 0;
   var studioOpen = false, studioView = "list", editingId = null;
   var printOpen = false, printCols = 3, printSold = true, printQr = true;
-  var busy = false, message = null;
+  var busy = false, message = null, dirty = false;
   var tapCount = 0, tapTimer = null;
   var pendingDeletes = [];
 
@@ -714,6 +716,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     s.showPrices = data.showPrices !== false;
     s.skuPrefix = data.skuPrefix || "ZC";
     s.siteUrl = data.siteUrl || "";
+    s.apiUrl = data.apiUrl || "";
 
     if (Array.isArray(data.pieces)) {
       s.pieces = data.pieces.map(function (p) {
@@ -1080,6 +1083,20 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   function token() {
     try { return localStorage.getItem(TOKEN_KEY) || ""; } catch (e) { return ""; }
   }
+  /* With a publishing service configured, the studio signs in with a password
+     and the GitHub token stays on the server. Without one, it falls back to a
+     token kept in this browser. */
+  function apiBase() {
+    return String(state.apiUrl || "").trim().replace(/\/+$/, "");
+  }
+  function useApi() { return !!apiBase(); }
+  function session() {
+    try { return localStorage.getItem(SESSION_KEY) || ""; } catch (e) { return ""; }
+  }
+  function signOut() {
+    try { localStorage.removeItem(SESSION_KEY); } catch (e) {}
+  }
+  function canPublish() { return useApi() ? !!session() : !!token(); }
   function editing() {
     for (var i = 0; i < state.pieces.length; i++) if (state.pieces[i].id === editingId) return state.pieces[i];
     return null;
@@ -1107,7 +1124,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     h += '<span class="note">' + (unsaved
       ? unsaved + " photo" + (unsaved > 1 ? "s" : "") + " waiting to go up."
       : "Changes go live about a minute after you publish.") + "</span>";
-    h += '<button class="btn" id="s-save"' + (busy || !token() ? " disabled" : "") + ">" +
+    h += '<button class="btn" id="s-save"' + (busy || !canPublish() ? " disabled" : "") + ">" +
          (busy ? "Publishing…" : "Publish to the website") + "</button>";
     h += "</div>";
     return h;
@@ -1119,7 +1136,20 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     var h = '<div class="studio-bar"><h2>Your studio</h2>' +
             '<button class="link-btn" id="s-close">Back to catalogue</button></div>';
 
-    if (!hasToken) {
+    if (useApi()) {
+      if (!session()) {
+        h += '<div class="block"><h3>Sign in</h3>';
+        h += '<p class="note">Enter the studio password to add or change pieces.</p>';
+        h += '<div class="field"><label for="s-pass">Password</label>' +
+             '<input type="password" id="s-pass" autocomplete="current-password" spellcheck="false"></div>';
+        h += '<div class="inline"><button class="btn" id="s-login">Sign in</button></div>';
+        h += "</div>";
+      } else {
+        h += '<div class="block"><h3>Signed in</h3><div class="inline">' +
+             '<span class="note">You can publish from this device.</span>' +
+             '<button class="link-btn" id="s-logout">Sign out</button></div></div>';
+      }
+    } else if (!hasToken) {
       h += '<div class="block"><h3>One-time setup</h3>';
       h += '<p class="note">This device needs a key before it can publish. Paste the access token below — it is saved in this browser only, never sent anywhere except GitHub.</p>';
       h += '<div class="field"><label for="s-token">GitHub access token</label>' +
@@ -1164,6 +1194,10 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
          '<input type="text" id="s-prefix" value="' + esc(state.skuPrefix || "ZC") +
          '" spellcheck="false"><span class="hint">New pieces are numbered ' +
          esc((state.skuPrefix || "ZC") + "-" + padNum(state.nextSku || 1)) + ", and so on.</span></div>";
+    h += '<div class="field"><label for="s-api">Publishing service address</label>' +
+         '<input type="text" id="s-api" value="' + esc(state.apiUrl || "") +
+         '" spellcheck="false" placeholder="https://…workers.dev"><span class="hint">' +
+         'Set this and the studio asks for a password instead of a GitHub token. Leave it blank to keep using a token on each device.</span></div>';
     h += '<div class="field"><label for="s-site">Website address for QR codes</label>' +
          '<input type="text" id="s-site" value="' + esc(state.siteUrl || "") +
          '" spellcheck="false" placeholder="' + esc(location.origin + location.pathname) +
@@ -1174,7 +1208,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
 
     if (message) h += '<p class="note' + (message.bad ? " warn" : "") + '">' + esc(message.text) + "</p>";
 
-    h += '<details class="help"><summary>Where does the token come from?</summary><ol>' +
+    if (!useApi()) h += '<details class="help"><summary>Where does the token come from?</summary><ol>' +
          "<li>On github.com, open Settings → Developer settings → Personal access tokens → Fine-grained tokens.</li>" +
          "<li>Generate a new token. Under Repository access choose <b>Only select repositories</b> and pick <code>" +
          esc(conf.owner + "/" + conf.repo) + "</code>.</li>" +
@@ -1216,6 +1250,42 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
 
   function wireList(el) {
     el.querySelector("#s-close").addEventListener("click", closeStudio);
+
+    var login = el.querySelector("#s-login");
+    if (login) {
+      var pass = el.querySelector("#s-pass");
+      var go = function () {
+        var v = pass.value;
+        if (!v) { message = { text: "Enter the password first.", bad: true }; renderStudio(); return; }
+        message = { text: "Signing in…" }; renderStudio();
+        fetch(apiBase() + "/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ password: v })
+        }).then(function (r) {
+          return r.json().catch(function () { return {}; }).then(function (j) {
+            if (!r.ok) throw new Error(j.error || ("Sign in failed (" + r.status + ")"));
+            return j;
+          });
+        }).then(function (j) {
+          try { localStorage.setItem(SESSION_KEY, j.session); }
+          catch (e) { throw new Error("This browser will not keep you signed in. Turn off private browsing."); }
+          message = { text: "Signed in. You can add pieces now." };
+          renderStudio();
+        }).catch(function (err) {
+          message = { text: String(err.message || err), bad: true };
+          renderStudio();
+        });
+      };
+      login.addEventListener("click", go);
+      pass.addEventListener("keydown", function (e) { if (e.key === "Enter") go(); });
+    }
+    var logout = el.querySelector("#s-logout");
+    if (logout) {
+      logout.addEventListener("click", function () {
+        signOut(); message = { text: "Signed out." }; renderStudio();
+      });
+    }
 
     var save = el.querySelector("#s-savetoken");
     if (save) {
@@ -1277,7 +1347,8 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     bindText(el, "#s-contact", function (v) { state.contact = v; });
     bindText(el, "#s-prefix", function (v) { state.skuPrefix = v.replace(/\s+/g, ""); });
     bindText(el, "#s-site", function (v) { state.siteUrl = v.trim(); });
-    el.querySelector("#s-prices").addEventListener("change", function (e) { state.showPrices = e.target.checked; });
+    bindText(el, "#s-api", function (v) { state.apiUrl = v.trim(); });
+    el.querySelector("#s-prices").addEventListener("change", function (e) { state.showPrices = e.target.checked; touch(); });
     el.querySelector("#s-save").addEventListener("click", publish);
   }
   function bindRows(box) {
@@ -1293,8 +1364,9 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   }
   function bindText(el, sel, fn) {
     var n = el.querySelector(sel);
-    if (n) n.addEventListener("input", function () { fn(n.value); });
+    if (n) n.addEventListener("input", function () { fn(n.value); dirty = true; });
   }
+  function touch() { dirty = true; }
 
   /* ---------------- studio: one piece ---------------- */
   function pieceEditorHtml() {
@@ -1378,7 +1450,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         var i = +b.getAttribute("data-pdel"), ph = p.photos[i];
         if (ph && ph.file && !ph.pending) pendingDeletes.push(ph.file);
         p.photos.splice(i, 1);
-        renderStudio();
+        touch(); renderStudio();
       });
     });
     var file = el.querySelector("#e-file");
@@ -1399,6 +1471,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         sku.classList.remove("bad");
         hint.textContent = "Scanning the code opens this piece on the website.";
         p.sku = v;
+        dirty = true;
         qrBox.innerHTML = qrSvg(pieceUrl(v));
       }
     });
@@ -1407,12 +1480,13 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     bindText(el, "#e-price", function (v) { p.price = v; });
     bindText(el, "#e-size", function (v) { p.size = v; });
     bindText(el, "#e-notes", function (v) { p.notes = v; });
-    el.querySelector("#e-sold").addEventListener("change", function (e) { p.sold = e.target.checked; });
+    el.querySelector("#e-sold").addEventListener("change", function (e) { p.sold = e.target.checked; touch(); });
 
     el.querySelector("#e-del").addEventListener("click", function () {
       if (!window.confirm("Delete " + p.sku + " and its photos?")) return;
       p.photos.forEach(function (ph) { if (ph.file && !ph.pending) pendingDeletes.push(ph.file); });
       state.pieces = state.pieces.filter(function (x) { return x.id !== p.id; });
+      touch();
       studioView = "list"; editingId = null;
       message = { text: p.sku + " removed. Publish to take it off the website." };
       renderStudio();
@@ -1425,7 +1499,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     var j = i + d;
     if (j < 0 || j >= p.photos.length) return;
     var t = p.photos[i]; p.photos[i] = p.photos[j]; p.photos[j] = t;
-    renderStudio();
+    touch(); renderStudio();
   }
 
   /* ---------------- photo intake ---------------- */
@@ -1484,13 +1558,16 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
             sold: false, photos: [photo]
           });
         }
-        done++; next(i + 1);
+        done++; dirty = true; next(i + 1);
       }).catch(function () { failed++; next(i + 1); });
     })(0);
   }
 
   /* ---------------- publishing to GitHub ---------------- */
   function ghHeaders() {
+    if (useApi()) {
+      return { Authorization: "Bearer " + session(), "Content-Type": "application/json" };
+    }
     return {
       Authorization: "Bearer " + token(),
       Accept: "application/vnd.github+json",
@@ -1498,8 +1575,11 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       "X-GitHub-Api-Version": "2022-11-28"
     };
   }
+  function repoUrl(conf) {
+    return (useApi() ? apiBase() + "/gh" : API) + "/repos/" + conf.owner + "/" + conf.repo;
+  }
   function contentsUrl(conf, path) {
-    return API + "/repos/" + conf.owner + "/" + conf.repo + "/contents/" + path;
+    return repoUrl(conf) + "/contents/" + path;
   }
   function getSha(conf, path) {
     return fetch(contentsUrl(conf, path) + "?ref=" + conf.branch + "&t=" + Date.now(),
@@ -1536,8 +1616,12 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
 
   function publish() {
     if (busy) return;
-    if (!token()) {
-      message = { text: "This device has no key yet — set one up at the top.", bad: true };
+    if (!canPublish()) {
+      message = {
+        text: useApi() ? "Sign in at the top before publishing."
+                       : "This device has no key yet — set one up at the top.",
+        bad: true
+      };
       studioView = "list"; renderStudio(); return;
     }
     var blank = state.pieces.filter(function (p) { return !String(p.sku || "").trim(); });
@@ -1589,6 +1673,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         showPrices: state.showPrices,
         skuPrefix: state.skuPrefix,
         siteUrl: state.siteUrl,
+        apiUrl: state.apiUrl,
         nextSku: state.nextSku,
         pieces: state.pieces.map(function (p) {
           return {
@@ -1611,6 +1696,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         })
         .then(function () {
           busy = false;
+          dirty = false;
           message = { text: "Published. The website updates in about a minute." };
           renderStudio();
         })
@@ -1621,7 +1707,12 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       busy = false;
       var m = String((err && err.message) || err || "");
       var text;
-      if (/401|Bad credentials/i.test(m)) {
+      if (/401|sign in/i.test(m) && useApi()) {
+        signOut();
+        studioView = "list"; /* the sign-in field lives on the list */
+        text = "That session has run out. Sign in again and publish once more.";
+      } else if (/401|Bad credentials/i.test(m)) {
+        studioView = "list";
         text = "The key was refused. It may have expired — make a new token and save it again.";
       } else if (/403|404/.test(m)) {
         text = "No permission to write to this repository. Check the token covers " +
@@ -1637,6 +1728,13 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   }
 
   /* ---------------- go ---------------- */
+  window.addEventListener("beforeunload", function (e) {
+    if (!dirty && !pendingCount()) return;
+    e.preventDefault();
+    e.returnValue = "";
+    return "";
+  });
+
   load();
   window.addEventListener("hashchange", function () {
     if (!studioOpen && !printOpen) openFromHash();
