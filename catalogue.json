@@ -6,7 +6,7 @@
   "showPrices": true,
   "skuPrefix": "ZC",
   "siteUrl": "https://ethanfuhrmeister-source.github.io/art-by-zurc/",
-  "apiUrl": "",
+  "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
   "nextSku": 55,
   "pieces": [
     {
