@@ -1795,10 +1795,14 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   /* One pass over everything without a description. Each one is saved as it
      arrives, so stopping halfway keeps what was already done. */
   function describeAll() {
-    var todo = state.pieces.filter(function (p) {
+    describeThese(state.pieces.filter(function (p) {
       return !String(p.description || "").trim() && cover(p);
-    });
-    if (!todo.length) return;
+    }));
+  }
+
+  function describeThese(todo) {
+    todo = (todo || []).filter(function (p) { return cover(p); });
+    if (!todo.length || !useApi() || !canPublish()) return;
     var note = document.getElementById("s-descnote");
     var btn = document.getElementById("s-describe");
     if (btn) btn.disabled = true;
@@ -1808,8 +1812,8 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       if (i >= todo.length) {
         message = {
           text: failed
-            ? done + " described, " + failed + " could not be read. Publish to save them."
-            : done + " described. Publish to save them.",
+            ? done + " described, " + failed + " could not be read."
+            : done + " described.",
           bad: failed > 0
         };
         renderStudio();
@@ -1958,6 +1962,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   }
 
   function intake(files, pieceId) {
+    var created = [];
     if (!files || !files.length) return;
     var list = Array.prototype.slice.call(files).filter(function (f) { return /^image\//.test(f.type); });
     if (!list.length) {
@@ -1972,8 +1977,10 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       if (i >= list.length) {
         message = failed
           ? { text: done + " added, " + failed + " could not be read.", bad: true }
-          : { text: done + " photo" + (done > 1 ? "s" : "") + " ready. Publish when you are done.", bad: false };
+          : { text: done + " photo" + (done > 1 ? "s" : "") + " added.", bad: false };
         renderStudio();
+        /* Describe what just came in, so it is searchable straight away. */
+        if (created.length) describeThese(created);
         return;
       }
       shrink(list[i], 1600, 0.8).then(function (img) {
@@ -1985,10 +1992,12 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
             if (state.pieces[k].id === pieceId) state.pieces[k].photos.push(photo);
           }
         } else {
-          state.pieces.push({
+          var made = {
             id: uid(), sku: makeSku(), title: "", price: "", size: "", notes: "",
             sold: false, photos: [photo]
-          });
+          };
+          state.pieces.push(made);
+          created.push(made);
         }
         done++; touch(); next(i + 1);
       }).catch(function () { failed++; next(i + 1); });
