@@ -79,14 +79,17 @@ button{font:inherit;color:inherit}
 .chip[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
 
 /* ---------- grid ---------- */
-.grid{column-count:4;column-gap:1.4rem;padding:0 1.4rem;margin:0}
-@media (max-width:1240px){.grid{column-count:3}}
-@media (max-width:820px){.grid{column-count:2;column-gap:1rem;padding:0 1rem}}
-@media (max-width:460px){.grid{column-count:1}}
-.piece{
-  break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;
-  margin:0 0 2.2rem;padding:0;display:block;
+/* A real grid, so pieces read left to right in item-number order.
+   Photos keep their own proportions; rows align at the top. */
+.grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2.2rem 1.4rem;align-items:start;
+  padding:0 1.4rem;margin:0;
 }
+@media (max-width:1240px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:820px){.grid{grid-template-columns:repeat(2,1fr);gap:1.6rem 1rem;padding:0 1rem}}
+@media (max-width:460px){.grid{grid-template-columns:1fr}}
+.piece{margin:0;padding:0;display:block}
 .shot{
   position:relative;display:block;width:100%;padding:0;margin:0;border:0;
   background:none;cursor:zoom-in;line-height:0;
