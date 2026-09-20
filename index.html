@@ -768,7 +768,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   var studioOpen = false, studioView = "list", editingId = null;
   var printOpen = false, printCols = 3, printSold = true, printQr = true;
   var busy = false, message = null, dirty = false;
-  var autoTimer = null, autoQueued = false, autoStatus = "";
+  var autoTimer = null, autoQueued = false, autoStatus = "", publishFailed = false;
   var catalogueSha = null;   /* the version this device last saw, for conflict detection */
   var seenStamp = "", watchTimer = null;
   var WATCH_EVERY = 15000;
@@ -1320,6 +1320,10 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   function saveBarState() {
     var unsaved = pendingCount(), guessed = suggestedCount();
     if (busy) return { warn: false, text: autoStatus || "Putting it on the website…" };
+    if (publishFailed) return { warn: true, text: "Not on the website yet." };
+    if (!canPublish() && (dirty || unsaved)) {
+      return { warn: true, text: "Sign in to put this on the website." };
+    }
     if (guessed) {
       return { warn: true, text: guessed + " suggested price" + (guessed > 1 ? "s" : "") + " not checked yet." };
     }
@@ -1331,10 +1335,19 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     if (unsaved) {
       return { warn: false, text: unsaved + " photo" + (unsaved > 1 ? "s" : "") + " waiting to go up." };
     }
-    return { warn: false, text: "Changes go live about a minute after you publish." };
+    return { warn: false, text: "Everything here is on the website." };
+  }
+  /* Publishing is automatic, so the button is only for the cases automation
+     cannot handle: a failed attempt, or changes made while signed out.
+     Neither changes as she types, so refreshing the bar never steals focus. */
+  function needsButton() {
+    return !busy && (publishFailed || (!canPublish() && (dirty || pendingCount())));
   }
   function refreshSaveBar() {
-    var n = document.querySelector(".savebar .note");
+    var bar = document.querySelector(".savebar");
+    if (!bar) return;
+    if (!!bar.querySelector("#s-save") !== needsButton()) { renderStudio(); return; }
+    var n = bar.querySelector(".note");
     if (!n) return;
     var st = saveBarState();
     n.className = "note" + (st.warn ? " warn" : "");
@@ -1345,8 +1358,10 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     var st = saveBarState();
     var h = '<div class="savebar">';
     h += '<span class="note' + (st.warn ? " warn" : "") + '">' + esc(st.text) + "</span>";
-    h += '<button class="btn" id="s-save"' + (busy || !canPublish() ? " disabled" : "") + ">" +
-         (busy ? "Publishing…" : "Publish to the website") + "</button>";
+    if (needsButton()) {
+      h += '<button class="btn" id="s-save"' + (canPublish() ? "" : " disabled") + ">" +
+           (publishFailed ? "Try again" : "Put it up now") + "</button>";
+    }
     h += "</div>";
     return h;
   }
@@ -1588,7 +1603,8 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     bindText(el, "#s-site", function (v) { state.siteUrl = v.trim(); });
     bindText(el, "#s-api", function (v) { state.apiUrl = v.trim(); });
     el.querySelector("#s-prices").addEventListener("change", function (e) { state.showPrices = e.target.checked; touch(); });
-    el.querySelector("#s-save").addEventListener("click", publish);
+    var sv = el.querySelector("#s-save");
+    if (sv) sv.addEventListener("click", function () { publish(); });
   }
   function bindRows(box) {
     box.querySelectorAll("[data-edit]").forEach(function (b) {
@@ -1781,7 +1797,8 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       }
     });
 
-    el.querySelector("#s-save").addEventListener("click", publish);
+    var sv2 = el.querySelector("#s-save");
+    if (sv2) sv2.addEventListener("click", function () { publish(); });
   }
 
   function movePhoto(p, i, d) {
@@ -2058,7 +2075,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   function publish(quiet) {
     if (busy) return;
     clearTimeout(autoTimer);
-    autoStatus = "";
+    autoStatus = ""; publishFailed = false;
     if (!canPublish()) {
       message = {
         text: useApi() ? "Sign in at the top before publishing."
@@ -2147,6 +2164,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         .then(function () {
           busy = false;
           dirty = false;
+          publishFailed = false;
           autoStatus = "On the website.";
           if (!quiet) message = { text: "Published. The website updates in about a minute." };
           renderStudio();
@@ -2157,6 +2175,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
 
     function fail(err) {
       busy = false;
+      publishFailed = true;
       var m = String((err && err.message) || err || "");
       var text;
       if (/401|sign in/i.test(m) && useApi()) {
