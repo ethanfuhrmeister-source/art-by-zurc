@@ -768,6 +768,11 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   var studioOpen = false, studioView = "list", editingId = null;
   var printOpen = false, printCols = 3, printSold = true, printQr = true;
   var busy = false, message = null, dirty = false;
+  var autoTimer = null, autoQueued = false, autoStatus = "";
+  var catalogueSha = null;   /* the version this device last saw, for conflict detection */
+  var seenStamp = "", watchTimer = null;
+  var WATCH_EVERY = 15000;
+  var AUTO_DELAY = 6000;
   var pendingDeletes = [];
 
   /* ---------------- load + migrate ---------------- */
@@ -823,9 +828,76 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
 
   function load() {
     fetch("catalogue.json?t=" + Date.now(), { cache: "no-store" })
-      .then(function (r) { if (!r.ok) throw new Error("no catalogue"); return r.json(); })
-      .then(function (data) { normalise(data); renderPage(); openFromHash(); })
-      .catch(function () { renderPage(); openFromHash(); });
+      .then(function (r) { if (!r.ok) throw new Error("no catalogue"); return r.text(); })
+      .then(function (txt) {
+        seenStamp = fingerprint(txt);
+        normalise(JSON.parse(txt));
+        renderPage(); openFromHash(); watch();
+      })
+      .catch(function () { renderPage(); openFromHash(); watch(); });
+  }
+
+  /* Cheap content fingerprint, so a poll can tell "changed" from "same". */
+  function fingerprint(txt) {
+    var h = 0x811c9dc5;
+    for (var i = 0; i < txt.length; i++) {
+      h ^= txt.charCodeAt(i);
+      h = (h + ((h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24))) >>> 0;
+    }
+    return txt.length + "." + h.toString(16);
+  }
+
+  /* Another device may add, change or delete a piece at any time. Keep looking,
+     so every screen showing the catalogue catches up on its own. */
+  function watch() {
+    clearInterval(watchTimer);
+    var ticks = 0;
+    watchTimer = setInterval(function () {
+      ticks++;
+      /* Slow down when nobody is looking, rather than stopping — some browsers
+         report a visible tab as hidden, and never checking would strand it. */
+      if (document.hidden && ticks % 4) return;
+      checkForChanges();
+    }, WATCH_EVERY);
+    document.addEventListener("visibilitychange", function () {
+      if (!document.hidden) checkForChanges();
+    });
+  }
+
+  function checkForChanges() {
+    if (busy) return;
+    fetch("catalogue.json?t=" + Date.now(), { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.text() : null; })
+      .then(function (txt) {
+        if (!txt) return;
+        var f = fingerprint(txt);
+        if (!seenStamp) { seenStamp = f; return; }
+        if (f === seenStamp) return;
+        seenStamp = f;
+
+        /* Never throw away work that only exists on this screen. */
+        if (studioOpen && (dirty || pendingCount())) {
+          message = {
+            text: "Changed on another device. Your unsaved work is still here — it will go up as usual, " +
+                  "but reload to see what they changed.",
+            bad: true
+          };
+          renderStudio();
+          return;
+        }
+        var open = viewPiece > -1 ? state.pieces[viewPiece] : null;
+        var openSku = open ? open.sku : null;
+        normalise(JSON.parse(txt));
+        catalogueSha = null;
+        if (openSku) {
+          var again = findBySku(openSku);
+          if (again < 0) { closeViewer(); viewPiece = -1; }
+          else { viewPiece = again; }
+        }
+        renderPage();
+        if (studioOpen) renderStudio();
+      })
+      .catch(function () {});
   }
 
   /* ---------------- public catalogue ---------------- */
@@ -1247,6 +1319,12 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
      refreshed in place without rebuilding the whole studio. */
   function saveBarState() {
     var unsaved = pendingCount(), guessed = suggestedCount();
+    if (busy) return { warn: false, text: autoStatus || "Putting it on the website…" };
+    if (guessed) {
+      return { warn: true, text: guessed + " suggested price" + (guessed > 1 ? "s" : "") + " not checked yet." };
+    }
+    if (dirty || unsaved) return { warn: false, text: "Saving…" };
+    if (autoStatus) return { warn: false, text: autoStatus };
     if (guessed) {
       return { warn: true, text: guessed + " suggested price" + (guessed > 1 ? "s" : "") + " not checked yet." };
     }
@@ -1525,9 +1603,21 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   }
   function bindText(el, sel, fn) {
     var n = el.querySelector(sel);
-    if (n) n.addEventListener("input", function () { fn(n.value); dirty = true; });
+    if (n) n.addEventListener("input", function () { fn(n.value); touch(); });
   }
-  function touch() { dirty = true; }
+  function touch() { dirty = true; refreshSaveBar(); scheduleAuto(); }
+
+  /* Changes go up on their own once she stops for a moment, so edits are
+     batched rather than one publish per keystroke. */
+  function scheduleAuto() {
+    if (!canPublish()) return;
+    clearTimeout(autoTimer);
+    autoTimer = setTimeout(function () {
+      if (busy) { autoQueued = true; return; }
+      if (!dirty && !pendingCount()) return;
+      publish(true);
+    }, AUTO_DELAY);
+  }
 
   /* ---------------- studio: one piece ---------------- */
   function pieceEditorHtml() {
@@ -1641,7 +1731,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         sku.classList.remove("bad");
         hint.textContent = "Scanning the code opens this piece on the website.";
         p.sku = v;
-        dirty = true;
+        touch();
         qrBox.innerHTML = qrSvg(pieceUrl(v));
       }
     });
@@ -1744,7 +1834,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       }).then(function (j) {
         p.description = j.description || "";
         p.keywords = Array.isArray(j.keywords) ? j.keywords : [];
-        dirty = true; done++;
+        touch(); done++;
         next(i + 1);
       }).catch(function () { failed++; next(i + 1); });
     })(0);
@@ -1823,7 +1913,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       if (j.low && j.high) bits.push("$" + Math.round(j.low) + "–$" + Math.round(j.high));
       if (j.note) bits.push(j.note);
       p.suggestedNote = bits.join(" · ");
-      dirty = true;
+      touch();
       if (input) { input.value = price; input.classList.add("suggested"); }
       hint.className = "hint";
       hint.textContent = p.suggestedNote;
@@ -1900,7 +1990,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
             sold: false, photos: [photo]
           });
         }
-        done++; dirty = true; next(i + 1);
+        done++; touch(); next(i + 1);
       }).catch(function () { failed++; next(i + 1); });
     })(0);
   }
@@ -1956,8 +2046,10 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     return btoa(String.fromCharCode.apply(null, new TextEncoder().encode(str)));
   }
 
-  function publish() {
+  function publish(quiet) {
     if (busy) return;
+    clearTimeout(autoTimer);
+    autoStatus = "";
     if (!canPublish()) {
       message = {
         text: useApi() ? "Sign in at the top before publishing."
@@ -2027,10 +2119,16 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
           };
         })
       };
-      getSha(conf, "catalogue.json")
+      /* Write against the version this device last saw. If the catalogue moved
+         on somewhere else, GitHub refuses rather than quietly overwriting it. */
+      Promise.resolve(catalogueSha || getSha(conf, "catalogue.json"))
         .then(function (sha) {
           return putFile(conf, "catalogue.json", utf8b64(JSON.stringify(data, null, 2)),
             "Update catalogue", sha);
+        })
+        .then(function (res) {
+          catalogueSha = (res && res.content && res.content.sha) || null;
+          return res;
         })
         .then(function () {
           var dead = pendingDeletes.slice();
@@ -2040,8 +2138,10 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         .then(function () {
           busy = false;
           dirty = false;
-          message = { text: "Published. The website updates in about a minute." };
+          autoStatus = "On the website.";
+          if (!quiet) message = { text: "Published. The website updates in about a minute." };
           renderStudio();
+          if (autoQueued) { autoQueued = false; scheduleAuto(); }
         })
         .catch(function (err) { fail(err); });
     }
@@ -2060,8 +2160,13 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       } else if (/403|404/.test(m)) {
         text = "No permission to write to this repository. Check the token covers " +
                conf.owner + "/" + conf.repo + " with Contents set to read and write.";
-      } else if (/409|conflict/i.test(m)) {
-        text = "Someone changed the catalogue at the same time. Try publishing again.";
+      } else if (/409|conflict|does not match|sha/i.test(m)) {
+        /* Another device published since this one loaded. Take theirs and start
+           again rather than overwrite work that is not on this screen. */
+        catalogueSha = null;
+        text = "This was changed on another device. Reloading so you do not lose their work — " +
+               "make your change again.";
+        setTimeout(function () { location.reload(); }, 2500);
       } else {
         text = "Publishing stopped: " + m + ". Your work is still here — try again.";
       }
