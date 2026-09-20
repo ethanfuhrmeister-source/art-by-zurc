@@ -256,6 +256,9 @@ button{font:inherit;color:inherit}
 }
 .field textarea{min-height:4.5rem;resize:vertical;line-height:1.5}
 .field input:focus,.field textarea:focus{border-color:var(--clay);outline:none}
+/* Placeholders must never be mistakable for something she actually typed. */
+.field input::placeholder,.field textarea::placeholder{color:#c3bab2;opacity:1}
+.field input::-webkit-input-placeholder,.field textarea::-webkit-input-placeholder{color:#c3bab2}
 .field .hint{font-size:.72rem;color:var(--muted)}
 .field input.bad{border-color:var(--clay);background:#fdf6f2}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
