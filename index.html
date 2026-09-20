@@ -65,6 +65,24 @@ button{font:inherit;color:inherit}
   text-transform:uppercase;color:var(--muted);text-align:center;
 }
 
+/* ---------- search ---------- */
+.findbar{
+  display:flex;gap:.5rem;justify-content:center;align-items:center;flex-wrap:wrap;
+  padding:0 1.25rem 1rem;max-width:34rem;margin:0 auto;
+}
+.findbar input{
+  flex:1;min-width:12rem;border:1px solid var(--line);border-radius:2px;
+  padding:.6rem .8rem;font-family:var(--sans);font-size:.9rem;
+  background:var(--paper);color:var(--ink);
+}
+.findbar input::placeholder{color:#c3bab2;opacity:1}
+.findbar input:focus{border-color:var(--clay);outline:none}
+.findbar input[disabled]{opacity:.6}
+.findnote{
+  margin:0 auto 1.5rem;max-width:34rem;padding:0 1.25rem;text-align:center;
+  font-family:var(--sans);font-size:.82rem;color:var(--muted);line-height:1.6;
+}
+
 /* ---------- filter bar ---------- */
 .filters{
   display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;
@@ -731,6 +749,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   var state = JSON.parse(JSON.stringify(DEFAULT_STATE));
   var root = document.getElementById("root");
   var filter = "all";
+  var searchQ = "", searchSkus = null, searchAnswer = "", searching = false;
   var viewPiece = -1, viewPhoto = 0;
   var studioOpen = false, studioView = "list", editingId = null;
   var printOpen = false, printCols = 3, printSold = true, printQr = true;
@@ -759,6 +778,8 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
           size: p.size || "",
           notes: p.notes || "",
           sold: p.sold === true,
+          description: p.description || "",
+          keywords: Array.isArray(p.keywords) ? p.keywords : [],
           photos: (Array.isArray(p.photos) ? p.photos : []).map(function (ph) {
             return { file: ph.file, url: ph.url, w: ph.w, h: ph.h, pending: ph.pending };
           }).filter(function (ph) { return ph.file || ph.url; })
@@ -795,6 +816,11 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
 
   /* ---------------- public catalogue ---------------- */
   function visible() {
+    if (searchSkus) {
+      var byS = {};
+      state.pieces.forEach(function (p) { byS[p.sku] = p; });
+      return searchSkus.map(function (k) { return byS[k]; }).filter(Boolean);
+    }
     return state.pieces.filter(function (p) {
       if (filter === "available") return !p.sold;
       if (filter === "sold") return p.sold;
@@ -812,7 +838,19 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     if (state.trade) h += '<p class="trade">' + esc(state.trade) + "</p>";
     h += "</header>";
 
-    if (soldCount && state.pieces.length) {
+    if (useApi() && state.pieces.length) {
+      h += '<div class="findbar">';
+      h += '<input type="search" id="q" value="' + esc(searchQ) +
+           '" placeholder="Search — try “blue bowl” or “something for serving”" ' +
+           'autocomplete="off" spellcheck="false"' + (searching ? " disabled" : "") + ">";
+      h += '<button class="btn plain" id="q-go"' + (searching ? " disabled" : "") + ">" +
+           (searching ? "Looking…" : "Search") + "</button>";
+      if (searchSkus) h += '<button class="link-btn" id="q-clear">Show everything</button>';
+      h += "</div>";
+      if (searchAnswer) h += '<p class="findnote">' + esc(searchAnswer) + "</p>";
+    }
+
+    if (!searchSkus && soldCount && state.pieces.length) {
       h += '<div class="filters">';
       [["all", "Everything", state.pieces.length],
        ["available", "Available", state.pieces.length - soldCount],
@@ -875,12 +913,59 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         filter = b.getAttribute("data-filter"); renderPage();
       });
     });
+    var qi = document.getElementById("q");
+    if (qi) {
+      var run = function () { runSearch(qi.value); };
+      document.getElementById("q-go").addEventListener("click", run);
+      qi.addEventListener("keydown", function (e) { if (e.key === "Enter") run(); });
+      var qc = document.getElementById("q-clear");
+      if (qc) qc.addEventListener("click", function () {
+        searchQ = ""; searchSkus = null; searchAnswer = ""; renderPage();
+      });
+    }
     var studioBtn = document.getElementById("open-studio");
     if (studioBtn) studioBtn.addEventListener("click", openStudio);
 
     if (viewPiece > -1) renderViewer();
     if (studioOpen) renderStudio();
     if (printOpen) renderPrint();
+  }
+
+  /* ---------------- search ---------------- */
+  function runSearch(q) {
+    q = String(q || "").trim();
+    searchQ = q;
+    if (!q) { searchSkus = null; searchAnswer = ""; renderPage(); return; }
+    searching = true; renderPage();
+    fetch(apiBase() + "/search", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        q: q,
+        pieces: state.pieces.map(function (p) {
+          return { sku: p.sku, title: p.title || "", description: p.description || "",
+                   keywords: p.keywords || [], sold: !!p.sold };
+        })
+      })
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) {
+        if (!r.ok) throw new Error(j.error || ("Search failed (" + r.status + ")"));
+        return j;
+      });
+    }).then(function (j) {
+      searching = false;
+      searchSkus = j.skus || [];
+      searchAnswer = searchSkus.length
+        ? (j.answer || (searchSkus.length + " found"))
+        : (j.answer || "Nothing matched that.");
+      renderPage();
+      var box = document.getElementById("q");
+      if (box) box.focus();
+    }).catch(function (err) {
+      searching = false; searchSkus = null;
+      searchAnswer = String((err && err.message) || err);
+      renderPage();
+    });
   }
 
   /* ---------------- viewer ---------------- */
@@ -1222,6 +1307,20 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     }
     h += "</div>";
 
+    if (useApi()) {
+      var undesc = state.pieces.filter(function (p) {
+        return !String(p.description || "").trim() && cover(p);
+      }).length;
+      h += '<div class="block"><h3>Searchable descriptions</h3>';
+      h += '<div class="inline"><button class="btn plain" id="s-describe"' +
+           (busy || !canPublish() || !undesc ? " disabled" : "") + '">' +
+           (undesc ? "Describe " + undesc + " piece" + (undesc > 1 ? "s" : "") : "All pieces described") +
+           "</button>";
+      h += '<span class="note" id="s-descnote">Looks at each photo once and writes what the piece is, ' +
+           "so people can search the catalogue.</span></div>";
+      h += "</div>";
+    }
+
     h += '<div class="block"><h3>Printing</h3>';
     h += '<div class="inline"><button class="btn plain" id="s-print">Print the inventory</button>';
     h += '<span class="note">Photos, item numbers and QR codes on paper.</span></div>';
@@ -1270,7 +1369,9 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     var h = "", shown = 0;
     for (var i = 0; i < state.pieces.length; i++) {
       var p = state.pieces[i];
-      if (term && (p.sku + " " + p.title).toLowerCase().indexOf(term) < 0) continue;
+      var hay = (p.sku + " " + p.title + " " + (p.description || "") + " " +
+                 (p.keywords || []).join(" ")).toLowerCase();
+      if (term && hay.indexOf(term) < 0) continue;
       shown++;
       var ph = cover(p);
       var isNew = p.photos.some(function (x) { return x.pending; });
@@ -1385,6 +1486,8 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     if (rows) bindRows(rows);
 
     el.querySelector("#s-print").addEventListener("click", openPrint);
+    var desc = el.querySelector("#s-describe");
+    if (desc) desc.addEventListener("click", describeAll);
 
     bindText(el, "#s-name", function (v) { state.name = v; });
     bindText(el, "#s-trade", function (v) { state.trade = v; });
@@ -1565,6 +1668,55 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     if (j < 0 || j >= p.photos.length) return;
     var t = p.photos[i]; p.photos[i] = p.photos[j]; p.photos[j] = t;
     touch(); renderStudio();
+  }
+
+  /* ---------------- descriptions ---------------- */
+  /* One pass over everything without a description. Each one is saved as it
+     arrives, so stopping halfway keeps what was already done. */
+  function describeAll() {
+    var todo = state.pieces.filter(function (p) {
+      return !String(p.description || "").trim() && cover(p);
+    });
+    if (!todo.length) return;
+    var note = document.getElementById("s-descnote");
+    var btn = document.getElementById("s-describe");
+    if (btn) btn.disabled = true;
+    var done = 0, failed = 0;
+
+    (function next(i) {
+      if (i >= todo.length) {
+        message = {
+          text: failed
+            ? done + " described, " + failed + " could not be read. Publish to save them."
+            : done + " described. Publish to save them.",
+          bad: failed > 0
+        };
+        renderStudio();
+        return;
+      }
+      var p = todo[i];
+      if (note) note.textContent = "Describing " + (i + 1) + " of " + todo.length + " — " + p.sku + "…";
+      photoBase64(p, 600).then(function (b64) {
+        return fetch(apiBase() + "/describe", {
+          method: "POST",
+          headers: { Authorization: "Bearer " + session(), "Content-Type": "application/json" },
+          body: JSON.stringify({
+            image: b64,
+            piece: { sku: p.sku, title: p.title || "", size: p.size || "", notes: p.notes || "" }
+          })
+        });
+      }).then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (j) {
+          if (!r.ok) throw new Error(j.error || ("Failed (" + r.status + ")"));
+          return j;
+        });
+      }).then(function (j) {
+        p.description = j.description || "";
+        p.keywords = Array.isArray(j.keywords) ? j.keywords : [];
+        dirty = true; done++;
+        next(i + 1);
+      }).catch(function () { failed++; next(i + 1); });
+    })(0);
   }
 
   /* ---------------- price suggestions ---------------- */
@@ -1838,6 +1990,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
           return {
             id: p.id, sku: p.sku, title: p.title || "", price: p.price || "",
             size: p.size || "", notes: p.notes || "", sold: !!p.sold,
+            description: p.description || "", keywords: p.keywords || [],
             photos: p.photos.filter(function (ph) { return ph.file; })
               .map(function (ph) { return { file: ph.file, w: ph.w, h: ph.h }; })
           };
