@@ -355,6 +355,16 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
      with a GitHub token that is kept only in this browser.
   ------------------------------------------------------------------ */
 
+  /* A tab left open from before the certificate existed can still be sitting on
+     http://. Storage and the publishing service are both origin-bound, so the
+     studio simply cannot work there — move to https before anything else runs. */
+  if (location.protocol === "http:" &&
+      !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)) {
+    location.replace("https://" + location.host + location.pathname +
+                     location.search + location.hash);
+    return;
+  }
+
   var REPO = { owner: "ethanfuhrmeister-source", repo: "art-by-zurc", branch: "main" };
   var TOKEN_KEY = "zurc.gh.token";
   var SESSION_KEY = "zurc.session";
@@ -1593,6 +1603,11 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         hint = el.querySelector("#e-pricehint"),
         input = el.querySelector("#e-price");
     if (!btn || btn.disabled) return;
+    if (location.protocol !== "https:" && !localPreview()) {
+      hint.className = "hint";
+      hint.textContent = "Open this page at https:// and sign in again.";
+      return;
+    }
     btn.disabled = true;
     hint.className = "hint thinking";
     hint.textContent = "Looking at the photo…";
