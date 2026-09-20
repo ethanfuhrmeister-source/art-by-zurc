@@ -717,6 +717,20 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     state.nextSku = n;
     return sku;
   }
+  /* Close the gaps so numbers always run 0001, 0002, 0003 in catalogue order.
+     Note this rewrites custom numbers too, and any tag already printed for a
+     piece that moves will point at whatever now holds that number. */
+  function renumber() {
+    var pre = (state.skuPrefix || "ZC").replace(/\s+/g, "");
+    var moved = 0;
+    state.pieces.forEach(function (p, i) {
+      var want = pre + "-" + padNum(i + 1);
+      if (p.sku !== want) { p.sku = want; moved++; }
+    });
+    state.nextSku = state.pieces.length + 1;
+    return moved;
+  }
+
   function skuTaken(sku, exceptId) {
     var k = String(sku || "").trim().toLowerCase();
     for (var i = 0; i < state.pieces.length; i++) {
@@ -1651,13 +1665,30 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     el.querySelector("#e-sold").addEventListener("change", function (e) { p.sold = e.target.checked; touch(); });
 
     el.querySelector("#e-del").addEventListener("click", function () {
-      if (!window.confirm("Delete " + p.sku + " and its photos?")) return;
+      var after = state.pieces.length - 1 - state.pieces.findIndex(function (x) { return x.id === p.id; });
+      var warn = "Delete " + p.sku + " and its photos?\n\n";
+      if (after > 0) {
+        warn += "The " + after + " piece" + (after > 1 ? "s" : "") + " after it will be renumbered, so any " +
+                "tags already printed for them will point at the wrong piece.\n\n";
+      }
+      warn += "This goes onto the website straight away, along with any other changes you have made here.";
+      if (!window.confirm(warn)) return;
+
       p.photos.forEach(function (ph) { if (ph.file && !ph.pending) pendingDeletes.push(ph.file); });
       state.pieces = state.pieces.filter(function (x) { return x.id !== p.id; });
+      var moved = renumber();
       touch();
       studioView = "list"; editingId = null;
-      message = { text: p.sku + " removed. Publish to take it off the website." };
-      renderStudio();
+
+      var said = p.sku + " removed" + (moved ? ", " + moved + " renumbered" : "");
+      if (canPublish()) {
+        message = { text: said + ". Putting it on the website…" };
+        renderStudio();
+        publish();
+      } else {
+        message = { text: said + ". Sign in to take it off the website.", bad: true };
+        renderStudio();
+      }
     });
 
     el.querySelector("#s-save").addEventListener("click", publish);
