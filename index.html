@@ -41,13 +41,24 @@ button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--clay);outline-offset:3px}
 
 .masthead{
+  position:relative;
   display:flex;flex-direction:column;align-items:center;gap:.35rem;
   padding:3.25rem 1.25rem 1.5rem;background:var(--paper);
+}
+.studio-link{
+  position:absolute;top:1rem;right:1rem;
+  font-family:var(--sans);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);background:none;border:0;cursor:pointer;
+  padding:.6rem .7rem;line-height:1;border-radius:2px;
+}
+.studio-link:hover{color:var(--ink);background:#faf8f6}
+@media (max-width:460px){
+  .masthead{padding-top:3.75rem}
+  .studio-link{top:.6rem;right:.4rem}
 }
 .mark{
   margin:0;font-weight:200;font-size:clamp(1.6rem,4.4vw,2.4rem);
   letter-spacing:.02em;line-height:1.1;text-align:center;text-wrap:balance;
-  cursor:default;-webkit-user-select:none;user-select:none;
 }
 .trade{
   margin:0;font-family:var(--sans);font-size:.66rem;letter-spacing:.22em;
@@ -703,7 +714,6 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   var studioOpen = false, studioView = "list", editingId = null;
   var printOpen = false, printCols = 3, printSold = true, printQr = true;
   var busy = false, message = null, dirty = false;
-  var tapCount = 0, tapTimer = null;
   var pendingDeletes = [];
 
   /* ---------------- load + migrate ---------------- */
@@ -776,6 +786,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     var soldCount = state.pieces.filter(function (p) { return p.sold; }).length;
     var h = "";
     h += '<header class="masthead">';
+    h += '<button class="studio-link" id="open-studio">Studio</button>';
     h += '<h1 class="mark" id="mark">' + esc(state.name) + "</h1>";
     if (state.trade) h += '<p class="trade">' + esc(state.trade) + "</p>";
     h += "</header>";
@@ -843,8 +854,8 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         filter = b.getAttribute("data-filter"); renderPage();
       });
     });
-    var mark = document.getElementById("mark");
-    if (mark) mark.addEventListener("click", secretTap);
+    var studioBtn = document.getElementById("open-studio");
+    if (studioBtn) studioBtn.addEventListener("click", openStudio);
 
     if (viewPiece > -1) renderViewer();
     if (studioOpen) renderStudio();
@@ -1055,12 +1066,6 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   }
 
   /* ---------------- studio entry ---------------- */
-  function secretTap() {
-    tapCount++;
-    clearTimeout(tapTimer);
-    tapTimer = setTimeout(function () { tapCount = 0; }, 1400);
-    if (tapCount >= 5) { tapCount = 0; openStudio(); }
-  }
   function openStudio() {
     studioOpen = true; studioView = "list"; message = null;
     document.body.style.overflow = "hidden";
