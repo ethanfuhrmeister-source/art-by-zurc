@@ -786,10 +786,11 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   var seenStamp = "", watchTimer = null;
   var deletedKeys = [];   /* pieces this session deliberately removed */
   var WATCH_EVERY = 15000;
-  /* Text editing batches slowly: every publish is a commit, and every commit
-     is a site rebuild. Structural changes that other devices must see - sold,
-     deleted, price visibility - still go up straight away. */
-  var AUTO_DELAY = 120000, URGENT_DELAY = 4000;
+  /* Saving no longer rebuilds the website, so this wait is only about not
+     saving mid-word - it is not paying for anything. Structural changes that
+     other devices must see - sold, deleted, price visibility - are quicker
+     still, so marking a piece sold at a show reaches every screen at once. */
+  var AUTO_DELAY = 30000, URGENT_DELAY = 4000;
   var pendingDeletes = [];
 
   /* ---------------- load + migrate ---------------- */
