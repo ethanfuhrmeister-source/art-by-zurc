@@ -1308,7 +1308,13 @@
         "not pottery",
         "monochrome"
       ],
-      "photos": []
+      "photos": [
+        {
+          "file": "photos/2026-09-21-zc-0074-muaj3o0vs0w04.jpg",
+          "w": 1254,
+          "h": 1254
+        }
+      ]
     }
   ]
 }
