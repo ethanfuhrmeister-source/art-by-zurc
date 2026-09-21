@@ -777,12 +777,15 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   var studioOpen = false, studioView = "list", editingId = null;
   var printOpen = false, printCols = 3, printSold = true, printQr = true;
   var busy = false, message = null, dirty = false;
-  var autoTimer = null, autoQueued = false, autoStatus = "", publishFailed = false;
+  var autoTimer = null, autoDeadline = 0, autoQueued = false, autoStatus = "", publishFailed = false;
   var catalogueSha = null;   /* the version this device last saw, for conflict detection */
   var seenStamp = "", watchTimer = null;
   var deletedKeys = [];   /* pieces this session deliberately removed */
   var WATCH_EVERY = 15000;
-  var AUTO_DELAY = 6000;
+  /* Text editing batches slowly: every publish is a commit, and every commit
+     is a site rebuild. Structural changes that other devices must see - sold,
+     deleted, price visibility - still go up straight away. */
+  var AUTO_DELAY = 120000, URGENT_DELAY = 4000;
   var pendingDeletes = [];
 
   /* ---------------- load + migrate ---------------- */
@@ -870,8 +873,9 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       checkForChanges();
     }, WATCH_EVERY);
     document.addEventListener("visibilitychange", function () {
-      if (!document.hidden) checkForChanges();
+      if (document.hidden) flushNow(); else checkForChanges();
     });
+    window.addEventListener("pagehide", flushNow);
   }
 
   function checkForChanges() {
@@ -1593,7 +1597,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     bindText(el, "#s-prefix", function (v) { state.skuPrefix = v.replace(/\s+/g, ""); });
     bindText(el, "#s-site", function (v) { state.siteUrl = v.trim(); });
     bindText(el, "#s-api", function (v) { state.apiUrl = v.trim(); });
-    el.querySelector("#s-prices").addEventListener("change", function (e) { state.showPrices = e.target.checked; touch(); });
+    el.querySelector("#s-prices").addEventListener("change", function (e) { state.showPrices = e.target.checked; touch(true); });
     var sv = el.querySelector("#s-save");
     if (sv) sv.addEventListener("click", function () { publish(); });
   }
@@ -1612,18 +1616,31 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     var n = el.querySelector(sel);
     if (n) n.addEventListener("input", function () { fn(n.value); touch(); });
   }
-  function touch() { dirty = true; refreshSaveBar(); scheduleAuto(); }
+  function touch(urgent) { dirty = true; refreshSaveBar(); scheduleAuto(urgent); }
 
   /* Changes go up on their own once she stops for a moment, so edits are
      batched rather than one publish per keystroke. */
-  function scheduleAuto() {
+  function scheduleAuto(urgent) {
     if (!canPublish()) return;
+    var now = Date.now(), want = now + (urgent ? URGENT_DELAY : AUTO_DELAY);
+    /* Later typing must never push back a publish that is already due sooner. */
+    if (autoTimer && autoDeadline <= want) return;
     clearTimeout(autoTimer);
+    autoDeadline = want;
     autoTimer = setTimeout(function () {
+      autoTimer = null; autoDeadline = 0;
       if (busy) { autoQueued = true; return; }
       if (!dirty && !pendingCount()) return;
       publish(true);
-    }, AUTO_DELAY);
+    }, want - now);
+  }
+
+  /* Waiting two minutes is only safe if closing the laptop does not lose it. */
+  function flushNow() {
+    if (!canPublish() || busy) return;
+    if (!dirty && !pendingCount()) return;
+    clearTimeout(autoTimer); autoTimer = null; autoDeadline = 0;
+    publish(true);
   }
 
   /* ---------------- studio: one piece ---------------- */
@@ -1759,7 +1776,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     if (sug) sug.addEventListener("click", function () { suggestPrice(p, el); });
     bindText(el, "#e-size", function (v) { p.size = v; });
     bindText(el, "#e-notes", function (v) { p.notes = v; });
-    el.querySelector("#e-sold").addEventListener("change", function (e) { p.sold = e.target.checked; touch(); });
+    el.querySelector("#e-sold").addEventListener("change", function (e) { p.sold = e.target.checked; touch(true); });
 
     el.querySelector("#e-del").addEventListener("click", function () {
       var after = state.pieces.length - 1 - state.pieces.findIndex(function (x) { return x.id === p.id; });
@@ -1775,7 +1792,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       deletedKeys.push(pieceKey(p));
       state.pieces = state.pieces.filter(function (x) { return x.id !== p.id; });
       var moved = renumber();
-      touch();
+      touch(true);
       studioView = "list"; editingId = null;
 
       var said = p.sku + " removed" + (moved ? ", " + moved + " renumbered" : "");
