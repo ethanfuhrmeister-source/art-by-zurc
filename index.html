@@ -166,7 +166,16 @@ button{font:inherit;color:inherit}
 .vmeta .sku{font-size:.74rem}
 .vmeta h2{margin:0;font-weight:300;font-size:1.25rem;font-style:italic}
 .vmeta .price{font-size:.95rem}
-.vmeta .desc{font-size:.92rem;color:var(--muted);line-height:1.6;margin:.35rem 0 0}
+.vmeta .desc{font-size:.95rem;color:var(--ink);line-height:1.65;margin:.5rem 0 0;font-style:italic}
+.vmeta .detail{
+  font-family:var(--sans);font-size:.8rem;color:var(--muted);line-height:1.6;
+  margin:.45rem 0 0;display:flex;gap:.55rem;justify-content:center;
+  flex-wrap:wrap;text-align:left;
+}
+.vmeta .lab{
+  font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
+  color:#bdb3aa;flex:0 0 auto;padding-top:.15rem;
+}
 .vmeta .soldline{
   font-family:var(--sans);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--clay);
 }
@@ -1125,8 +1134,9 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     if (p.title) h += "<h2>" + esc(p.title) + "</h2>";
     if (p.sold) h += '<p class="soldline">Sold</p>';
     else if (state.showPrices && p.price) h += '<p class="price">' + esc(p.price) + "</p>";
-    if (p.size) h += '<p class="desc">' + esc(p.size) + "</p>";
-    if (p.notes) h += '<p class="desc">' + esc(p.notes) + "</p>";
+    if (p.description) h += '<p class="desc">' + esc(p.description) + "</p>";
+    if (p.size) h += '<p class="detail"><span class="lab">Size</span>' + esc(p.size) + "</p>";
+    if (p.notes) h += '<p class="detail"><span class="lab">Notes</span>' + esc(p.notes) + "</p>";
     h += "</div>";
     el.innerHTML = h;
 
@@ -2182,6 +2192,10 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         signOut();
         studioView = "list"; /* the sign-in field lives on the list */
         text = "That session has run out. Sign in again and publish once more.";
+      } else if (/bad credentials|401/i.test(m) && useApi()) {
+        /* The service's own GitHub key, not anything she can fix. */
+        text = "The website would not accept the change. The studio's GitHub key needs renewing — " +
+               "tell whoever set this up. Nothing you did is lost.";
       } else if (/401|Bad credentials/i.test(m)) {
         studioView = "list";
         text = "The key was refused. It may have expired — make a new token and save it again.";
