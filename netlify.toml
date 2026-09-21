@@ -3,6 +3,12 @@
 
 [build]
   publish = "."
+  # The website reads the catalogue from the publishing service now, so a
+  # commit that only touches catalogue.json has nothing to rebuild. Exit 0
+  # means "skip this build": that is what git diff returns when nothing
+  # outside catalogue.json changed. Belt and braces alongside the
+  # [skip netlify] marker the service puts on its backup commits.
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':(exclude)catalogue.json'"
 
 # catalogue.json is the live inventory; never let it be served stale.
 [[headers]]
