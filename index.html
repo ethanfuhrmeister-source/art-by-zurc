@@ -780,6 +780,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   var autoTimer = null, autoQueued = false, autoStatus = "", publishFailed = false;
   var catalogueSha = null;   /* the version this device last saw, for conflict detection */
   var seenStamp = "", watchTimer = null;
+  var deletedKeys = [];   /* pieces this session deliberately removed */
   var WATCH_EVERY = 15000;
   var AUTO_DELAY = 6000;
   var pendingDeletes = [];
@@ -1804,6 +1805,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       if (!window.confirm(warn)) return;
 
       p.photos.forEach(function (ph) { if (ph.file && !ph.pending) pendingDeletes.push(ph.file); });
+      deletedKeys.push(pieceKey(p));
       state.pieces = state.pieces.filter(function (x) { return x.id !== p.id; });
       var moved = renumber();
       touch();
@@ -2094,6 +2096,37 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   function utf8b64(str) {
     return btoa(String.fromCharCode.apply(null, new TextEncoder().encode(str)));
   }
+  function b64utf8(b64) {
+    var bin = atob(String(b64 || "").replace(/\s/g, ""));
+    var bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return new TextDecoder().decode(bytes);
+  }
+
+  /* Identify a piece across devices. The id travels in the catalogue; the
+     cover photo's filename is a fallback for anything written before ids. */
+  function pieceKey(p) {
+    return p.id || (p.photos && p.photos[0] && p.photos[0].file) || p.sku;
+  }
+
+  /* Read the catalogue as GitHub currently holds it, with its version. */
+  function getCatalogueFile(conf) {
+    return fetch(contentsUrl(conf, "catalogue.json") + "?ref=" + conf.branch + "&t=" + Date.now(),
+      { headers: ghHeaders(), cache: "no-store" })
+      .then(function (r) {
+        if (!r.ok) {
+          return r.json().catch(function () { return {}; }).then(function (j) {
+            throw new Error((j && j.message) || ("Could not read the catalogue (" + r.status + ")"));
+          });
+        }
+        return r.json();
+      })
+      .then(function (j) {
+        var data = null;
+        try { data = JSON.parse(b64utf8(j.content)); } catch (e) {}
+        return { sha: j.sha, data: data };
+      });
+  }
 
   function publish(quiet) {
     if (busy) return;
@@ -2168,12 +2201,25 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
           };
         })
       };
-      /* Write against the version this device last saw. If the catalogue moved
-         on somewhere else, GitHub refuses rather than quietly overwriting it. */
-      Promise.resolve(catalogueSha || getSha(conf, "catalogue.json"))
-        .then(function (sha) {
+      /* Last line of defence: compare against what is actually on the website
+         and refuse to write anything that would drop pieces this device did
+         not delete. This holds even if the version check is somehow missed. */
+      getCatalogueFile(conf)
+        .then(function (cur) {
+          var ours = {};
+          state.pieces.forEach(function (p) { ours[pieceKey(p)] = 1; });
+          var theirs = (cur.data && cur.data.pieces) || [];
+          var lost = theirs.filter(function (p) {
+            var k = pieceKey(p);
+            return !ours[k] && deletedKeys.indexOf(k) < 0;
+          });
+          if (lost.length) {
+            var e = new Error("would drop " + lost.length + " piece" + (lost.length > 1 ? "s" : ""));
+            e.stale = lost.length;
+            throw e;
+          }
           return putFile(conf, "catalogue.json", utf8b64(JSON.stringify(data, null, 2)),
-            "Update catalogue", sha);
+            "Update catalogue", cur.sha);
         })
         .then(function (res) {
           catalogueSha = (res && res.content && res.content.sha) || null;
@@ -2201,7 +2247,13 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       publishFailed = true;
       var m = String((err && err.message) || err || "");
       var text;
-      if (/401|sign in/i.test(m) && useApi()) {
+      if (err && err.stale) {
+        catalogueSha = null;
+        text = "The website has " + err.stale + " piece" + (err.stale > 1 ? "s" : "") +
+               " this screen has not seen, so nothing was changed. Reloading — " +
+               "make your change again afterwards.";
+        setTimeout(function () { location.reload(); }, 3500);
+      } else if (/401|sign in/i.test(m) && useApi()) {
         signOut();
         studioView = "list"; /* the sign-in field lives on the list */
         text = "That session has run out. Sign in again and publish once more.";
