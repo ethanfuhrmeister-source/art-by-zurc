@@ -396,6 +396,9 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   }
 
   var REPO = { owner: "ethanfuhrmeister-source", repo: "art-by-zurc", branch: "main" };
+  /* Where the catalogue lives. Needed before the catalogue is loaded, so it
+     cannot come from the catalogue itself. Public, like the repository. */
+  var API_URL = "https://zurc-catalog-studio.ethanentermedia.workers.dev";
   var TOKEN_KEY = "zurc.gh.token";
   var SESSION_KEY = "zurc.session";
   var REPO_KEY = "zurc.gh.repo";
@@ -778,6 +781,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   var printOpen = false, printCols = 3, printSold = true, printQr = true;
   var busy = false, message = null, dirty = false;
   var autoTimer = null, autoDeadline = 0, autoQueued = false, autoStatus = "", publishFailed = false;
+  var catalogueVersion = null;
   var catalogueSha = null;   /* the version this device last saw, for conflict detection */
   var seenStamp = "", watchTimer = null;
   var deletedKeys = [];   /* pieces this session deliberately removed */
@@ -839,12 +843,32 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     return s;
   }
 
-  function load() {
-    fetch("catalogue.json?t=" + Date.now(), { cache: "no-store" })
+  /* The service holds the catalogue in a database, so an edit is a row update
+     rather than a rebuild of the website. The file in the repository is kept as
+     a backup, and is what this falls back to if the service cannot be reached. */
+  function fromFile() {
+    return fetch("catalogue.json?t=" + Date.now(), { cache: "no-store" })
       .then(function (r) { if (!r.ok) throw new Error("no catalogue"); return r.text(); })
-      .then(function (txt) {
-        seenStamp = fingerprint(txt);
-        normalise(JSON.parse(txt));
+      .then(function (txt) { return { text: txt, version: null }; });
+  }
+  function fetchCatalogue() {
+    var a = apiBase();
+    if (!a) return fromFile();
+    return fetch(a + "/catalogue?t=" + Date.now(), { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw new Error("service " + r.status); return r.json(); })
+      .then(function (j) {
+        if (!j || !j.data) throw new Error("empty catalogue");
+        return { text: JSON.stringify(j.data), version: j.version };
+      })
+      .catch(function () { return fromFile(); });
+  }
+
+  function load() {
+    fetchCatalogue()
+      .then(function (c) {
+        seenStamp = fingerprint(c.text);
+        catalogueVersion = c.version;
+        normalise(JSON.parse(c.text));
         renderPage(); openFromHash(); watch();
       })
       .catch(function () { renderPage(); openFromHash(); watch(); });
@@ -880,10 +904,11 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
 
   function checkForChanges() {
     if (busy) return;
-    fetch("catalogue.json?t=" + Date.now(), { cache: "no-store" })
-      .then(function (r) { return r.ok ? r.text() : null; })
-      .then(function (txt) {
+    fetchCatalogue()
+      .then(function (c) {
+        var txt = c && c.text;
         if (!txt) return;
+        catalogueVersion = c.version;
         var f = fingerprint(txt);
         if (!seenStamp) { seenStamp = f; return; }
         if (f === seenStamp) return;
@@ -1294,7 +1319,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
      and the GitHub token stays on the server. Without one, it falls back to a
      token kept in this browser. */
   function apiBase() {
-    return String(state.apiUrl || "").trim().replace(/\/+$/, "");
+    return String(state.apiUrl || API_URL).trim().replace(/\/+$/, "");
   }
   function useApi() { return !!apiBase(); }
   function session() {
@@ -2085,6 +2110,60 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     return p.id || (p.photos && p.photos[0] && p.photos[0].file) || p.sku;
   }
 
+  /* Refuse to write anything that would drop pieces this screen never saw.
+     The service repeats this check before it writes, so a stale tab cannot
+     erase another device's work even if this copy of the page is old. */
+  function guardAgainstLoss(theirs) {
+    var ours = {};
+    state.pieces.forEach(function (p) { ours[pieceKey(p)] = 1; });
+    var lost = (theirs || []).filter(function (p) {
+      var k = pieceKey(p);
+      return !ours[k] && deletedKeys.indexOf(k) < 0;
+    });
+    if (lost.length) {
+      var e = new Error("would drop " + lost.length + " piece" + (lost.length > 1 ? "s" : ""));
+      e.stale = lost.length;
+      throw e;
+    }
+  }
+
+  /* Save the catalogue. Through the service this is a row update carrying the
+     version this screen read, so two devices saving at once cannot both win.
+     Without a service it still writes the file, as it always did. */
+  function saveCatalogue(data) {
+    if (!useApi()) {
+      var conf = repoConf();
+      return getCatalogueFile(conf).then(function (cur) {
+        guardAgainstLoss((cur.data && cur.data.pieces) || []);
+        return putFile(conf, "catalogue.json", utf8b64(JSON.stringify(data, null, 2)),
+          "Update catalogue", cur.sha).then(function (res) {
+            catalogueSha = (res && res.content && res.content.sha) || null;
+          });
+      });
+    }
+    var start = catalogueVersion != null
+      ? Promise.resolve(catalogueVersion)
+      : fetchCatalogue().then(function (c) { catalogueVersion = c.version; return c.version; });
+
+    return start.then(function (version) {
+      return fetch(apiBase() + "/catalogue", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json", Authorization: "Bearer " + session() },
+        body: JSON.stringify({ data: data, version: version, deletedKeys: deletedKeys })
+      });
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) {
+        if (!r.ok) {
+          var e = new Error((j && j.error) || ("Could not save (" + r.status + ")"));
+          if (j && j.stale) e.stale = j.stale;
+          if (j && j.conflict) e.conflict = true;
+          throw e;
+        }
+        catalogueVersion = j.version;
+      });
+    });
+  }
+
   /* Read the catalogue as GitHub currently holds it, with its version. */
   function getCatalogueFile(conf) {
     return fetch(contentsUrl(conf, "catalogue.json") + "?ref=" + conf.branch + "&t=" + Date.now(),
@@ -2180,27 +2259,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       /* Last line of defence: compare against what is actually on the website
          and refuse to write anything that would drop pieces this device did
          not delete. This holds even if the version check is somehow missed. */
-      getCatalogueFile(conf)
-        .then(function (cur) {
-          var ours = {};
-          state.pieces.forEach(function (p) { ours[pieceKey(p)] = 1; });
-          var theirs = (cur.data && cur.data.pieces) || [];
-          var lost = theirs.filter(function (p) {
-            var k = pieceKey(p);
-            return !ours[k] && deletedKeys.indexOf(k) < 0;
-          });
-          if (lost.length) {
-            var e = new Error("would drop " + lost.length + " piece" + (lost.length > 1 ? "s" : ""));
-            e.stale = lost.length;
-            throw e;
-          }
-          return putFile(conf, "catalogue.json", utf8b64(JSON.stringify(data, null, 2)),
-            "Update catalogue", cur.sha);
-        })
-        .then(function (res) {
-          catalogueSha = (res && res.content && res.content.sha) || null;
-          return res;
-        })
+      saveCatalogue(data)
         .then(function () {
           var dead = pendingDeletes.slice();
           pendingDeletes = [];
@@ -2243,7 +2302,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       } else if (/403|404/.test(m)) {
         text = "No permission to write to this repository. Check the token covers " +
                conf.owner + "/" + conf.repo + " with Contents set to read and write.";
-      } else if (/409|conflict|does not match|sha/i.test(m)) {
+      } else if ((err && err.conflict) || /409|conflict|does not match|sha/i.test(m)) {
         /* Another device published since this one loaded. Take theirs and start
            again rather than overwrite work that is not on this screen. */
         catalogueSha = null;
