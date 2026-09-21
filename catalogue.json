@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 75,
+  "nextSku": 72,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -479,7 +479,7 @@
     },
     {
       "id": "mu63z81kg07yo",
-      "sku": "ZC-0029",
+      "sku": "ZC-0027",
       "title": "",
       "price": "",
       "size": "",
@@ -497,7 +497,7 @@
     },
     {
       "id": "mu63z87l4wta3",
-      "sku": "ZC-0030",
+      "sku": "ZC-0028",
       "title": "",
       "price": "",
       "size": "",
@@ -515,7 +515,7 @@
     },
     {
       "id": "mu63z8djmnnuk",
-      "sku": "ZC-0031",
+      "sku": "ZC-0029",
       "title": "",
       "price": "",
       "size": "",
@@ -533,7 +533,7 @@
     },
     {
       "id": "mu63z8k1869gh",
-      "sku": "ZC-0032",
+      "sku": "ZC-0030",
       "title": "",
       "price": "",
       "size": "",
@@ -551,7 +551,7 @@
     },
     {
       "id": "mu63z8p14ka5x",
-      "sku": "ZC-0033",
+      "sku": "ZC-0031",
       "title": "",
       "price": "",
       "size": "",
@@ -569,7 +569,7 @@
     },
     {
       "id": "mu63z8t2loyhe",
-      "sku": "ZC-0034",
+      "sku": "ZC-0032",
       "title": "",
       "price": "",
       "size": "",
@@ -587,7 +587,7 @@
     },
     {
       "id": "mu63z8xkirjzr",
-      "sku": "ZC-0035",
+      "sku": "ZC-0033",
       "title": "",
       "price": "",
       "size": "",
@@ -605,7 +605,7 @@
     },
     {
       "id": "mu63z92moce4g",
-      "sku": "ZC-0036",
+      "sku": "ZC-0034",
       "title": "",
       "price": "",
       "size": "",
@@ -623,7 +623,7 @@
     },
     {
       "id": "mu63z96zj3ufq",
-      "sku": "ZC-0037",
+      "sku": "ZC-0035",
       "title": "",
       "price": "",
       "size": "",
@@ -641,7 +641,7 @@
     },
     {
       "id": "mu63z9b5vbdpd",
-      "sku": "ZC-0038",
+      "sku": "ZC-0036",
       "title": "",
       "price": "",
       "size": "",
@@ -659,7 +659,7 @@
     },
     {
       "id": "mu63z9f6vuil7",
-      "sku": "ZC-0039",
+      "sku": "ZC-0037",
       "title": "",
       "price": "",
       "size": "",
@@ -677,7 +677,7 @@
     },
     {
       "id": "mu63z9k4s2dvr",
-      "sku": "ZC-0040",
+      "sku": "ZC-0038",
       "title": "",
       "price": "",
       "size": "",
@@ -695,7 +695,7 @@
     },
     {
       "id": "mu63z9of7gnhq",
-      "sku": "ZC-0041",
+      "sku": "ZC-0039",
       "title": "",
       "price": "",
       "size": "",
@@ -713,7 +713,7 @@
     },
     {
       "id": "mu63z9tvmema2",
-      "sku": "ZC-0042",
+      "sku": "ZC-0040",
       "title": "",
       "price": "",
       "size": "",
@@ -731,7 +731,7 @@
     },
     {
       "id": "mu63z9xci8ge6",
-      "sku": "ZC-0043",
+      "sku": "ZC-0041",
       "title": "",
       "price": "",
       "size": "",
@@ -749,7 +749,7 @@
     },
     {
       "id": "mu63za22rqiwu",
-      "sku": "ZC-0044",
+      "sku": "ZC-0042",
       "title": "",
       "price": "",
       "size": "",
@@ -767,7 +767,7 @@
     },
     {
       "id": "mu63za6rlqexp",
-      "sku": "ZC-0045",
+      "sku": "ZC-0043",
       "title": "",
       "price": "",
       "size": "",
@@ -785,7 +785,7 @@
     },
     {
       "id": "mu63zabge4b6j",
-      "sku": "ZC-0046",
+      "sku": "ZC-0044",
       "title": "",
       "price": "",
       "size": "",
@@ -803,7 +803,7 @@
     },
     {
       "id": "mu63zahpxcen6",
-      "sku": "ZC-0047",
+      "sku": "ZC-0045",
       "title": "",
       "price": "",
       "size": "",
@@ -821,7 +821,7 @@
     },
     {
       "id": "mu63zaoc071vs",
-      "sku": "ZC-0048",
+      "sku": "ZC-0046",
       "title": "",
       "price": "",
       "size": "",
@@ -839,7 +839,7 @@
     },
     {
       "id": "mu63zaudh7n2b",
-      "sku": "ZC-0049",
+      "sku": "ZC-0047",
       "title": "",
       "price": "",
       "size": "",
@@ -857,7 +857,7 @@
     },
     {
       "id": "mu63zb1avg24d",
-      "sku": "ZC-0050",
+      "sku": "ZC-0048",
       "title": "",
       "price": "",
       "size": "",
@@ -875,7 +875,7 @@
     },
     {
       "id": "mu63zb7dat4hp",
-      "sku": "ZC-0051",
+      "sku": "ZC-0049",
       "title": "",
       "price": "",
       "size": "",
@@ -893,7 +893,7 @@
     },
     {
       "id": "mu63zbb9icrw5",
-      "sku": "ZC-0052",
+      "sku": "ZC-0050",
       "title": "",
       "price": "",
       "size": "",
@@ -911,7 +911,7 @@
     },
     {
       "id": "mu63zbhpjh72o",
-      "sku": "ZC-0053",
+      "sku": "ZC-0051",
       "title": "",
       "price": "",
       "size": "",
@@ -929,7 +929,7 @@
     },
     {
       "id": "mu63zbo0obz5g",
-      "sku": "ZC-0054",
+      "sku": "ZC-0052",
       "title": "",
       "price": "",
       "size": "",
@@ -947,7 +947,7 @@
     },
     {
       "id": "muaibkqn0wm9s",
-      "sku": "ZC-0055",
+      "sku": "ZC-0053",
       "title": "",
       "price": "",
       "size": "",
@@ -965,7 +965,7 @@
     },
     {
       "id": "muaibkvda26rj",
-      "sku": "ZC-0056",
+      "sku": "ZC-0054",
       "title": "",
       "price": "",
       "size": "",
@@ -983,7 +983,7 @@
     },
     {
       "id": "muaibkzk4umj6",
-      "sku": "ZC-0057",
+      "sku": "ZC-0055",
       "title": "",
       "price": "",
       "size": "",
@@ -1001,7 +1001,7 @@
     },
     {
       "id": "muaibl9dc42bn",
-      "sku": "ZC-0058",
+      "sku": "ZC-0056",
       "title": "",
       "price": "",
       "size": "",
@@ -1019,7 +1019,7 @@
     },
     {
       "id": "muaiblfhwpf5a",
-      "sku": "ZC-0059",
+      "sku": "ZC-0057",
       "title": "",
       "price": "",
       "size": "",
@@ -1037,7 +1037,7 @@
     },
     {
       "id": "muaibllwt9jc5",
-      "sku": "ZC-0060",
+      "sku": "ZC-0058",
       "title": "",
       "price": "",
       "size": "",
@@ -1055,7 +1055,7 @@
     },
     {
       "id": "muaibluhjfzhl",
-      "sku": "ZC-0061",
+      "sku": "ZC-0059",
       "title": "White Platter ",
       "price": "$60",
       "size": "",
@@ -1073,7 +1073,7 @@
     },
     {
       "id": "muaibm609x1s7",
-      "sku": "ZC-0062",
+      "sku": "ZC-0060",
       "title": "",
       "price": "",
       "size": "",
@@ -1091,7 +1091,7 @@
     },
     {
       "id": "muaibmam0hoe0",
-      "sku": "ZC-0063",
+      "sku": "ZC-0061",
       "title": "",
       "price": "",
       "size": "",
@@ -1109,7 +1109,7 @@
     },
     {
       "id": "muaibmfk2up5w",
-      "sku": "ZC-0064",
+      "sku": "ZC-0062",
       "title": "",
       "price": "",
       "size": "",
@@ -1127,7 +1127,7 @@
     },
     {
       "id": "muaibmk1xttib",
-      "sku": "ZC-0065",
+      "sku": "ZC-0063",
       "title": "",
       "price": "",
       "size": "",
@@ -1145,7 +1145,7 @@
     },
     {
       "id": "muaibmoi80jej",
-      "sku": "ZC-0066",
+      "sku": "ZC-0064",
       "title": "",
       "price": "",
       "size": "",
@@ -1163,7 +1163,7 @@
     },
     {
       "id": "muaibmsucgod5",
-      "sku": "ZC-0067",
+      "sku": "ZC-0065",
       "title": "",
       "price": "",
       "size": "",
@@ -1181,7 +1181,7 @@
     },
     {
       "id": "muaibmzgzwkj3",
-      "sku": "ZC-0068",
+      "sku": "ZC-0066",
       "title": "",
       "price": "$68",
       "size": "",
@@ -1199,7 +1199,7 @@
     },
     {
       "id": "muaibn7mtw5g1",
-      "sku": "ZC-0069",
+      "sku": "ZC-0067",
       "title": "",
       "price": "",
       "size": "",
@@ -1217,7 +1217,7 @@
     },
     {
       "id": "muaibncwifzjo",
-      "sku": "ZC-0070",
+      "sku": "ZC-0068",
       "title": "",
       "price": "$125",
       "size": "",
@@ -1235,7 +1235,7 @@
     },
     {
       "id": "muaibnho829ly",
-      "sku": "ZC-0071",
+      "sku": "ZC-0069",
       "title": "",
       "price": "",
       "size": "",
@@ -1253,7 +1253,7 @@
     },
     {
       "id": "muaibnmzzosk0",
-      "sku": "ZC-0072",
+      "sku": "ZC-0070",
       "title": "",
       "price": "",
       "size": "",
@@ -1271,7 +1271,7 @@
     },
     {
       "id": "muaibnqzmw5to",
-      "sku": "ZC-0073",
+      "sku": "ZC-0071",
       "title": "",
       "price": "",
       "size": "",
@@ -1284,35 +1284,6 @@
           "file": "photos/2026-09-21-zc-0073-muaibnqzpjiie.jpg",
           "w": 1540,
           "h": 1600
-        }
-      ]
-    },
-    {
-      "id": "muaj2w4xdffhf",
-      "sku": "ZC-0074",
-      "title": "",
-      "price": "$68",
-      "size": "",
-      "notes": "",
-      "sold": false,
-      "description": "This isn't a pottery piece \ns a black and white logo graphic showing a white scorpion inside a circle with the words \"The Affiliates\" underneath.",
-      "keywords": [
-        "logo",
-        "graphic",
-        "black and white",
-        "scorpion",
-        "circle",
-        "emblem",
-        "text",
-        "branding",
-        "not pottery",
-        "monochrome"
-      ],
-      "photos": [
-        {
-          "file": "photos/2026-09-21-zc-0074-muaj3o0vs0w04.jpg",
-          "w": 1254,
-          "h": 1254
         }
       ]
     }
