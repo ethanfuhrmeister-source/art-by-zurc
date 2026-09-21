@@ -898,6 +898,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         var openSku = open ? open.sku : null;
         normalise(JSON.parse(txt));
         catalogueSha = null;
+        rememberVersion();
         if (openSku) {
           var again = findBySku(openSku);
           if (again < 0) { closeViewer(); viewPiece = -1; }
@@ -1271,7 +1272,18 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   function openStudio() {
     studioOpen = true; studioView = "list"; message = null;
     document.body.style.overflow = "hidden";
+    rememberVersion();
     renderStudio();
+  }
+
+  /* Note which version of the catalogue this device is working from, so even
+     its FIRST publish is checked. Without this, a tab opened before someone
+     else's change publishes straight over their work. */
+  function rememberVersion() {
+    if (!canPublish() || catalogueSha) return;
+    getSha(repoConf(), "catalogue.json").then(function (sha) {
+      if (sha) catalogueSha = sha;
+    });
   }
   function closeStudio() {
     studioOpen = false;
@@ -1533,6 +1545,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
           try { localStorage.setItem(SESSION_KEY, j.session); }
           catch (e) { throw new Error("This browser will not keep you signed in. Turn off private browsing."); }
           message = { text: "Signed in. You can add pieces now." };
+          rememberVersion();
           renderStudio();
         }).catch(function (err) {
           message = { text: String(err.message || err), bad: true };
