@@ -772,7 +772,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   var state = JSON.parse(JSON.stringify(DEFAULT_STATE));
   var root = document.getElementById("root");
   var filter = "all";
-  var searchQ = "", searchSkus = null, searchAnswer = "", searching = false;
+  var searchQ = "";
   var viewPiece = -1, viewPhoto = 0;
   var studioOpen = false, studioView = "list", editingId = null;
   var printOpen = false, printCols = 3, printSold = true, printQr = true;
@@ -912,12 +912,19 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   }
 
   /* ---------------- public catalogue ---------------- */
+  /* Everything a piece can be found by, lowercased once at render time. */
+  function haystack(p) {
+    return [p.sku, p.title, p.description, (p.keywords || []).join(" "), p.size, p.notes]
+      .filter(Boolean).join(" ").toLowerCase();
+  }
+  /* Every word typed must appear somewhere, in any order. */
+  function matches(hay, q) {
+    var words = String(q || "").toLowerCase().split(/\s+/).filter(Boolean);
+    for (var i = 0; i < words.length; i++) if (hay.indexOf(words[i]) < 0) return false;
+    return true;
+  }
+
   function visible() {
-    if (searchSkus) {
-      var byS = {};
-      state.pieces.forEach(function (p) { byS[p.sku] = p; });
-      return searchSkus.map(function (k) { return byS[k]; }).filter(Boolean);
-    }
     return state.pieces.filter(function (p) {
       if (filter === "available") return !p.sold;
       if (filter === "sold") return p.sold;
@@ -935,19 +942,15 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     if (state.trade) h += '<p class="trade">' + esc(state.trade) + "</p>";
     h += "</header>";
 
-    if (useApi() && state.pieces.length) {
+    if (state.pieces.length) {
       h += '<div class="findbar">';
       h += '<input type="search" id="q" value="' + esc(searchQ) +
-           '" placeholder="Search — try “blue bowl” or “something for serving”" ' +
-           'autocomplete="off" spellcheck="false"' + (searching ? " disabled" : "") + ">";
-      h += '<button class="btn plain" id="q-go"' + (searching ? " disabled" : "") + ">" +
-           (searching ? "Looking…" : "Search") + "</button>";
-      if (searchSkus) h += '<button class="link-btn" id="q-clear">Show everything</button>';
+           '" placeholder="Search by name or description" autocomplete="off" spellcheck="false">';
       h += "</div>";
-      if (searchAnswer) h += '<p class="findnote">' + esc(searchAnswer) + "</p>";
+      h += '<p class="findnote" id="q-count"></p>';
     }
 
-    if (!searchSkus && soldCount && state.pieces.length) {
+    if (soldCount && state.pieces.length) {
       h += '<div class="filters">';
       [["all", "Everything", state.pieces.length],
        ["available", "Available", state.pieces.length - soldCount],
@@ -967,7 +970,8 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         var p = list[i], ph = cover(p);
         if (!ph) continue;
         var dim = ph.w && ph.h ? ' width="' + ph.w + '" height="' + ph.h + '"' : "";
-        h += '<figure class="piece' + (p.sold ? " is-sold" : "") + '">';
+        h += '<figure class="piece' + (p.sold ? " is-sold" : "") +
+             '" data-find="' + esc(haystack(p)) + '">';
         h += '<button class="shot" data-open="' + esc(p.id) + '" aria-label="' +
              esc((p.title || "Piece") + " " + p.sku) + '">';
         h += '<img src="' + esc(photoSrc(ph)) + '" alt="' + esc(p.title || "Pottery piece") + '"' +
@@ -1012,13 +1016,8 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     });
     var qi = document.getElementById("q");
     if (qi) {
-      var run = function () { runSearch(qi.value); };
-      document.getElementById("q-go").addEventListener("click", run);
-      qi.addEventListener("keydown", function (e) { if (e.key === "Enter") run(); });
-      var qc = document.getElementById("q-clear");
-      if (qc) qc.addEventListener("click", function () {
-        searchQ = ""; searchSkus = null; searchAnswer = ""; renderPage();
-      });
+      qi.addEventListener("input", function () { applySearch(qi.value); });
+      if (searchQ) applySearch(searchQ);
     }
     var studioBtn = document.getElementById("open-studio");
     if (studioBtn) studioBtn.addEventListener("click", openStudio);
@@ -1029,40 +1028,24 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   }
 
   /* ---------------- search ---------------- */
-  function runSearch(q) {
-    q = String(q || "").trim();
-    searchQ = q;
-    if (!q) { searchSkus = null; searchAnswer = ""; renderPage(); return; }
-    searching = true; renderPage();
-    fetch(apiBase() + "/search", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        q: q,
-        pieces: state.pieces.map(function (p) {
-          return { sku: p.sku, title: p.title || "", description: p.description || "",
-                   keywords: p.keywords || [], sold: !!p.sold };
-        })
-      })
-    }).then(function (r) {
-      return r.json().catch(function () { return {}; }).then(function (j) {
-        if (!r.ok) throw new Error(j.error || ("Search failed (" + r.status + ")"));
-        return j;
-      });
-    }).then(function (j) {
-      searching = false;
-      searchSkus = j.skus || [];
-      searchAnswer = searchSkus.length
-        ? (j.answer || (searchSkus.length + " found"))
-        : (j.answer || "Nothing matched that.");
-      renderPage();
-      var box = document.getElementById("q");
-      if (box) box.focus();
-    }).catch(function (err) {
-      searching = false; searchSkus = null;
-      searchAnswer = String((err && err.message) || err);
-      renderPage();
-    });
+  /* Shows and hides the cards already on the page, so it keeps up with typing
+     and never loses what is in the box. */
+  function applySearch(q) {
+    searchQ = String(q || "");
+    var term = searchQ.trim();
+    var cards = document.querySelectorAll(".piece");
+    var shown = 0;
+    for (var i = 0; i < cards.length; i++) {
+      var hit = !term || matches(cards[i].getAttribute("data-find") || "", term);
+      cards[i].style.display = hit ? "" : "none";
+      if (hit) shown++;
+    }
+    var note = document.getElementById("q-count");
+    if (note) {
+      note.textContent = !term ? ""
+        : shown ? shown + (shown === 1 ? " piece" : " pieces") + " matching “" + term + "”"
+                : "Nothing matches “" + term + "”";
+    }
   }
 
   /* ---------------- viewer ---------------- */
@@ -1437,20 +1420,6 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     }
     h += "</div>";
 
-    if (useApi()) {
-      var undesc = state.pieces.filter(function (p) {
-        return !String(p.description || "").trim() && cover(p);
-      }).length;
-      h += '<div class="block"><h3>Searchable descriptions</h3>';
-      h += '<div class="inline"><button class="btn plain" id="s-describe"' +
-           (busy || !canPublish() || !undesc ? " disabled" : "") + '">' +
-           (undesc ? "Describe " + undesc + " piece" + (undesc > 1 ? "s" : "") : "All pieces described") +
-           "</button>";
-      h += '<span class="note" id="s-descnote">Looks at each photo once and writes what the piece is, ' +
-           "so people can search the catalogue.</span></div>";
-      h += "</div>";
-    }
-
     h += '<div class="block"><h3>Printing</h3>';
     h += '<div class="inline"><button class="btn plain" id="s-print">Print the inventory</button>';
     h += '<span class="note">Photos, item numbers and QR codes on paper.</span></div>';
@@ -1617,8 +1586,6 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     if (rows) bindRows(rows);
 
     el.querySelector("#s-print").addEventListener("click", openPrint);
-    var desc = el.querySelector("#s-describe");
-    if (desc) desc.addEventListener("click", describeAll);
 
     bindText(el, "#s-name", function (v) { state.name = v; });
     bindText(el, "#s-trade", function (v) { state.trade = v; });
@@ -1836,12 +1803,6 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   /* ---------------- descriptions ---------------- */
   /* One pass over everything without a description. Each one is saved as it
      arrives, so stopping halfway keeps what was already done. */
-  function describeAll() {
-    describeThese(state.pieces.filter(function (p) {
-      return !String(p.description || "").trim() && cover(p);
-    }));
-  }
-
   function describeThese(todo) {
     todo = (todo || []).filter(function (p) { return cover(p); });
     if (!todo.length || !useApi() || !canPublish()) return;
