@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 74,
+  "nextSku": 55,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -17,8 +17,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z4cabejv3.jpg",
@@ -31,12 +29,10 @@
       "id": "mu63z4g5yspc1",
       "sku": "ZC-0002",
       "title": "",
-      "price": "",
+      "price": "$85",
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z4g5yspc1.jpg",
@@ -53,8 +49,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z4mcrivmy.jpg",
@@ -71,8 +65,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z4r15vajv.jpg",
@@ -89,8 +81,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z4xj8zve7.jpg",
@@ -107,8 +97,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z54hzsdrz.jpg",
@@ -125,8 +113,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z597s18wr.jpg",
@@ -143,8 +129,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z5fkknck9.jpg",
@@ -161,8 +145,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z5lxy0hqc.jpg",
@@ -179,8 +161,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z5qpv29y9.jpg",
@@ -197,8 +177,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z5u6l928c.jpg",
@@ -215,8 +193,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z5z9zytv3.jpg",
@@ -233,8 +209,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z64594gs3.jpg",
@@ -251,8 +225,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z6am6tszf.jpg",
@@ -269,8 +241,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z6e937g7w.jpg",
@@ -287,8 +257,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z6iz17o0h.jpg",
@@ -305,8 +273,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z6nka9m1w.jpg",
@@ -323,8 +289,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z6s5j4o8e.jpg",
@@ -341,8 +305,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z6yc29awv.jpg",
@@ -359,8 +321,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z71xpjd5h.jpg",
@@ -377,8 +337,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z75om0q0w.jpg",
@@ -395,8 +353,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z7as13d3d.jpg",
@@ -413,8 +369,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z7fnm8ilp.jpg",
@@ -431,8 +385,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z7jy7q84b.jpg",
@@ -449,8 +401,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z7o4q4qyd.jpg",
@@ -467,13 +417,43 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z7s5vzzhu.jpg",
           "w": 1600,
           "h": 1434
+        }
+      ]
+    },
+    {
+      "id": "mu63z7uz7bniw",
+      "sku": "ZC-0027",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "photos": [
+        {
+          "file": "photos/2026-09-17-piece-mu63z7uz7bniw.jpg",
+          "w": 1320,
+          "h": 1234
+        }
+      ]
+    },
+    {
+      "id": "mu63z7xx26t0u",
+      "sku": "ZC-0028",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "photos": [
+        {
+          "file": "photos/2026-09-17-piece-mu63z7xx26t0u.jpg",
+          "w": 1318,
+          "h": 1160
         }
       ]
     },
@@ -485,8 +465,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z81kg07yo.jpg",
@@ -503,8 +481,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z87l4wta3.jpg",
@@ -521,8 +497,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z8djmnnuk.jpg",
@@ -539,8 +513,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z8k1869gh.jpg",
@@ -557,8 +529,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z8p14ka5x.jpg",
@@ -575,8 +545,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z8t2loyhe.jpg",
@@ -593,8 +561,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z8xkirjzr.jpg",
@@ -611,8 +577,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z92moce4g.jpg",
@@ -629,8 +593,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z96zj3ufq.jpg",
@@ -647,8 +609,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z9b5vbdpd.jpg",
@@ -665,8 +625,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z9f6vuil7.jpg",
@@ -683,8 +641,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z9k4s2dvr.jpg",
@@ -701,8 +657,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z9of7gnhq.jpg",
@@ -719,8 +673,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z9tvmema2.jpg",
@@ -737,8 +689,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z9xci8ge6.jpg",
@@ -755,8 +705,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63za22rqiwu.jpg",
@@ -773,8 +721,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63za6rlqexp.jpg",
@@ -791,8 +737,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63zabge4b6j.jpg",
@@ -809,8 +753,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63zahpxcen6.jpg",
@@ -827,8 +769,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63zaoc071vs.jpg",
@@ -845,8 +785,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63zaudh7n2b.jpg",
@@ -863,8 +801,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63zb1avg24d.jpg",
@@ -881,8 +817,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63zb7dat4hp.jpg",
@@ -899,8 +833,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63zbb9icrw5.jpg",
@@ -917,8 +849,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63zbhpjh72o.jpg",
@@ -935,355 +865,11 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63zbo0obz5g.jpg",
           "w": 1600,
           "h": 995
-        }
-      ]
-    },
-    {
-      "id": "muaibkqn0wm9s",
-      "sku": "ZC-0055",
-      "title": "",
-      "price": "",
-      "size": "",
-      "notes": "",
-      "sold": false,
-      "description": "",
-      "keywords": [],
-      "photos": [
-        {
-          "file": "photos/2026-09-21-zc-0055-muaibkqn52omb.jpg",
-          "w": 1482,
-          "h": 1600
-        }
-      ]
-    },
-    {
-      "id": "muaibkvda26rj",
-      "sku": "ZC-0056",
-      "title": "",
-      "price": "",
-      "size": "",
-      "notes": "",
-      "sold": false,
-      "description": "",
-      "keywords": [],
-      "photos": [
-        {
-          "file": "photos/2026-09-21-zc-0056-muaibkvdavjze.jpg",
-          "w": 1600,
-          "h": 1165
-        }
-      ]
-    },
-    {
-      "id": "muaibkzk4umj6",
-      "sku": "ZC-0057",
-      "title": "",
-      "price": "",
-      "size": "",
-      "notes": "",
-      "sold": false,
-      "description": "",
-      "keywords": [],
-      "photos": [
-        {
-          "file": "photos/2026-09-21-zc-0057-muaibkzk9pplq.jpg",
-          "w": 1600,
-          "h": 1261
-        }
-      ]
-    },
-    {
-      "id": "muaibl9dc42bn",
-      "sku": "ZC-0058",
-      "title": "",
-      "price": "",
-      "size": "",
-      "notes": "",
-      "sold": false,
-      "description": "",
-      "keywords": [],
-      "photos": [
-        {
-          "file": "photos/2026-09-21-zc-0058-muaibl9ddypv5.jpg",
-          "w": 1600,
-          "h": 1143
-        }
-      ]
-    },
-    {
-      "id": "muaiblfhwpf5a",
-      "sku": "ZC-0059",
-      "title": "",
-      "price": "",
-      "size": "",
-      "notes": "",
-      "sold": false,
-      "description": "",
-      "keywords": [],
-      "photos": [
-        {
-          "file": "photos/2026-09-21-zc-0059-muaiblfhh8xvb.jpg",
-          "w": 1600,
-          "h": 1220
-        }
-      ]
-    },
-    {
-      "id": "muaibllwt9jc5",
-      "sku": "ZC-0060",
-      "title": "",
-      "price": "",
-      "size": "",
-      "notes": "",
-      "sold": false,
-      "description": "",
-      "keywords": [],
-      "photos": [
-        {
-          "file": "photos/2026-09-21-zc-0060-muaibllwso79i.jpg",
-          "w": 1600,
-          "h": 1387
-        }
-      ]
-    },
-    {
-      "id": "muaibluhjfzhl",
-      "sku": "ZC-0061",
-      "title": "",
-      "price": "",
-      "size": "",
-      "notes": "",
-      "sold": false,
-      "description": "",
-      "keywords": [],
-      "photos": [
-        {
-          "file": "photos/2026-09-21-zc-0061-muaibluhp0hrn.jpg",
-          "w": 1600,
-          "h": 1324
-        }
-      ]
-    },
-    {
-      "id": "muaibm609x1s7",
-      "sku": "ZC-0062",
-      "title": "",
-      "price": "",
-      "size": "",
-      "notes": "",
-      "sold": false,
-      "description": "",
-      "keywords": [],
-      "photos": [
-        {
-          "file": "photos/2026-09-21-zc-0062-muaibm60vrbxb.jpg",
-          "w": 1600,
-          "h": 870
-        }
-      ]
-    },
-    {
-      "id": "muaibmam0hoe0",
-      "sku": "ZC-0063",
-      "title": "",
-      "price": "",
-      "size": "",
-      "notes": "",
-      "sold": false,
-      "description": "",
-      "keywords": [],
-      "photos": [
-        {
-          "file": "photos/2026-09-21-zc-0063-muaibmamtgg21.jpg",
-          "w": 1518,
-          "h": 1600
-        }
-      ]
-    },
-    {
-      "id": "muaibmfk2up5w",
-      "sku": "ZC-0064",
-      "title": "",
-      "price": "",
-      "size": "",
-      "notes": "",
-      "sold": false,
-      "description": "",
-      "keywords": [],
-      "photos": [
-        {
-          "file": "photos/2026-09-21-zc-0064-muaibmfkadxkp.jpg",
-          "w": 1585,
-          "h": 1600
-        }
-      ]
-    },
-    {
-      "id": "muaibmk1xttib",
-      "sku": "ZC-0065",
-      "title": "",
-      "price": "",
-      "size": "",
-      "notes": "",
-      "sold": false,
-      "description": "",
-      "keywords": [],
-      "photos": [
-        {
-          "file": "photos/2026-09-21-zc-0065-muaibmk14smqr.jpg",
-          "w": 1600,
-          "h": 1535
-        }
-      ]
-    },
-    {
-      "id": "muaibmoi80jej",
-      "sku": "ZC-0066",
-      "title": "",
-      "price": "",
-      "size": "",
-      "notes": "",
-      "sold": false,
-      "description": "",
-      "keywords": [],
-      "photos": [
-        {
-          "file": "photos/2026-09-21-zc-0066-muaibmoivddu5.jpg",
-          "w": 1475,
-          "h": 1600
-        }
-      ]
-    },
-    {
-      "id": "muaibmsucgod5",
-      "sku": "ZC-0067",
-      "title": "",
-      "price": "",
-      "size": "",
-      "notes": "",
-      "sold": false,
-      "description": "",
-      "keywords": [],
-      "photos": [
-        {
-          "file": "photos/2026-09-21-zc-0067-muaibmsuew7b7.jpg",
-          "w": 1591,
-          "h": 1600
-        }
-      ]
-    },
-    {
-      "id": "muaibmzgzwkj3",
-      "sku": "ZC-0068",
-      "title": "",
-      "price": "$68",
-      "size": "",
-      "notes": "",
-      "sold": false,
-      "description": "",
-      "keywords": [],
-      "photos": [
-        {
-          "file": "photos/2026-09-21-zc-0068-muaibmzg1gniv.jpg",
-          "w": 1600,
-          "h": 962
-        }
-      ]
-    },
-    {
-      "id": "muaibn7mtw5g1",
-      "sku": "ZC-0069",
-      "title": "",
-      "price": "",
-      "size": "",
-      "notes": "",
-      "sold": false,
-      "description": "",
-      "keywords": [],
-      "photos": [
-        {
-          "file": "photos/2026-09-21-zc-0069-muaibn7mfiu0h.jpg",
-          "w": 1600,
-          "h": 1073
-        }
-      ]
-    },
-    {
-      "id": "muaibncwifzjo",
-      "sku": "ZC-0070",
-      "title": "",
-      "price": "$125",
-      "size": "",
-      "notes": "",
-      "sold": false,
-      "description": "",
-      "keywords": [],
-      "photos": [
-        {
-          "file": "photos/2026-09-21-zc-0070-muaibncwfkmka.jpg",
-          "w": 1600,
-          "h": 851
-        }
-      ]
-    },
-    {
-      "id": "muaibnho829ly",
-      "sku": "ZC-0071",
-      "title": "",
-      "price": "",
-      "size": "",
-      "notes": "",
-      "sold": false,
-      "description": "",
-      "keywords": [],
-      "photos": [
-        {
-          "file": "photos/2026-09-21-zc-0071-muaibnho4hupn.jpg",
-          "w": 1376,
-          "h": 1600
-        }
-      ]
-    },
-    {
-      "id": "muaibnmzzosk0",
-      "sku": "ZC-0072",
-      "title": "",
-      "price": "",
-      "size": "",
-      "notes": "",
-      "sold": false,
-      "description": "",
-      "keywords": [],
-      "photos": [
-        {
-          "file": "photos/2026-09-21-zc-0072-muaibnmzijoqj.jpg",
-          "w": 1437,
-          "h": 1600
-        }
-      ]
-    },
-    {
-      "id": "muaibnqzmw5to",
-      "sku": "ZC-0073",
-      "title": "",
-      "price": "",
-      "size": "",
-      "notes": "",
-      "sold": false,
-      "description": "",
-      "keywords": [],
-      "photos": [
-        {
-          "file": "photos/2026-09-21-zc-0073-muaibnqzpjiie.jpg",
-          "w": 1540,
-          "h": 1600
         }
       ]
     }
