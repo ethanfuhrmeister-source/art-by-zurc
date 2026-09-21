@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 74,
+  "nextSku": 75,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -1284,6 +1284,35 @@
           "file": "photos/2026-09-21-zc-0073-muaibnqzpjiie.jpg",
           "w": 1540,
           "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "muaj2w4xdffhf",
+      "sku": "ZC-0074",
+      "title": "",
+      "price": "$68",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "This isn't a pottery piece \ns a black and white logo graphic showing a white scorpion inside a circle with the words \"The Affiliates\" underneath.",
+      "keywords": [
+        "logo",
+        "graphic",
+        "black and white",
+        "scorpion",
+        "circle",
+        "emblem",
+        "text",
+        "branding",
+        "not pottery",
+        "monochrome"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-09-21-zc-0074-muaj2w4xw3lih.jpg",
+          "w": 500,
+          "h": 500
         }
       ]
     }
