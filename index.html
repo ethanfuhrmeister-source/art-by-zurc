@@ -1806,9 +1806,6 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   function describeThese(todo) {
     todo = (todo || []).filter(function (p) { return cover(p); });
     if (!todo.length || !useApi() || !canPublish()) return;
-    var note = document.getElementById("s-descnote");
-    var btn = document.getElementById("s-describe");
-    if (btn) btn.disabled = true;
     var done = 0, failed = 0;
 
     (function next(i) {
@@ -1823,7 +1820,8 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         return;
       }
       var p = todo[i];
-      if (note) note.textContent = "Describing " + (i + 1) + " of " + todo.length + " — " + p.sku + "…";
+      message = { text: "Describing " + (i + 1) + " of " + todo.length + " — " + p.sku + "…" };
+      renderStudio();
       photoBase64(p, 600).then(function (b64) {
         return fetch(apiBase() + "/describe", {
           method: "POST",
