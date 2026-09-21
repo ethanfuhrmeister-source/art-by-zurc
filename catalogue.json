@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 55,
+  "nextSku": 74,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -942,6 +942,348 @@
           "file": "photos/2026-09-17-piece-mu63zbo0obz5g.jpg",
           "w": 1600,
           "h": 995
+        }
+      ]
+    },
+    {
+      "id": "muaibkqn0wm9s",
+      "sku": "ZC-0055",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-09-21-zc-0055-muaibkqn52omb.jpg",
+          "w": 1482,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "muaibkvda26rj",
+      "sku": "ZC-0056",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-09-21-zc-0056-muaibkvdavjze.jpg",
+          "w": 1600,
+          "h": 1165
+        }
+      ]
+    },
+    {
+      "id": "muaibkzk4umj6",
+      "sku": "ZC-0057",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-09-21-zc-0057-muaibkzk9pplq.jpg",
+          "w": 1600,
+          "h": 1261
+        }
+      ]
+    },
+    {
+      "id": "muaibl9dc42bn",
+      "sku": "ZC-0058",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-09-21-zc-0058-muaibl9ddypv5.jpg",
+          "w": 1600,
+          "h": 1143
+        }
+      ]
+    },
+    {
+      "id": "muaiblfhwpf5a",
+      "sku": "ZC-0059",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-09-21-zc-0059-muaiblfhh8xvb.jpg",
+          "w": 1600,
+          "h": 1220
+        }
+      ]
+    },
+    {
+      "id": "muaibllwt9jc5",
+      "sku": "ZC-0060",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-09-21-zc-0060-muaibllwso79i.jpg",
+          "w": 1600,
+          "h": 1387
+        }
+      ]
+    },
+    {
+      "id": "muaibluhjfzhl",
+      "sku": "ZC-0061",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-09-21-zc-0061-muaibluhp0hrn.jpg",
+          "w": 1600,
+          "h": 1324
+        }
+      ]
+    },
+    {
+      "id": "muaibm609x1s7",
+      "sku": "ZC-0062",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-09-21-zc-0062-muaibm60vrbxb.jpg",
+          "w": 1600,
+          "h": 870
+        }
+      ]
+    },
+    {
+      "id": "muaibmam0hoe0",
+      "sku": "ZC-0063",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-09-21-zc-0063-muaibmamtgg21.jpg",
+          "w": 1518,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "muaibmfk2up5w",
+      "sku": "ZC-0064",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-09-21-zc-0064-muaibmfkadxkp.jpg",
+          "w": 1585,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "muaibmk1xttib",
+      "sku": "ZC-0065",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-09-21-zc-0065-muaibmk14smqr.jpg",
+          "w": 1600,
+          "h": 1535
+        }
+      ]
+    },
+    {
+      "id": "muaibmoi80jej",
+      "sku": "ZC-0066",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-09-21-zc-0066-muaibmoivddu5.jpg",
+          "w": 1475,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "muaibmsucgod5",
+      "sku": "ZC-0067",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-09-21-zc-0067-muaibmsuew7b7.jpg",
+          "w": 1591,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "muaibmzgzwkj3",
+      "sku": "ZC-0068",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-09-21-zc-0068-muaibmzg1gniv.jpg",
+          "w": 1600,
+          "h": 962
+        }
+      ]
+    },
+    {
+      "id": "muaibn7mtw5g1",
+      "sku": "ZC-0069",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-09-21-zc-0069-muaibn7mfiu0h.jpg",
+          "w": 1600,
+          "h": 1073
+        }
+      ]
+    },
+    {
+      "id": "muaibncwifzjo",
+      "sku": "ZC-0070",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-09-21-zc-0070-muaibncwfkmka.jpg",
+          "w": 1600,
+          "h": 851
+        }
+      ]
+    },
+    {
+      "id": "muaibnho829ly",
+      "sku": "ZC-0071",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-09-21-zc-0071-muaibnho4hupn.jpg",
+          "w": 1376,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "muaibnmzzosk0",
+      "sku": "ZC-0072",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-09-21-zc-0072-muaibnmzijoqj.jpg",
+          "w": 1437,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "muaibnqzmw5to",
+      "sku": "ZC-0073",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-09-21-zc-0073-muaibnqzpjiie.jpg",
+          "w": 1540,
+          "h": 1600
         }
       ]
     }
