@@ -17,21 +17,8 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "A leaf-shaped serving dish with a little stem at one end, glazed in a glossy mottled green that pools darker in the dips — nice for fruit, salads, or setting out snacks.",
-      "keywords": [
-        "leaf dish",
-        "serving bowl",
-        "green",
-        "glossy glaze",
-        "mottled",
-        "shallow bowl",
-        "fruit bowl",
-        "handbuilt",
-        "platter",
-        "table centrepiece",
-        "serving",
-        "decorative"
-      ],
+      "description": "",
+      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z4cabejv3.jpg",
@@ -48,23 +35,8 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "A hand-altered oval cup with a pulled-up pointed rim sitting on a small square dish with wavy edges, both glazed in a warm rust-red that breaks to black at the edges — nice as a tea or espresso cup and saucer, or just as a set to look at on a shelf.",
-      "keywords": [
-        "cup",
-        "saucer",
-        "dish",
-        "red",
-        "rust",
-        "black",
-        "altered rim",
-        "glossy glaze",
-        "tea",
-        "espresso",
-        "serving",
-        "decorative",
-        "handbuilt",
-        "set"
-      ],
+      "description": "",
+      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z4g5yspc1.jpg",
@@ -81,23 +53,8 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "A long oval serving platter with a glossy, mottled glaze in dark browns, greens, rust and cream that pools and runs like a landscape — good for bread, crudites, or just sitting out on the table as a centrepiece.",
-      "keywords": [
-        "platter",
-        "oval",
-        "serving dish",
-        "glossy",
-        "mottled",
-        "brown",
-        "green",
-        "cream",
-        "rust",
-        "flowing glaze",
-        "centrepiece",
-        "tableware",
-        "decorative",
-        "bread tray"
-      ],
+      "description": "",
+      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z4mcrivmy.jpg",
@@ -114,22 +71,8 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "A hand-built, free-form bowl with a wavy ruffled rim, glossy mottled blue and purple inside and a rough textured grey-green outside, good for serving fruit or as a centrepiece on the table.",
-      "keywords": [
-        "bowl",
-        "hand-built",
-        "freeform",
-        "ruffled rim",
-        "blue",
-        "purple",
-        "grey",
-        "textured",
-        "glossy glaze",
-        "serving",
-        "fruit bowl",
-        "centrepiece",
-        "decorative"
-      ],
+      "description": "",
+      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z4r15vajv.jpg",
@@ -146,23 +89,8 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "A large hand-formed bowl with a wavy, ruffled rim, glazed in glossy browns, creams and soft blue-purple drips, good for serving salad or fruit on the table.",
-      "keywords": [
-        "bowl",
-        "serving bowl",
-        "ruffled rim",
-        "freeform",
-        "brown",
-        "cream",
-        "blue",
-        "purple",
-        "glossy",
-        "drip glaze",
-        "fruit bowl",
-        "salad bowl",
-        "centerpiece",
-        "handmade"
-      ],
+      "description": "",
+      "keywords": [],
       "photos": [
         {
           "file": "photos/2026-09-17-piece-mu63z4xj8zve7.jpg",
@@ -546,42 +474,6 @@
           "file": "photos/2026-09-17-piece-mu63z7s5vzzhu.jpg",
           "w": 1600,
           "h": 1434
-        }
-      ]
-    },
-    {
-      "id": "mu63z7uz7bniw",
-      "sku": "ZC-0027",
-      "title": "",
-      "price": "",
-      "size": "",
-      "notes": "",
-      "sold": false,
-      "description": "",
-      "keywords": [],
-      "photos": [
-        {
-          "file": "photos/2026-09-17-piece-mu63z7uz7bniw.jpg",
-          "w": 1320,
-          "h": 1234
-        }
-      ]
-    },
-    {
-      "id": "mu63z7xx26t0u",
-      "sku": "ZC-0028",
-      "title": "",
-      "price": "",
-      "size": "",
-      "notes": "",
-      "sold": false,
-      "description": "",
-      "keywords": [],
-      "photos": [
-        {
-          "file": "photos/2026-09-17-piece-mu63z7xx26t0u.jpg",
-          "w": 1318,
-          "h": 1160
         }
       ]
     },
@@ -1021,7 +913,7 @@
       "id": "mu63zbhpjh72o",
       "sku": "ZC-0053",
       "title": "",
-      "price": "$165",
+      "price": "",
       "size": "",
       "notes": "",
       "sold": false,
