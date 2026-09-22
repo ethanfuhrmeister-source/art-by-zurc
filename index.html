@@ -290,6 +290,8 @@ button{font:inherit;color:inherit}
 .field input.bad{border-color:var(--clay);background:#fdf6f2}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
 .withbtn{display:flex;gap:.4rem;align-items:stretch}
+.labelrow{display:flex;justify-content:space-between;align-items:center;gap:.6rem;margin-bottom:.35rem}
+.labelrow label{margin:0}
 .withbtn input{flex:1;min-width:0}
 .btn.small{padding:.5rem .75rem;font-size:.82rem;white-space:nowrap}
 .field input.suggested{background:var(--clay-soft);border-color:#e0cdbf}
@@ -1725,9 +1727,11 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     h += '<div class="field"><label for="e-size">Size</label>' +
          '<input type="text" id="e-size" value="' + esc(p.size || "") + '" placeholder="9 in tall"></div>';
     h += "</div>";
-    h += '<div class="field"><label for="e-notes">Notes</label>' +
-         '<textarea id="e-notes" placeholder="Glaze, clay body, firing — anything worth remembering.">' +
-         esc(p.notes || "") + "</textarea></div>";
+    h += '<div class="field"><div class="labelrow"><label for="e-notes">Notes</label>' +
+         (useApi() && p.photos && p.photos.length
+           ? '<button class="btn ghost small" id="e-note">Write one</button>' : "") +
+         '</div><textarea id="e-notes" placeholder="Glaze, clay body, firing — anything worth remembering.">' +
+         esc(p.notes || "") + '</textarea><span class="hint" id="e-notehint"></span></div>';
     h += '<label class="check"><input type="checkbox" id="e-sold"' + (p.sold ? " checked" : "") +
          "> Sold</label>";
     h += '<p class="note">Sold pieces stay on the catalogue with a Sold mark.</p>';
@@ -1802,6 +1806,8 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     if (sug) sug.addEventListener("click", function () { suggestPrice(p, el); });
     bindText(el, "#e-size", function (v) { p.size = v; });
     bindText(el, "#e-notes", function (v) { p.notes = v; });
+    var nbtn = el.querySelector("#e-note");
+    if (nbtn) nbtn.addEventListener("click", function () { writeNote(p, el); });
     el.querySelector("#e-sold").addEventListener("change", function (e) { p.sold = e.target.checked; touch(true); });
 
     el.querySelector("#e-del").addEventListener("click", function () {
@@ -1920,6 +1926,69 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       .map(function (x) {
         return { sku: x.sku, title: x.title || "", size: x.size || "", price: x.price };
       });
+  }
+
+  /* Everything she appends after the description - care lines, and warnings
+     like "Dry food on platter only" - is hers and must survive a rewrite.
+     Keep from the first instruction sentence to the end, not just the last. */
+  var CARE_WORDS = /(food safe|dishwasher|oven safe|microwave|dry food|hand ?wash|decorative only|not for)/i;
+  function careTail(text) {
+    var parts = String(text || "").match(/[^.]+\./g) || [];
+    for (var i = 0; i < parts.length; i++) {
+      if (CARE_WORDS.test(parts[i])) return parts.slice(i).join("").trim();
+    }
+    return "";
+  }
+
+  /* Ask the service for a catalogue note in her voice. She keeps the last say:
+     an existing note is never replaced without asking, and her care line -
+     which only she can vouch for - is carried across onto the new sentence. */
+  function writeNote(p, el) {
+    var btn = el.querySelector("#e-note"),
+        hint = el.querySelector("#e-notehint"),
+        box = el.querySelector("#e-notes");
+    if (!btn || btn.disabled) return;
+    if (location.protocol !== "https:" && !localPreview()) {
+      hint.className = "hint";
+      hint.textContent = "Open this page at https:// and sign in again.";
+      return;
+    }
+    var existing = String(p.notes || "").trim();
+    if (existing && !confirm("Replace the note that is already here?\n\n" + existing)) return;
+    var care = careTail(existing);
+
+    btn.disabled = true;
+    hint.className = "hint thinking";
+    hint.textContent = "Looking at the photo…";
+
+    photoBase64(p, 600).then(function (b64) {
+      return fetch(apiBase() + "/note", {
+        method: "POST",
+        headers: { Authorization: "Bearer " + session(), "Content-Type": "application/json" },
+        body: JSON.stringify({ image: b64, piece: { title: p.title || "", size: p.size || "" } })
+      });
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) {
+        if (!r.ok) throw new Error(j.error || ("Could not write a note (" + r.status + ")"));
+        return j;
+      });
+    }).then(function (j) {
+      var note = String(j.note || "").trim();
+      if (!note) throw new Error("Nothing came back.");
+      if (care) note += " " + care;
+      p.notes = note;
+      if (box) box.value = note;
+      touch();
+      hint.className = "hint";
+      hint.textContent = care
+        ? "Written from the photo. Your care line was kept — edit anything that is wrong."
+        : "Written from the photo — edit anything that is wrong, and add your care line.";
+      btn.disabled = false;
+    }).catch(function (err) {
+      hint.className = "hint";
+      hint.textContent = String((err && err.message) || err);
+      btn.disabled = false;
+    });
   }
 
   function suggestPrice(p, el) {
