@@ -1952,13 +1952,13 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         return j;
       });
     }).then(function (j) {
-      var price = "$" + Math.round(j.price);
+      /* One price, always a multiple of five, never rounded up. */
+      var n = Math.max(0, Math.floor(Math.round(j.price) / 5) * 5);
+      var price = "$" + n;
       p.price = price;
       p.suggested = true;
       var bits = [];
-      if (j.basis === "comparables" && j.anchor) bits.push("Suggested from " + j.anchor);
-      else bits.push("Suggested estimate");
-      if (j.low && j.high) bits.push("$" + Math.round(j.low) + "–$" + Math.round(j.high));
+      if (j.basis === "comparables" && j.anchor) bits.push("Priced from " + j.anchor);
       if (j.note) bits.push(j.note);
       p.suggestedNote = bits.join(" · ");
       touch();
