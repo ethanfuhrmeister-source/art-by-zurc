@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 72,
+  "nextSku": 80,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -1284,6 +1284,272 @@
           "file": "photos/2026-09-21-zc-0073-muaibnqzpjiie.jpg",
           "w": 1540,
           "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mucuudfm04v62",
+      "sku": "ZC-0072",
+      "title": "s",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A set of nesting rectangular serving platters in a soft off-white glaze, each hand-painted with an undersea scene of seaweed, coral and little blue fish, good for serving appetisers, fish or cheese at the table.",
+      "keywords": [
+        "platter",
+        "tray",
+        "nesting set",
+        "serving",
+        "white",
+        "off-white",
+        "blue",
+        "green",
+        "coral",
+        "fish",
+        "seaweed",
+        "hand-painted",
+        "coastal",
+        "rectangular"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-09-22-zc-0072-mucuudfmg44yi.jpg",
+          "w": 1600,
+          "h": 689
+        }
+      ]
+    },
+    {
+      "id": "mucuudnrmf1im",
+      "sku": "ZC-0073",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A pair of hand-painted shallow platters with a glossy glaze — one bright with turquoise sky, green and orange abstract landscape shapes and a crescent moon, the other softer in blue with a sailing boat and moon — both good for serving or standing up on a shelf.",
+      "keywords": [
+        "platter",
+        "plate",
+        "shallow bowl",
+        "hand-painted",
+        "blue",
+        "turquoise",
+        "orange",
+        "green",
+        "glossy glaze",
+        "abstract landscape",
+        "boat",
+        "moon",
+        "serving",
+        "decorative"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-09-22-zc-0073-mucuudnr43t59.jpg",
+          "w": 1600,
+          "h": 1048
+        }
+      ]
+    },
+    {
+      "id": "mucuudw843t55",
+      "sku": "ZC-0074",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A set of six hand-built dog-face plates with little floppy ears, each in a different glaze \ta blue, turquoise, yellow, orange, green and a black-spotted dalmatian \tfun for kids' meals, snacks or hanging on the wall.",
+      "keywords": [
+        "plate",
+        "set",
+        "dog",
+        "animal",
+        "kids",
+        "blue",
+        "yellow",
+        "green",
+        "orange",
+        "turquoise",
+        "polka dot",
+        "glossy",
+        "hand painted",
+        "serving",
+        "decorative"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-09-22-zc-0074-mucuudw8hlseu.jpg",
+          "w": 1248,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mucuue45lrqmg",
+      "sku": "ZC-0075",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A small rectangular slab tray with a soft white rim and a dark navy floral pattern across the base in pink, yellow and pale blue, good for holding jewellery, keys or serving a few nibbles.",
+      "keywords": [
+        "tray",
+        "rectangular",
+        "slab",
+        "floral",
+        "navy",
+        "white",
+        "pink",
+        "yellow",
+        "patterned",
+        "trinket dish",
+        "serving",
+        "decorative",
+        "glossy"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-09-22-zc-0075-mucuue4567rht.jpg",
+          "w": 1600,
+          "h": 1063
+        }
+      ]
+    },
+    {
+      "id": "mucuue9o5z9du",
+      "sku": "ZC-0076",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A small square slab-built dish with softly curved edges, glazed creamy white with a floral transfer image in grey, yellow, red and pink filling the centre \\u2014 nice for trinkets, rings, or serving a few nibbles.",
+      "keywords": [
+        "square dish",
+        "slab built",
+        "trinket dish",
+        "floral",
+        "transfer print",
+        "white",
+        "grey",
+        "yellow",
+        "red",
+        "glossy",
+        "decorative",
+        "ring dish",
+        "serving",
+        "small plate"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-09-22-zc-0076-mucuue9o1dfkc.jpg",
+          "w": 1600,
+          "h": 1153
+        }
+      ]
+    },
+    {
+      "id": "mucuuegaer6d2",
+      "sku": "ZC-0077",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A hand-built two-piece wall set — a small round dish painted as a face with dark hair, and a large oval platter painted as a body in a pink striped shirt, orange belt and blue jeans — bright hand-painted colours under a glossy glaze, meant to hang together as a figure or be used as a quirky serving dish.",
+      "keywords": [
+        "platter",
+        "oval platter",
+        "figure",
+        "face",
+        "hand-painted",
+        "folk art",
+        "pink",
+        "blue",
+        "orange",
+        "glossy glaze",
+        "wall hanging",
+        "decorative",
+        "serving",
+        "whimsical",
+        "portrait"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-09-22-zc-0077-mucuuegakp656.jpg",
+          "w": 1078,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mucuuethpntav",
+      "sku": "ZC-0078",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A set of small square dishes with softly rounded corners, hand-painted in pastel blocks of pink, yellow, orange, blue and green with dark grid lines, signed on the back \\u2014 good for nibbles, olives, spices, or as little catch-all trays.",
+      "keywords": [
+        "square dish",
+        "small plate",
+        "set",
+        "pastel",
+        "pink",
+        "yellow",
+        "orange",
+        "blue",
+        "green",
+        "hand-painted",
+        "geometric",
+        "grid",
+        "glossy glaze",
+        "tapas",
+        "trinket dish"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-09-22-zc-0078-mucuueth1hk2j.jpg",
+          "w": 1600,
+          "h": 934
+        }
+      ]
+    },
+    {
+      "id": "mucuuf0h7g16p",
+      "sku": "ZC-0079",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A long rectangular serving tray in glossy white, hand-painted with a big orange poppy and a spray of small purple and white flowers, good for cheese, appetisers or laying out sweets.",
+      "keywords": [
+        "tray",
+        "platter",
+        "rectangular",
+        "serving",
+        "orange",
+        "white",
+        "purple",
+        "floral",
+        "poppy",
+        "hand-painted",
+        "glossy",
+        "appetisers",
+        "cheese board",
+        "decorative"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-09-22-zc-0079-mucuuf0hgifod.jpg",
+          "w": 1600,
+          "h": 931
         }
       ]
     }
