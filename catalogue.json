@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 80,
+  "nextSku": 82,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -1550,6 +1550,72 @@
           "file": "photos/2026-09-22-zc-0079-mucuuf0hgifod.jpg",
           "w": 1600,
           "h": 931
+        }
+      ]
+    },
+    {
+      "id": "mun5z8zlawg2o",
+      "sku": "ZC-0080",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A large oval serving platter in a soft cream glaze with rust speckles and pale green-grey streaks, finished with a hand-sculpted red flower and green vine trailing over one rim.",
+      "keywords": [
+        "platter",
+        "oval platter",
+        "serving dish",
+        "cream",
+        "speckled",
+        "rust",
+        "green",
+        "flower",
+        "sculpted detail",
+        "glossy glaze",
+        "serving",
+        "decorative",
+        "handmade",
+        "wedding gift"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-09-29-zc-0080-mun5z8zl122z4.jpg",
+          "w": 1600,
+          "h": 1459
+        }
+      ]
+    },
+    {
+      "id": "mun5z95bdnl0w",
+      "sku": "ZC-0081",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A set of four square-ish bowls with softly rounded corners, glazed in mossy greens and browns with a pooled glossy centre, and a band of pressed flowers around the outside picked out in dusty pink — good for soup, cereal or serving sides.",
+      "keywords": [
+        "bowl",
+        "set of bowls",
+        "square bowl",
+        "green",
+        "brown",
+        "mossy",
+        "pink flowers",
+        "floral",
+        "textured",
+        "glossy glaze",
+        "soup bowl",
+        "cereal bowl",
+        "serving",
+        "handbuilt"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-09-29-zc-0081-mun5z95blfu3p.jpg",
+          "w": 1600,
+          "h": 985
         }
       ]
     }
