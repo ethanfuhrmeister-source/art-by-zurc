@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 81,
+  "nextSku": 80,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -1550,39 +1550,6 @@
           "file": "photos/2026-09-22-zc-0079-mucuuf0hgifod.jpg",
           "w": 1600,
           "h": 931
-        }
-      ]
-    },
-    {
-      "id": "mun5r4v2uohsl",
-      "sku": "ZC-0080",
-      "title": "",
-      "price": "",
-      "size": "",
-      "notes": "",
-      "sold": false,
-      "description": "A set of four square-ish hand-built bowls glazed in mottled green and blue-grey, with raised pink flower stamps around the outside — good for soup, cereal or serving sides.",
-      "keywords": [
-        "bowl",
-        "square bowl",
-        "set of bowls",
-        "green",
-        "blue",
-        "pink",
-        "mottled glaze",
-        "flower",
-        "floral",
-        "carved",
-        "serving",
-        "soup bowl",
-        "cereal bowl",
-        "handbuilt"
-      ],
-      "photos": [
-        {
-          "file": "photos/2026-09-29-zc-0080-mun5r4v2wmyc9.jpg",
-          "w": 1600,
-          "h": 985
         }
       ]
     }
