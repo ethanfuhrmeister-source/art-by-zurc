@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 82,
+  "nextSku": 89,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -1616,6 +1616,230 @@
           "file": "photos/2026-09-29-zc-0081-mun5z95blfu3p.jpg",
           "w": 1600,
           "h": 985
+        }
+      ]
+    },
+    {
+      "id": "mv8g4n3rqd4ek",
+      "sku": "ZC-0082",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A tall, slim cylinder bud vase with a warm golden-amber glaze and a small raised medallion on the front, just the right size for a single rose or a few stems.",
+      "keywords": [
+        "bud vase",
+        "vase",
+        "tall",
+        "cylinder",
+        "amber",
+        "gold",
+        "glossy",
+        "flowers",
+        "single stem",
+        "slim",
+        "decorative",
+        "applied detail"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-10-14-zc-0082-mv8g4n3r0hmjb.jpg",
+          "w": 484,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mv8g4n7es1g7s",
+      "sku": "ZC-0083",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A tall, slab-built floor vase with a slightly flared, wavy rim and a glossy bronze-brown glaze, with a raised decorative medallion pressed into the front — made for big dried or silk flower arrangements.",
+      "keywords": [
+        "vase",
+        "floor vase",
+        "tall vase",
+        "slab built",
+        "bronze",
+        "brown",
+        "glossy",
+        "metallic glaze",
+        "relief medallion",
+        "flowers",
+        "dried arrangement",
+        "decorative",
+        "statement piece"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-10-14-zc-0083-mv8g4n7egat0w.jpg",
+          "w": 566,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mv8g4nd8oyqk1",
+      "sku": "ZC-0084",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A shallow rectangular stone-look tray planter, mottled cream and brown with a natural rough edge, shown here filled with moss and a mixed floral arrangement of white poppies, red pincushion protea and roses.",
+      "keywords": [
+        "tray",
+        "planter",
+        "rectangular",
+        "shallow",
+        "stone look",
+        "marbled",
+        "cream",
+        "brown",
+        "floral arrangement",
+        "centerpiece",
+        "moss",
+        "decorative",
+        "tabletop"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-10-14-zc-0084-mv8g4nd85o48w.jpg",
+          "w": 1232,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mv8g4nk50yvhu",
+      "sku": "ZC-0085",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A hand-built slab vase in a deep blue glaze, decorated with raised white and yellow daisies and a small sculpted face, perfect for holding a big bunch of garden flowers.",
+      "keywords": [
+        "vase",
+        "flower vase",
+        "blue",
+        "slab built",
+        "hand built",
+        "daisies",
+        "relief decoration",
+        "face",
+        "glossy glaze",
+        "rustic",
+        "decorative",
+        "tall vase",
+        "flowers"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-10-14-zc-0085-mv8g4nk5at5gq.jpg",
+          "w": 1156,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mv8g4nrva2mvb",
+      "sku": "ZC-0086",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A tall hand-built vase with softly flared, slightly oval rim and a raised leaf-and-vine design running up one side, glazed in a creamy oatmeal white with warm tan speckles — good for a big arrangement of flowers or branches.",
+      "keywords": [
+        "vase",
+        "flower vase",
+        "tall vase",
+        "cream",
+        "oatmeal",
+        "speckled",
+        "beige",
+        "hand-built",
+        "textured",
+        "leaf design",
+        "relief",
+        "matte glaze",
+        "floral",
+        "decorative"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-10-14-zc-0086-mv8g4nrvfpypt.jpg",
+          "w": 782,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mv8g4ny150abm",
+      "sku": "ZC-0087",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A tall slab-built vase with a sculpted face pressed into the front, glazed in glossy coppery amber and brown tones, shown here holding a big dried and silk flower arrangement.",
+      "keywords": [
+        "vase",
+        "face vase",
+        "sculptural",
+        "amber",
+        "copper",
+        "brown",
+        "glossy glaze",
+        "slab built",
+        "flowers",
+        "floral arrangement",
+        "decorative",
+        "tall vase",
+        "figurative"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-10-14-zc-0087-mv8g4ny1m66sp.jpg",
+          "w": 1042,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mv8g4o1f94u5w",
+      "sku": "ZC-0088",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A rounded dark brown vase with a glossy, carved-looking surface, shown here filled with a tall dried arrangement of orange flowers, twigs and grasses \".\" it works well as a floor or table vase for tall dried or silk stems.",
+      "keywords": [
+        "vase",
+        "brown",
+        "dark brown",
+        "glossy",
+        "carved",
+        "round vase",
+        "floor vase",
+        "dried flowers",
+        "flower arrangement",
+        "orange",
+        "decorative",
+        "home decor",
+        "tall stems"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-10-14-zc-0088-mv8g4o1fx6mtd.jpg",
+          "w": 528,
+          "h": 1600
         }
       ]
     }
