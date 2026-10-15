@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 89,
+  "nextSku": 88,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -1683,40 +1683,8 @@
       ]
     },
     {
-      "id": "mv8g4nd8oyqk1",
-      "sku": "ZC-0084",
-      "title": "Garden Rhapsody ",
-      "price": "$105",
-      "size": "Vase W:6\" L:12\"H:2  with Flowers:15\" tall",
-      "notes": "",
-      "sold": false,
-      "description": "A shallow rectangular stone-look tray planter, mottled cream and brown with a natural rough edge, shown here filled with moss and a mixed floral arrangement of white poppies, red pincushion protea and roses.",
-      "keywords": [
-        "tray",
-        "planter",
-        "rectangular",
-        "shallow",
-        "stone look",
-        "marbled",
-        "cream",
-        "brown",
-        "floral arrangement",
-        "centerpiece",
-        "moss",
-        "decorative",
-        "tabletop"
-      ],
-      "photos": [
-        {
-          "file": "photos/2026-10-14-zc-0084-mv8g4nd85o48w.jpg",
-          "w": 1232,
-          "h": 1600
-        }
-      ]
-    },
-    {
       "id": "mv8g4nk50yvhu",
-      "sku": "ZC-0085",
+      "sku": "ZC-0084",
       "title": "Spring's Embrace",
       "price": "$135",
       "size": "Vase: 9  with Flowers 22\"",
@@ -1748,7 +1716,7 @@
     },
     {
       "id": "mv8g4nrva2mvb",
-      "sku": "ZC-0086",
+      "sku": "ZC-0085",
       "title": "The Red Dance",
       "price": "$130",
       "size": "Vase: 9.5\"  with Flowers 24\"",
@@ -1781,7 +1749,7 @@
     },
     {
       "id": "mv8g4ny150abm",
-      "sku": "ZC-0087",
+      "sku": "ZC-0086",
       "title": "Blooming Soul",
       "price": "$130",
       "size": "Vase: 10.5  with Flowers 26\"",
@@ -1813,7 +1781,7 @@
     },
     {
       "id": "mv8g4o1f94u5w",
-      "sku": "ZC-0088",
+      "sku": "ZC-0087",
       "title": "Flames of Nature",
       "price": "$105",
       "size": "Vase: 7\"  with Flowers 36\"",
