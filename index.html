@@ -336,6 +336,9 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
 }
 .sheet-head h1{margin:0;font-family:var(--serif);font-weight:300;font-size:1.5rem}
 .sheet-head .sub{font-size:.72rem;color:var(--muted);letter-spacing:.06em;text-align:right;line-height:1.6}
+/* one block per row of cards: a page break can fall between rows, never through one */
+.pline{break-inside:avoid;page-break-inside:avoid}
+.pline+.pline{margin-top:.55rem}
 .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem}
 .pgrid.cols2{grid-template-columns:repeat(2,1fr)}
 .pgrid.cols4{grid-template-columns:repeat(4,1fr)}
@@ -1238,9 +1241,10 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     if (!list.length) {
       h += '<p class="note">Nothing to print yet.</p>';
     } else {
-      h += '<div class="pgrid' + (printCols === 2 ? " cols2" : printCols === 4 ? " cols4" : "") + '">';
-      list.forEach(function (p) {
+      var grid = '<div class="pline"><div class="pgrid' + (printCols === 2 ? " cols2" : printCols === 4 ? " cols4" : "") + '">';
+      list.forEach(function (p, i) {
         var ph = cover(p);
+        if (i % printCols === 0) h += (i ? "</div></div>" : "") + grid;
         h += '<div class="pcard">';
         h += ph ? '<img class="thumb" src="' + esc(photoSrc(ph)) + '" alt="">'
                 : '<div class="thumb"></div>';
@@ -1257,7 +1261,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         if (printQr) h += qrSvg(pieceUrl(p.sku), "qr");
         h += "</div></div>";
       });
-      h += "</div>";
+      h += "</div></div>";
     }
     h += '<div class="sheet-foot"><span>' + esc(state.name) + "</span><span>" + esc(today) + "</span></div>";
     h += "</div>";
