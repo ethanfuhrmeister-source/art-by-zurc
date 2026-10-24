@@ -1463,6 +1463,14 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     h += '<span class="note">Photos, item numbers and QR codes on paper.</span></div>';
     h += "</div>";
 
+    if (useApi()) {
+      h += '<div class="block"><h3>Square</h3>';
+      h += '<div class="inline"><button class="btn plain" id="s-square">Send pieces to Square</button>';
+      h += '<span class="note" id="s-square-note">Adds what is for sale to the Square item library and takes out anything sold. ' +
+           'A piece rung up in Square is marked sold here by itself.</span></div>';
+      h += "</div>";
+    }
+
     h += '<div class="block"><h3>Heading and contact</h3>';
     h += '<div class="field"><label for="s-name">Name at the top</label>' +
          '<input type="text" id="s-name" value="' + esc(state.name) + '"></div>';
@@ -1624,6 +1632,8 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     if (rows) bindRows(rows);
 
     el.querySelector("#s-print").addEventListener("click", openPrint);
+    var sq = el.querySelector("#s-square");
+    if (sq) sq.addEventListener("click", function () { sendToSquare(sq, el.querySelector("#s-square-note")); });
 
     bindText(el, "#s-name", function (v) { state.name = v; });
     bindText(el, "#s-trade", function (v) { state.trade = v; });
@@ -1993,6 +2003,29 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     }).catch(function (err) {
       hint.className = "hint";
       hint.textContent = String((err && err.message) || err);
+      btn.disabled = false;
+    });
+  }
+
+  /* Square reads the published catalogue, so unpublished edits would not reach it. */
+  function sendToSquare(btn, note) {
+    if (dirty) { note.textContent = "Publish your changes first, then send to Square."; return; }
+    btn.disabled = true;
+    note.textContent = "Sending to Square…";
+    fetch(apiBase() + "/square-sync", {
+      method: "POST",
+      headers: { Authorization: "Bearer " + session(), "Content-Type": "application/json" }
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) {
+        if (!r.ok) throw new Error(j.error || ("Could not reach Square (" + r.status + ")"));
+        return j;
+      });
+    }).then(function (j) {
+      note.textContent = "Done. " + (j.pushed || 0) + " piece" + (j.pushed === 1 ? "" : "s") + " for sale in Square" +
+        (j.removed ? ", " + j.removed + " sold piece" + (j.removed === 1 ? "" : "s") + " taken out." : ".");
+      btn.disabled = false;
+    }).catch(function (err) {
+      note.textContent = String((err && err.message) || err);
       btn.disabled = false;
     });
   }
