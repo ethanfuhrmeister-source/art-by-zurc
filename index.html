@@ -707,9 +707,17 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     if (/[0-9]{7}/.test(t.replace(/[^0-9]/g, ""))) return "tel:" + t.replace(/[^0-9+]/g, "");
     return "";
   }
+  /* What a piece sells for. A set listed with a per-cup price as well
+     ("$30 per cup Set $120") sells whole, at the set price. The publishing
+     service's priceInCents reads prices the same way; keep the two in step. */
   function priceNum(p) {
-    var n = parseFloat(String(p == null ? "" : p).replace(/[^0-9.]/g, ""));
-    return isFinite(n) ? n : 0;
+    var s = String(p == null ? "" : p), amt = "([0-9][0-9,]*(?:\\.[0-9]{1,2})?)";
+    var m = s.match(new RegExp("\\$\\s*" + amt + "\\s*(?:for\\s+the\\s+)?set\\b", "i")) ||
+            s.match(new RegExp("\\bset\\s*(?:of\\s+\\d+\\s*)?[:\\-]?\\s*\\$?\\s*" + amt, "i")) ||
+            s.match(new RegExp("\\$\\s*" + amt)) ||
+            s.match(new RegExp("(?:^|[^0-9.,])" + amt + "(?![0-9])"));
+    var n = m ? parseFloat(m[1].replace(/,/g, "")) : 0;
+    return isFinite(n) && n > 0 ? n : 0;
   }
   function money(n) {
     return "$" + n.toFixed(2).replace(/\.00$/, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -1468,6 +1476,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       h += '<div class="inline"><button class="btn plain" id="s-square">Send pieces to Square</button>';
       h += '<span class="note" id="s-square-note">Adds what is for sale to the Square item library and takes out anything sold. ' +
            'A piece rung up in Square is marked sold here by itself.</span></div>';
+      h += '<p class="note" id="s-sales" style="margin-top:.6rem"></p>';
       h += "</div>";
     }
 
@@ -1634,6 +1643,8 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     el.querySelector("#s-print").addEventListener("click", openPrint);
     var sq = el.querySelector("#s-square");
     if (sq) sq.addEventListener("click", function () { sendToSquare(sq, el.querySelector("#s-square-note")); });
+    var sales = el.querySelector("#s-sales");
+    if (sales && session()) loadSales(sales);
 
     bindText(el, "#s-name", function (v) { state.name = v; });
     bindText(el, "#s-trade", function (v) { state.trade = v; });
@@ -2004,6 +2015,26 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       hint.className = "hint";
       hint.textContent = String((err && err.message) || err);
       btn.disabled = false;
+    });
+  }
+
+  /* What Square has taken, before tax: read from the service, never from the
+     public catalogue, so the amounts stay private. */
+  function loadSales(box) {
+    box.textContent = "Checking Square sales…";
+    fetch(apiBase() + "/sales", { headers: { Authorization: "Bearer " + session() } }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) {
+        if (!r.ok) throw new Error(j.error || ("Could not read the sales (" + r.status + ")"));
+        return j;
+      });
+    }).then(function (j) {
+      if (!j.pieces && !j.gross_cents) { box.textContent = "No Square sales yet."; return; }
+      box.textContent = "Sold through Square: " + j.pieces + " piece" + (j.pieces === 1 ? "" : "s") +
+        ", " + money(j.revenue_cents / 100) + " before tax" +
+        (j.refunded_cents ? " (after " + money(j.refunded_cents / 100) + " in refunds)" : "") +
+        ". Tax collected " + money(j.tax_cents / 100) + ".";
+    }).catch(function (err) {
+      box.textContent = String((err && err.message) || err);
     });
   }
 
