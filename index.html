@@ -2030,9 +2030,11 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     }).then(function (j) {
       if (!j.pieces && !j.gross_cents) { box.textContent = "No Square sales yet."; return; }
       box.textContent = "Sold through Square: " + j.pieces + " piece" + (j.pieces === 1 ? "" : "s") +
+        " on " + j.payments + " payment" + (j.payments === 1 ? "" : "s") +
         ", " + money(j.revenue_cents / 100) + " before tax" +
         (j.refunded_cents ? " (after " + money(j.refunded_cents / 100) + " in refunds)" : "") +
-        ". Tax collected " + money(j.tax_cents / 100) + ".";
+        ". Tax collected " + money(j.tax_cents / 100) + ". Pieces marked sold by hand are not included. " +
+        "Check the payment count against Square's own sales report.";
     }).catch(function (err) {
       box.textContent = String((err && err.message) || err);
     });
