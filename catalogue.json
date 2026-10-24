@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 88,
+  "nextSku": 99,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -1808,6 +1808,334 @@
           "file": "photos/2026-10-14-zc-0088-mv8g4o1fx6mtd.jpg",
           "w": 528,
           "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mvmpc4t4c83xv",
+      "sku": "ZC-0088",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A hand-built squared bowl with a glossy green and rust-brown glaze pooling inside, and a rough red-earth exterior painted with simple flowers — good for serving salad or fruit, or just sitting out as a centrepiece.",
+      "keywords": [
+        "bowl",
+        "serving bowl",
+        "green",
+        "rust",
+        "brown",
+        "glossy",
+        "flower",
+        "hand-built",
+        "square rim",
+        "decorative",
+        "fruit bowl",
+        "earthy",
+        "textured"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-10-24-zc-0088-mvmpc4t4pz5bp.jpg",
+          "w": 1600,
+          "h": 1194
+        }
+      ]
+    },
+    {
+      "id": "mvmpc565vtzz8",
+      "sku": "ZC-0089",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A deep stoneware bowl with a glossy amber and dark brown speckled glaze inside and a rough, bare textured clay exterior, good for serving salads or fruit.",
+      "keywords": [
+        "bowl",
+        "serving bowl",
+        "amber",
+        "brown",
+        "speckled",
+        "glossy",
+        "textured",
+        "rustic",
+        "stoneware",
+        "salad bowl",
+        "fruit bowl",
+        "unglazed exterior"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-10-24-zc-0089-mvmpc56529ym5.jpg",
+          "w": 1600,
+          "h": 984
+        }
+      ]
+    },
+    {
+      "id": "mvmpc5bzs1mlf",
+      "sku": "ZC-0090",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A set of five tall, slightly twisted tumblers in dark brown with pale silvery-grey mottled glaze running down the sides, each with a metal straw, good for iced drinks or cocktails.",
+      "keywords": [
+        "tumbler",
+        "cup set",
+        "tall",
+        "brown",
+        "grey",
+        "mottled",
+        "speckled",
+        "dark glaze",
+        "metal straw",
+        "iced drinks",
+        "cocktail",
+        "drinkware",
+        "stoneware",
+        "handmade set"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-10-24-zc-0090-mvmpc5bzqixlb.jpg",
+          "w": 1600,
+          "h": 1426
+        }
+      ]
+    },
+    {
+      "id": "mvmpc5keg7rrq",
+      "sku": "ZC-0091",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A hand-built bowl with a wavy, ruffled rim and textured outside, glazed in glossy browns, amber and gold with dark speckling — good for snacks, dips, or fruit on the table.",
+      "keywords": [
+        "bowl",
+        "ruffled rim",
+        "hand-built",
+        "brown",
+        "amber",
+        "gold",
+        "glossy",
+        "speckled",
+        "textured",
+        "serving",
+        "snack bowl",
+        "dip bowl",
+        "decorative",
+        "rustic"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-10-24-zc-0091-mvmpc5keb51i1.jpg",
+          "w": 1600,
+          "h": 1531
+        }
+      ]
+    },
+    {
+      "id": "mvmpc5rtpobjr",
+      "sku": "ZC-0092",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A shallow hand-built square dish with softly curved sides, hand-painted with a big yellow-green daisy outlined in blue over a speckled cream ground, with scrolls and small flowers around the edge under a glossy glaze — nice for serving nibbles or sitting out on a shelf.",
+      "keywords": [
+        "dish",
+        "square dish",
+        "shallow bowl",
+        "hand-painted",
+        "floral",
+        "flower",
+        "blue",
+        "yellow",
+        "green",
+        "speckled",
+        "glossy glaze",
+        "serving",
+        "decorative",
+        "hand-built",
+        "folk pattern"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-10-24-zc-0092-mvmpc5rt896h7.jpg",
+          "w": 1255,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mvmpc5xkfkr4v",
+      "sku": "ZC-0093",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A pair of small serving bowls glazed in mottled browns, ochre and green, with streaky drips running down the outside — good for salads, fruit or soup.",
+      "keywords": [
+        "bowl",
+        "pair",
+        "serving bowl",
+        "brown",
+        "ochre",
+        "green",
+        "mottled",
+        "drippy glaze",
+        "rustic",
+        "salad",
+        "fruit bowl",
+        "soup",
+        "earthy",
+        "stoneware"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-10-24-zc-0093-mvmpc5xke8l85.jpg",
+          "w": 1600,
+          "h": 845
+        }
+      ]
+    },
+    {
+      "id": "mvmpc65hmrsef",
+      "sku": "ZC-0094",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A set of flat rectangular tiles or small serving plates glazed in a creamy off-white with heavy green and brown speckling, good for cheese, appetisers, or as coasters and trivets.",
+      "keywords": [
+        "tile",
+        "rectangular plate",
+        "tray",
+        "coaster",
+        "speckled",
+        "green",
+        "cream",
+        "white",
+        "flat",
+        "serving",
+        "cheese board",
+        "appetizer",
+        "set"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-10-24-zc-0094-mvmpc65hdo3w7.jpg",
+          "w": 1600,
+          "h": 1058
+        }
+      ]
+    },
+    {
+      "id": "mvmpc6d0ik0ag",
+      "sku": "ZC-0095",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A wide round platter with a creamy speckled glaze that breaks to warm brown and rust around the rim, good for serving bread, cheese, or fruit at the table.",
+      "keywords": [
+        "platter",
+        "plate",
+        "serving",
+        "round",
+        "cream",
+        "brown",
+        "rust",
+        "speckled",
+        "glossy",
+        "tableware",
+        "large",
+        "cheese board",
+        "stoneware"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-10-24-zc-0095-mvmpc6d0tth3i.jpg",
+          "w": 1600,
+          "h": 1280
+        }
+      ]
+    },
+    {
+      "id": "mvmpc6kb70orl",
+      "sku": "ZC-0096",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A set of small scalloped-edge plates glazed in soft green and cream with brown speckling that streaks out from the centre like petals, handy for side salads, desserts or little bites.",
+      "keywords": [
+        "plate",
+        "small plate",
+        "side plate",
+        "scalloped",
+        "flower shape",
+        "green",
+        "cream",
+        "brown speckled",
+        "speckled glaze",
+        "rustic",
+        "dessert",
+        "serving",
+        "set of plates"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-10-24-zc-0096-mvmpc6kbpta1y.jpg",
+          "w": 1600,
+          "h": 908
+        }
+      ]
+    },
+    {
+      "id": "mvmpc6s07lfhn",
+      "sku": "ZC-0097",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-10-24-zc-0097-mvmpc6s0auy2i.jpg",
+          "w": 1600,
+          "h": 883
+        }
+      ]
+    },
+    {
+      "id": "mvmpc6zor9xdp",
+      "sku": "ZC-0098",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-10-24-zc-0098-mvmpc6zo6lhcp.jpg",
+          "w": 1600,
+          "h": 1032
         }
       ]
     }
