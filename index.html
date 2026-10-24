@@ -359,9 +359,11 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
 
 @media print{
   @page{margin:.45in}
-  html,body{background:#fff}
-  body>*{display:none!important}
-  body>.printview{display:block!important;position:static;inset:auto;overflow:visible;background:#fff}
+  html,body{background:#fff;overflow:visible!important;height:auto!important}
+  body>*:not(#root){display:none!important}
+  #root{display:block!important}
+  #root>*:not(.printview){display:none!important}
+  #root>.printview:not([hidden]){display:block!important;position:static!important;inset:auto;overflow:visible!important;height:auto!important;z-index:auto;background:#fff}
   .printbar{display:none!important}
   .sheet{box-shadow:none;margin:0;max-width:none;padding:0;width:auto}
   .pcard{border-color:#ccc}
