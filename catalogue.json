@@ -3175,9 +3175,10 @@
       "sku": "ZC-0130",
       "title": "",
       "price": "",
-      "size": "",
+      "size": "5\"x5\"",
       "notes": "",
       "sold": false,
+      "kind": "painting",
       "description": "",
       "keywords": [],
       "photos": [
