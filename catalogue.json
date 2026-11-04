@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 150,
+  "nextSku": 156,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -3765,6 +3765,205 @@
           "file": "photos/2026-11-04-zc-0149-mw1hjalzjdrfq.jpg",
           "w": 1600,
           "h": 826
+        }
+      ]
+    },
+    {
+      "id": "mw1hnpul9z8bu",
+      "sku": "ZC-0150",
+      "title": "T",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A small square canvas painting of a flock of round yellow chicks on long skinny legs beside a flowering plant, with real buttons glued on as the blossoms, all over a soft pale blue washed background — ready to hang on a wall.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "mixed media",
+        "buttons",
+        "chicks",
+        "birds",
+        "flowers",
+        "yellow",
+        "pale blue",
+        "whimsical",
+        "nursery art",
+        "wall art",
+        "decorative",
+        "signed"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0150-mw1hnpul4cmsa.jpg",
+          "w": 1192,
+          "h": 1210
+        }
+      ]
+    },
+    {
+      "id": "mw1hnpy3b08fh",
+      "sku": "ZC-0151",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A square canvas painting of two orange and navy striped fish swimming over a pale aqua background, with blue flowers, seaweed and coral along the bottom — ready to hang as is.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "fish",
+        "goldfish",
+        "orange",
+        "aqua",
+        "turquoise",
+        "blue",
+        "underwater",
+        "coral",
+        "seaweed",
+        "wall art",
+        "decorative",
+        "square",
+        "folk art"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0151-mw1hnpy3diw4z.jpg",
+          "w": 1270,
+          "h": 1273
+        }
+      ]
+    },
+    {
+      "id": "mw1hnq1b9rlew",
+      "sku": "ZC-0152",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A small square canvas painting of a big-eyed green turtle sitting beside a bright red mushroom, with thin brown toadstools and a soft pale blue-green background, signed in the corner and ready to hang on a wall.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "wall art",
+        "turtle",
+        "mushroom",
+        "toadstool",
+        "red",
+        "green",
+        "pale blue",
+        "whimsical",
+        "cartoon",
+        "nursery",
+        "decorative",
+        "signed"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0152-mw1hnq1b2i8nr.jpg",
+          "w": 1323,
+          "h": 1288
+        }
+      ]
+    },
+    {
+      "id": "mw1hnq4hfzix1",
+      "sku": "ZC-0153",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A small square canvas with a stitched fabric applique bird in beige and blue floral prints, standing among hand-painted blue cornflowers on a soft pink and white washed background, ready to hang on the wall.",
+      "keywords": [
+        "canvas",
+        "wall art",
+        "bird",
+        "applique",
+        "fabric collage",
+        "stitched",
+        "blue",
+        "pink",
+        "floral",
+        "cornflowers",
+        "decorative",
+        "square",
+        "painting",
+        "folk art"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0153-mw1hnq4hf0cqv.jpg",
+          "w": 1312,
+          "h": 1319
+        }
+      ]
+    },
+    {
+      "id": "mw1hnq7lwv0xo",
+      "sku": "ZC-0154",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A small square canvas painting of a party llama wearing sunglasses and a striped party hat, with fabric bunting flags glued across the top and a soft mottled green background — ready to hang on a wall.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "llama",
+        "mixed media",
+        "fabric collage",
+        "bunting",
+        "green",
+        "whimsical",
+        "nursery art",
+        "wall art",
+        "decorative",
+        "animal",
+        "party hat",
+        "sunglasses"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0154-mw1hnq7lpqthw.jpg",
+          "w": 1300,
+          "h": 1310
+        }
+      ]
+    },
+    {
+      "id": "mw1hnqdd6pg9f",
+      "sku": "ZC-0155",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A square painted canvas on a soft pale green background, showing two tall flower stems with round pom-pom blooms in red, pink, teal, purple and navy, each one stitched over with thread, and a little hedgehog with a watering can at the bottom — a piece to hang on the wall.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "wall art",
+        "flowers",
+        "hedgehog",
+        "pale green",
+        "pink",
+        "teal",
+        "purple",
+        "embroidery",
+        "stitched",
+        "whimsical",
+        "nursery",
+        "decorative"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0155-mw1hnqddfnqvb.jpg",
+          "w": 1268,
+          "h": 1233
         }
       ]
     }
