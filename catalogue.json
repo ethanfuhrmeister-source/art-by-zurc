@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 156,
+  "nextSku": 164,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -3970,6 +3970,211 @@
           "file": "photos/2026-11-04-zc-0155-mw1hnqddfnqvb.jpg",
           "w": 1268,
           "h": 1233
+        }
+      ]
+    },
+    {
+      "id": "mw1i0r1qinf8p",
+      "sku": "ZC-0156",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A small square canvas painted with a soft pink and cream wash, showing a fuzzy yellow chick holding a red balloon beside a patch of flowers made from bright button-like blooms in green, orange, pink and purple — a cheerful piece for a nursery or child's room wall.",
+      "keywords": [
+        "canvas",
+        "painting",
+        "wall art",
+        "nursery",
+        "chick",
+        "balloon",
+        "flowers",
+        "pink",
+        "yellow",
+        "whimsical",
+        "children",
+        "decorative",
+        "buttons",
+        "mixed media"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0156-mw1i0r1q688tz.jpg",
+          "w": 1212,
+          "h": 1203
+        }
+      ]
+    },
+    {
+      "id": "mw1i0r4t1a4xo",
+      "sku": "ZC-0157",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A small square canvas painting of a friendly orange giraffe nibbling green bamboo leaves, with purple flowers to one side and a soft mottled peach background — a cheerful piece for a child's room or nursery wall.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "giraffe",
+        "animal art",
+        "nursery art",
+        "children's room",
+        "orange",
+        "green",
+        "purple flowers",
+        "bamboo",
+        "wall art",
+        "decorative",
+        "square canvas",
+        "illustration"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0157-mw1i0r4tdc4zt.jpg",
+          "w": 1276,
+          "h": 1272
+        }
+      ]
+    },
+    {
+      "id": "mw1i0r7rs7ufe",
+      "sku": "ZC-0158",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A small square canvas painted with a yellow leaping bunny with a fluffy white tail, hopping over green grass and little red flowers on a soft cream background \\u2014 a sweet piece for a nursery or child's room wall.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "bunny",
+        "rabbit",
+        "nursery art",
+        "children's room",
+        "yellow",
+        "cream",
+        "red flowers",
+        "green grass",
+        "wall art",
+        "decorative",
+        "whimsical",
+        "signed"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0158-mw1i0r7r3jqld.jpg",
+          "w": 1261,
+          "h": 1246
+        }
+      ]
+    },
+    {
+      "id": "mw1i0rawpxe9r",
+      "sku": "ZC-0159",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0159-mw1i0rawvx0ez.jpg",
+          "w": 1314,
+          "h": 1273
+        }
+      ]
+    },
+    {
+      "id": "mw1i0re5d9hc5",
+      "sku": "ZC-0160",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A small square canvas painting of two tropical fish \"\" one red and blue, one orange and black \"\" swimming among green seagrass with bubbles rising through a soft aqua and white water background, signed in the corner and ready to hang on a wall.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "fish",
+        "tropical fish",
+        "underwater",
+        "aqua",
+        "turquoise",
+        "orange",
+        "red",
+        "green",
+        "seagrass",
+        "bubbles",
+        "wall art",
+        "decorative",
+        "coastal"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0160-mw1i0re43cpq0.jpg",
+          "w": 1249,
+          "h": 1267
+        }
+      ]
+    },
+    {
+      "id": "mw1i0rgovcss5",
+      "sku": "ZC-0161",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0161-mw1i0rgo5u6tp.jpg",
+          "w": 1128,
+          "h": 1127
+        }
+      ]
+    },
+    {
+      "id": "mw1i0rmrhyhyz",
+      "sku": "ZC-0162",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0162-mw1i0rmr3bfyl.jpg",
+          "w": 1323,
+          "h": 1305
+        }
+      ]
+    },
+    {
+      "id": "mw1i0rta4cr4t",
+      "sku": "ZC-0163",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0163-mw1i0rtaf8cjl.jpg",
+          "w": 1323,
+          "h": 1332
         }
       ]
     }
