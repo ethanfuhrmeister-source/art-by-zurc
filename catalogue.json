@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 129,
+  "nextSku": 141,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -3135,6 +3135,270 @@
           "h": 1600
         }
       ]
+    },
+    {
+      "id": "mw1g3pjo5zl0n",
+      "sku": "ZC-0129",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A small square canvas painted with a meadow of tall grasses, yellow and purple flowers and a single bright butterfly against a pale blue sky, signed in the corner and ready to stand or hang as it is.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "square",
+        "meadow",
+        "wildflowers",
+        "butterfly",
+        "pale blue",
+        "yellow",
+        "purple",
+        "green",
+        "signed",
+        "decorative",
+        "wall art",
+        "small"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0129-mw1g3pjozonuq.jpg",
+          "w": 1290,
+          "h": 1300
+        }
+      ]
+    },
+    {
+      "id": "mw1g3puyz5dlg",
+      "sku": "ZC-0130",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0130-mw1g3puynocwd.jpg",
+          "w": 1300,
+          "h": 1288
+        }
+      ]
+    },
+    {
+      "id": "mw1g3q6y4o55s",
+      "sku": "ZC-0131",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A small square canvas painting of a misty evergreen forest with a lone deer standing at the edge of a snowy clearing, done in soft greys, greens and browns, ready to hang or sit on a shelf.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "small square",
+        "landscape",
+        "forest",
+        "pine trees",
+        "deer",
+        "winter",
+        "snow",
+        "grey",
+        "green",
+        "brown",
+        "wall art",
+        "decorative"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0131-mw1g3q6y3etrr.jpg",
+          "w": 1286,
+          "h": 1300
+        }
+      ]
+    },
+    {
+      "id": "mw1g3qh5x6ouv",
+      "sku": "ZC-0132",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0132-mw1g3qh50zigc.jpg",
+          "w": 1300,
+          "h": 1274
+        }
+      ]
+    },
+    {
+      "id": "mw1g3qt0myerc",
+      "sku": "ZC-0133",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A small square canvas painted with a soft pink landscape — dark green and rust-red trees along a water's edge, with little animals, birds overhead and reeds sketched in ink, signed in the bottom corner, ready to stand or hang as it is.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "small square",
+        "landscape",
+        "pink",
+        "green",
+        "rust red",
+        "trees",
+        "birds",
+        "ink drawing",
+        "signed",
+        "decorative",
+        "wall art",
+        "shelf art"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0133-mw1g3qt08awot.jpg",
+          "w": 1300,
+          "h": 1278
+        }
+      ]
+    },
+    {
+      "id": "mw1g3r4avvvgk",
+      "sku": "ZC-0134",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A small square canvas painting of a snail crossing dark earth beneath tall rust-and-pink seed-head flowers, in soft faded greens and cream, signed in the bottom corner and ready to hang or stand on a shelf.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "square",
+        "snail",
+        "flowers",
+        "rust",
+        "pink",
+        "green",
+        "cream",
+        "muted",
+        "nature scene",
+        "decorative",
+        "wall art",
+        "signed"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0134-mw1g3r4a4evjo.jpg",
+          "w": 1300,
+          "h": 1258
+        }
+      ]
+    },
+    {
+      "id": "mw1g3rdvk02tg",
+      "sku": "ZC-0135",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0135-mw1g3rdvzkrnt.jpg",
+          "w": 1300,
+          "h": 1296
+        }
+      ]
+    },
+    {
+      "id": "mw1g3ros0bbxs",
+      "sku": "ZC-0136",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0136-mw1g3ros3lvxq.jpg",
+          "w": 1300,
+          "h": 1299
+        }
+      ]
+    },
+    {
+      "id": "mw1g3s0bmuky3",
+      "sku": "ZC-0137",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0137-mw1g3s0bk5e1x.jpg",
+          "w": 1300,
+          "h": 1270
+        }
+      ]
+    },
+    {
+      "id": "mw1g3sa19d9a3",
+      "sku": "ZC-0138",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0138-mw1g3sa1d5yr0.jpg",
+          "w": 1300,
+          "h": 1282
+        }
+      ]
+    },
+    {
+      "id": "mw1g3svuqcoec",
+      "sku": "ZC-0139",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": []
+    },
+    {
+      "id": "mw1g3t0myvjqp",
+      "sku": "ZC-0140",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": []
     }
   ]
 }
