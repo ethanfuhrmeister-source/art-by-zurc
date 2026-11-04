@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 116,
+  "nextSku": 129,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -2699,6 +2699,416 @@
           "file": "photos/2026-11-04-zc-0115-mw1dxypkifmlf.jpg",
           "w": 1288,
           "h": 1300
+        }
+      ]
+    },
+    {
+      "id": "mw1e0q10iwdo6",
+      "sku": "ZC-0116",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A framed painting on canvas of a woman's face in profile with long golden-blonde hair and red lips, set against a warm textured background of rust, ochre and dark teal patches, ready to hang on a wall.",
+      "keywords": [
+        "painting",
+        "portrait",
+        "canvas",
+        "framed",
+        "wall art",
+        "profile",
+        "woman",
+        "blonde",
+        "rust",
+        "ochre",
+        "teal",
+        "textured",
+        "decorative",
+        "figurative"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0116-mw1e0q10ejr36.jpg",
+          "w": 1285,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mw1e0q7xm9tu0",
+      "sku": "ZC-0117",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A framed abstract painting of a woman's face emerging from layered, drippy grey, olive and rust brushwork, with one striking blue eye and dark red lips, ready to hang on a wall.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "framed",
+        "portrait",
+        "face",
+        "abstract",
+        "grey",
+        "olive green",
+        "rust red",
+        "blue eye",
+        "textured",
+        "wall art",
+        "decorative"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0117-mw1e0q7x2zotd.jpg",
+          "w": 1301,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mw1e0qfn7r86e",
+      "sku": "ZC-0118",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "This is a framed abstract mixed-media collage on canvas, built up from layered dark greys, blacks, ochre and a bright red block, with a textured grid-like mesh across the middle — a wall piece meant for hanging.",
+      "keywords": [
+        "abstract",
+        "collage",
+        "mixed media",
+        "painting",
+        "framed",
+        "wall art",
+        "dark grey",
+        "black",
+        "red",
+        "ochre",
+        "textured",
+        "layered",
+        "decorative",
+        "hanging"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0118-mw1e0qfn88igj.jpg",
+          "w": 1322,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mw1e0qmgy99jf",
+      "sku": "ZC-0119",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A framed painting of a stylised woman in a teal jacket holding a small orange flower, worked in muted greens, greys and blues with bold black outlines and a simple black frame — a wall piece for hanging.",
+      "keywords": [
+        "painting",
+        "portrait",
+        "framed",
+        "figurative",
+        "woman",
+        "flower",
+        "teal",
+        "muted",
+        "grey green",
+        "orange",
+        "black outline",
+        "wall art",
+        "decorative",
+        "canvas"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0119-mw1e0qmgcfyo4.jpg",
+          "w": 1306,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mw1e0qt4g1fci",
+      "sku": "ZC-0120",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A large framed wall panel painted with a close-up face, eyes closed and red lips, on a weathered grey and silver mottled surface — purely decorative, made to hang.",
+      "keywords": [
+        "wall art",
+        "framed panel",
+        "face",
+        "portrait",
+        "grey",
+        "silver",
+        "red lips",
+        "mottled",
+        "weathered",
+        "textured surface",
+        "decorative",
+        "hanging",
+        "closed eyes",
+        "black frame"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0120-mw1e0qt407o7r.jpg",
+          "w": 1600,
+          "h": 1302
+        }
+      ]
+    },
+    {
+      "id": "mw1e0r0tix2ln",
+      "sku": "ZC-0121",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A framed abstract portrait painting of a woman's face with striking turquoise eyes and red lips, built up in textured layers of grey, blue, yellow and rust, ready to hang on a wall.",
+      "keywords": [
+        "painting",
+        "portrait",
+        "abstract",
+        "face",
+        "woman",
+        "turquoise",
+        "blue",
+        "yellow",
+        "grey",
+        "rust red",
+        "textured",
+        "framed canvas",
+        "wall art",
+        "decorative"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0121-mw1e0r0tlyley.jpg",
+          "w": 1318,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mw1e0r8bi9bkl",
+      "sku": "ZC-0122",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A framed abstract portrait painting of a woman's face with green eyes and red lips, emerging from layered greens, golds, blacks and rust textures, ready to hang on a wall.",
+      "keywords": [
+        "painting",
+        "portrait",
+        "abstract",
+        "face",
+        "woman",
+        "green",
+        "black",
+        "red lips",
+        "textured",
+        "framed",
+        "canvas",
+        "wall art",
+        "decorative",
+        "mixed media"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0122-mw1e0r8biy199.jpg",
+          "w": 1270,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mw1e0rdzghm0u",
+      "sku": "ZC-0123",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A framed abstract painting on canvas in dark blacks and greens with a swipe of deep red across the lower half and a small cluster of yellow dots up in the top right, set in a simple slim black frame and ready to hang.",
+      "keywords": [
+        "abstract painting",
+        "canvas",
+        "framed",
+        "black frame",
+        "dark green",
+        "red",
+        "moody",
+        "textured",
+        "layered paint",
+        "wall art",
+        "decorative",
+        "hanging",
+        "landscape format"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0123-mw1e0rdzcmjrt.jpg",
+          "w": 1600,
+          "h": 1282
+        }
+      ]
+    },
+    {
+      "id": "mw1e0rk6e5imv",
+      "sku": "ZC-0124",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A framed abstract painting on canvas in moody greys, blacks and warm golden ochre with a band of olive green across the bottom and two small flashes of red, finished in a simple black frame and ready to hang.",
+      "keywords": [
+        "abstract painting",
+        "canvas",
+        "framed",
+        "wall art",
+        "black",
+        "grey",
+        "gold",
+        "ochre",
+        "olive green",
+        "red accent",
+        "textured",
+        "moody",
+        "decorative",
+        "hanging"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0124-mw1e0rk63rzc4.jpg",
+          "w": 1297,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mw1e0rrnbd0ef",
+      "sku": "ZC-0125",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A framed abstract wall piece in dark greys and blacks, with a crinkled gold-and-red patched panel down the left side and a repeating circle or honeycomb pattern over the rest, finished in a simple black frame for hanging.",
+      "keywords": [
+        "abstract",
+        "wall art",
+        "framed",
+        "black",
+        "grey",
+        "gold",
+        "red",
+        "textured",
+        "honeycomb pattern",
+        "mixed media",
+        "decorative",
+        "hanging"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0125-mw1e0rrnebquf.jpg",
+          "w": 1280,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mw1e0rzdhnpnr",
+      "sku": "ZC-0126",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A framed abstract painting of a seated figure, worked in black, grey and rusty ochre with scraped and dotted texture, ready to hang on a wall.",
+      "keywords": [
+        "painting",
+        "abstract",
+        "figure",
+        "wall art",
+        "black",
+        "grey",
+        "ochre",
+        "rust",
+        "textured",
+        "framed",
+        "canvas",
+        "decorative",
+        "mixed media",
+        "neutral tones"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0126-mw1e0rzd8btvq.jpg",
+          "w": 1286,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mw1e0s5ztt62f",
+      "sku": "ZC-0127",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A framed painting of a figure seen from behind, worked in dark greys, blacks and olive-gold with a heavily textured, crackled surface, set in a simple black frame and meant to hang on a wall.",
+      "keywords": [
+        "painting",
+        "framed art",
+        "figure",
+        "nude",
+        "black",
+        "grey",
+        "gold",
+        "olive",
+        "textured",
+        "crackle",
+        "dark",
+        "wall art",
+        "decorative",
+        "abstract"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0127-mw1e0s5zvoi53.jpg",
+          "w": 1343,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mw1e0scka5ntt",
+      "sku": "ZC-0128",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "",
+      "keywords": [],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0128-mw1e0sckyqiu2.jpg",
+          "w": 1328,
+          "h": 1600
         }
       ]
     }
