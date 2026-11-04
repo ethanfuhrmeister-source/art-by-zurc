@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 141,
+  "nextSku": 149,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -3464,6 +3464,267 @@
           "file": "photos/2026-11-04-zc-0140-mw1g3t0mxy4r8.jpg",
           "w": 1572,
           "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mw1h2y8zhsok7",
+      "sku": "ZC-0141",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "kind": "painting",
+      "description": "A small painting on canvas of a stem of blue bell-shaped flowers with red-tipped stamens and green leaves, set against a mottled blue and grey washed background, ready to hang or stand on a shelf.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "wall art",
+        "blue",
+        "green",
+        "flowers",
+        "botanical",
+        "floral",
+        "mottled background",
+        "signed",
+        "decorative",
+        "home decor"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0141-mw1h2y8zhtpqu.jpg",
+          "w": 1300,
+          "h": 1067
+        }
+      ]
+    },
+    {
+      "id": "mw1h2yr0sqhq2",
+      "sku": "ZC-0142",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A small acrylic painting on stretched canvas showing a fisherman in a yellow raincoat rowing a brown boat on a blue-green sea, with a dark whale tail rising out of the water beside him — ready to hang as is.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "acrylic",
+        "whale",
+        "fisherman",
+        "boat",
+        "seascape",
+        "blue",
+        "green",
+        "yellow",
+        "nautical",
+        "wall art",
+        "decorative",
+        "folk art"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0142-mw1h2yr0szmi9.jpg",
+          "w": 1300,
+          "h": 1036
+        }
+      ]
+    },
+    {
+      "id": "mw1h2z2tk0090",
+      "sku": "ZC-0143",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A small mixed-media canvas painting of a garden scene with a red ladder, a window with curtains, and a flower bed built up with bright button-like flowers in pink, orange, yellow, blue and purple against a soft grey-green textured background, ready to hang on a wall.",
+      "keywords": [
+        "canvas",
+        "painting",
+        "mixed media",
+        "wall art",
+        "flowers",
+        "garden scene",
+        "colourful",
+        "textured",
+        "grey",
+        "green",
+        "pink",
+        "orange",
+        "yellow",
+        "decorative"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0143-mw1h2z2t7pi3n.jpg",
+          "w": 1300,
+          "h": 1077
+        }
+      ]
+    },
+    {
+      "id": "mw1h2zi14172j",
+      "sku": "ZC-0144",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "This is a small painted canvas, not a pot \ro a still life with bottles, wine glasses, a jug holding a red flower and a fish on a platter, worked in turquoise, rust and gold with a loose black outline, ready to hang on a wall.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "still life",
+        "wall art",
+        "turquoise",
+        "rust",
+        "gold",
+        "black outline",
+        "flower",
+        "bottles",
+        "wine glasses",
+        "fish",
+        "decorative",
+        "signed"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0144-mw1h2zi1etskb.jpg",
+          "w": 1300,
+          "h": 1045
+        }
+      ]
+    },
+    {
+      "id": "mw1h2zu5fmriw",
+      "sku": "ZC-0145",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A flat wall panel painted with a black spider web over a mottled green and grey background, with a sculpted three-dimensional spider sitting off-centre on the web, meant to hang on a wall as decoration.",
+      "keywords": [
+        "wall art",
+        "panel",
+        "spider",
+        "web",
+        "green",
+        "grey",
+        "black",
+        "mottled",
+        "textured",
+        "sculptural",
+        "decorative",
+        "hanging",
+        "signed"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0145-mw1h2zu51o4se.jpg",
+          "w": 1300,
+          "h": 1051
+        }
+      ]
+    },
+    {
+      "id": "mw1h309sjmvyj",
+      "sku": "ZC-0146",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A small painted canvas showing three patterned fish swimming past blue seaweed and a school of tiny fish, in muted greens, blues, orange and pink — meant to hang on a wall.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "wall art",
+        "fish",
+        "underwater",
+        "sea",
+        "blue",
+        "orange",
+        "pink",
+        "green",
+        "decorative",
+        "coastal",
+        "folk art"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0146-mw1h309spmxr5.jpg",
+          "w": 1300,
+          "h": 1053
+        }
+      ]
+    },
+    {
+      "id": "mw1h30pg4al9f",
+      "sku": "ZC-0147",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A small stretched-canvas painting of a flock of sheep with one black sheep grazing on a stony blue-grey hillside, with a blossoming tree and a hedgerow of red and orange flowers built up in thick raised dots of paint, ready to hang on the wall.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "wall art",
+        "sheep",
+        "black sheep",
+        "blossom tree",
+        "flowers",
+        "blue",
+        "grey",
+        "red",
+        "textured",
+        "landscape",
+        "decorative",
+        "folk art"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0147-mw1h30pgb4x2r.jpg",
+          "w": 1300,
+          "h": 1046
+        }
+      ]
+    },
+    {
+      "id": "mw1h3167yr39e",
+      "sku": "ZC-0148",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A small painting on canvas of a girl in a red top climbing a tall red ladder to reach the crescent moon, with blue clouds above and a field of little flowers below, in soft pinks, greys and greens — ready to hang on a wall.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "wall art",
+        "whimsical",
+        "girl",
+        "ladder",
+        "moon",
+        "clouds",
+        "flowers",
+        "blue",
+        "pink",
+        "red",
+        "decorative",
+        "nursery art"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0148-mw1h3167fsrkb.jpg",
+          "w": 1300,
+          "h": 1032
         }
       ]
     }
