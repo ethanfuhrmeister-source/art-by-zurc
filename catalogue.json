@@ -4152,7 +4152,7 @@
       "id": "mw1i0rmrhyhyz",
       "sku": "ZC-0162",
       "title": "Sir hoots a lot",
-      "price": "",
+      "price": "$95",
       "size": "10\"x10\"",
       "notes": "",
       "sold": false,
@@ -4185,11 +4185,12 @@
     {
       "id": "mw1i0rta4cr4t",
       "sku": "ZC-0163",
-      "title": "",
+      "title": "Lady Luck",
       "price": "",
-      "size": "",
+      "size": "10\"x10\"",
       "notes": "",
       "sold": false,
+      "kind": "painting",
       "description": "",
       "keywords": [],
       "photos": [
