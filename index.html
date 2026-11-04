@@ -830,6 +830,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
           size: p.size || "",
           notes: p.notes || "",
           sold: p.sold === true,
+          kind: p.kind === "painting" ? "painting" : "",
           description: p.description || "",
           keywords: Array.isArray(p.keywords) ? p.keywords : [],
           photos: (Array.isArray(p.photos) ? p.photos : []).map(function (ph) {
@@ -973,6 +974,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     return state.pieces.filter(function (p) {
       if (filter === "available") return !p.sold;
       if (filter === "sold") return p.sold;
+      if (filter === "paintings") return p.kind === "painting";
       return true;
     });
   }
@@ -980,6 +982,8 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   function renderPage() {
     var list = visible();
     var soldCount = state.pieces.filter(function (p) { return p.sold; }).length;
+    var paintCount = state.pieces.filter(function (p) { return p.kind === "painting"; }).length;
+    if (filter === "paintings" && !paintCount) { filter = "all"; list = visible(); }
     var h = "";
     h += '<header class="masthead">';
     h += '<button class="studio-link" id="open-studio">Studio</button>';
@@ -995,11 +999,13 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       h += '<p class="findnote" id="q-count"></p>';
     }
 
-    if (soldCount && state.pieces.length) {
+    /* The Paintings tab appears once a piece is marked a painting in the studio. */
+    if ((soldCount || paintCount) && state.pieces.length) {
+      var tabs = [["all", "Everything", state.pieces.length]];
+      if (paintCount) tabs.push(["paintings", "Paintings", paintCount]);
+      if (soldCount) tabs.push(["available", "Available", state.pieces.length - soldCount], ["sold", "Sold", soldCount]);
       h += '<div class="filters">';
-      [["all", "Everything", state.pieces.length],
-       ["available", "Available", state.pieces.length - soldCount],
-       ["sold", "Sold", soldCount]].forEach(function (f) {
+      tabs.forEach(function (f) {
         h += '<button class="chip" data-filter="' + f[0] + '" aria-pressed="' +
              (filter === f[0]) + '">' + esc(f[1]) + " · " + f[2] + "</button>";
       });
@@ -1739,6 +1745,10 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     h += '<div class="field"><label for="e-title">Title</label>' +
          '<input type="text" id="e-title" value="' + esc(p.title || "") + '" placeholder="Tall vase, ash glaze">' +
          '<span class="hint">Shown on the catalogue next to the item number.</span></div>';
+    h += '<div class="field"><label for="e-kind">Type</label><select id="e-kind">' +
+         '<option value=""' + (p.kind === "painting" ? "" : " selected") + '>Pottery</option>' +
+         '<option value="painting"' + (p.kind === "painting" ? " selected" : "") + '>Painting</option>' +
+         '</select><span class="hint">Paintings get their own tab on the catalogue.</span></div>';
     h += '<div class="two">';
     h += '<div class="field"><label for="e-price">Price</label>';
     if (useApi()) {
@@ -1836,6 +1846,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     var nbtn = el.querySelector("#e-note");
     if (nbtn) nbtn.addEventListener("click", function () { writeNote(p, el); });
     el.querySelector("#e-sold").addEventListener("change", function (e) { p.sold = e.target.checked; touch(true); });
+    el.querySelector("#e-kind").addEventListener("change", function (e) { p.kind = e.target.value === "painting" ? "painting" : ""; touch(true); });
 
     el.querySelector("#e-del").addEventListener("click", function () {
       var after = state.pieces.length - 1 - state.pieces.findIndex(function (x) { return x.id === p.id; });
@@ -2392,6 +2403,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
           return {
             id: p.id, sku: p.sku, title: p.title || "", price: p.price || "",
             size: p.size || "", notes: p.notes || "", sold: !!p.sold,
+            kind: p.kind === "painting" ? "painting" : undefined,
             description: p.description || "", keywords: p.keywords || [],
             photos: p.photos.filter(function (ph) { return ph.file; })
               .map(function (ph) { return { file: ph.file, w: ph.w, h: ph.h }; })
