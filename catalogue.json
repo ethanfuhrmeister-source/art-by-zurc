@@ -4133,8 +4133,8 @@
       "id": "mw1i0rgovcss5",
       "sku": "ZC-0161",
       "title": "Home tweet home",
-      "price": "",
-      "size": "",
+      "price": "$125",
+      "size": "10\"x10\"",
       "notes": "",
       "sold": false,
       "kind": "painting",
@@ -4156,6 +4156,7 @@
       "size": "",
       "notes": "",
       "sold": false,
+      "kind": "painting",
       "description": "A small square canvas painting of a blue owl in a bowler hat, round red glasses and a bow tie, perched on a branch against a soft green background — a fun piece for a nursery or kid's room wall.",
       "keywords": [
         "painting",
