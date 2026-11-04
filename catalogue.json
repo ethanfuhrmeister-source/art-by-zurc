@@ -4011,7 +4011,7 @@
       "id": "mw1i0r4t1a4xo",
       "sku": "ZC-0157",
       "title": "A little snack",
-      "price": "",
+      "price": "$125",
       "size": "10\"x10\"",
       "notes": "",
       "sold": false,
@@ -4044,11 +4044,12 @@
     {
       "id": "mw1i0r7rs7ufe",
       "sku": "ZC-0158",
-      "title": "",
+      "title": "Hop, hop",
       "price": "",
       "size": "",
       "notes": "",
       "sold": false,
+      "kind": "painting",
       "description": "A small square canvas painted with a yellow leaping bunny with a fluffy white tail, hopping over green grass and little red flowers on a soft cream background \\u2014 a sweet piece for a nursery or child's room wall.",
       "keywords": [
         "painting",
