@@ -2143,7 +2143,7 @@
       "id": "mw1deomiy77v9",
       "sku": "ZC-0099",
       "title": "The Mended Heart",
-      "price": "$325",
+      "price": "$225",
       "size": "W: 16\"x20\"",
       "notes": "",
       "sold": false,
@@ -2209,11 +2209,12 @@
     {
       "id": "mw1dep2k87gz4",
       "sku": "ZC-0101",
-      "title": "",
+      "title": "Love",
       "price": "",
       "size": "",
       "notes": "",
       "sold": false,
+      "kind": "painting",
       "description": "A framed mixed-media collage painting of a big red patterned heart with the word LOVE across it, a smaller bright red heart stitched on top, and a row of little painted flowers along the bottom on a soft gold-green background — made to hang on a wall.",
       "keywords": [
         "mixed media",
