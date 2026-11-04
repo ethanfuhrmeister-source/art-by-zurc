@@ -790,6 +790,17 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   var state = JSON.parse(JSON.stringify(DEFAULT_STATE));
   var root = document.getElementById("root");
   var filter = "pottery";
+  /* What a piece is: [stored kind, catalogue tab, tab label, studio label].
+     Pottery is stored as no kind at all, so older pieces need nothing. */
+  var KINDS = [
+    ["", "pottery", "Handmade pottery", "Handmade pottery"],
+    ["painting", "paintings", "Mixed media paintings", "Mixed media painting"],
+    ["flowers", "flowers", "Flower arrangements", "Flower arrangement"]
+  ];
+  function kindOf(v) {
+    for (var i = 1; i < KINDS.length; i++) if (v === KINDS[i][0]) return v;
+    return "";
+  }
   var searchQ = "";
   var viewPiece = -1, viewPhoto = 0;
   var studioOpen = false, studioView = "list", editingId = null;
@@ -830,7 +841,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
           size: p.size || "",
           notes: p.notes || "",
           sold: p.sold === true,
-          kind: p.kind === "painting" ? "painting" : "",
+          kind: kindOf(p.kind),
           description: p.description || "",
           keywords: Array.isArray(p.keywords) ? p.keywords : [],
           photos: (Array.isArray(p.photos) ? p.photos : []).map(function (ph) {
@@ -973,16 +984,22 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   function visible() {
     return state.pieces.filter(function (p) {
       if (filter === "sold") return p.sold;
-      if (filter === "paintings") return p.kind === "painting" && !p.sold;
-      return p.kind !== "painting" && !p.sold;
+      if (p.sold) return false;
+      for (var i = 0; i < KINDS.length; i++) if (KINDS[i][1] === filter) return kindOf(p.kind) === KINDS[i][0];
+      return kindOf(p.kind) === "";
     });
   }
 
   function renderPage() {
     var list = visible();
     var soldCount = state.pieces.filter(function (p) { return p.sold; }).length;
-    var paintCount = state.pieces.filter(function (p) { return p.kind === "painting" && !p.sold; }).length;
-    if ((filter === "paintings" && !paintCount) || (filter === "sold" && !soldCount)) { filter = "pottery"; list = visible(); }
+    var counts = KINDS.map(function (k) {
+      return state.pieces.filter(function (p) { return !p.sold && kindOf(p.kind) === k[0]; }).length;
+    });
+    var others = counts.slice(1).reduce(function (a, n) { return a + n; }, 0);
+    var shown = KINDS.some(function (k, i) { return k[1] === filter && (i === 0 || counts[i]); }) ||
+                (filter === "sold" && soldCount);
+    if (!shown) { filter = "pottery"; list = visible(); }
     var h = "";
     h += '<header class="masthead">';
     h += '<button class="studio-link" id="open-studio">Studio</button>';
@@ -998,12 +1015,12 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       h += '<p class="findnote" id="q-count"></p>';
     }
 
-    /* Pottery and Paintings hold what is still for sale; Sold holds the rest.
-       Paintings appears once a piece is marked a painting in the studio, Sold
+    /* One tab per kind of work, holding what is still for sale; Sold holds the
+       rest. A kind's tab appears once a piece of that kind is for sale, Sold
        once something has sold. */
-    if (paintCount || soldCount) {
-      var tabs = [["pottery", "Pottery", state.pieces.length - paintCount - soldCount]];
-      if (paintCount) tabs.push(["paintings", "Paintings", paintCount]);
+    if (others || soldCount) {
+      var tabs = [];
+      KINDS.forEach(function (k, i) { if (i === 0 || counts[i]) tabs.push([k[1], k[2], counts[i]]); });
       if (soldCount) tabs.push(["sold", "Sold", soldCount]);
       h += '<div class="filters">';
       tabs.forEach(function (f) {
@@ -1747,9 +1764,10 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
          '<input type="text" id="e-title" value="' + esc(p.title || "") + '" placeholder="Tall vase, ash glaze">' +
          '<span class="hint">Shown on the catalogue next to the item number.</span></div>';
     h += '<div class="field"><label for="e-kind">Type</label><select id="e-kind">' +
-         '<option value=""' + (p.kind === "painting" ? "" : " selected") + '>Pottery</option>' +
-         '<option value="painting"' + (p.kind === "painting" ? " selected" : "") + '>Painting</option>' +
-         '</select><span class="hint">Paintings get their own tab on the catalogue.</span></div>';
+         KINDS.map(function (k) {
+           return '<option value="' + k[0] + '"' + (kindOf(p.kind) === k[0] ? " selected" : "") + ">" + esc(k[3]) + "</option>";
+         }).join("") +
+         '</select><span class="hint">Each type gets its own tab on the catalogue.</span></div>';
     h += '<div class="two">';
     h += '<div class="field"><label for="e-price">Price</label>';
     if (useApi()) {
@@ -1847,7 +1865,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     var nbtn = el.querySelector("#e-note");
     if (nbtn) nbtn.addEventListener("click", function () { writeNote(p, el); });
     el.querySelector("#e-sold").addEventListener("change", function (e) { p.sold = e.target.checked; touch(true); });
-    el.querySelector("#e-kind").addEventListener("change", function (e) { p.kind = e.target.value === "painting" ? "painting" : ""; touch(true); });
+    el.querySelector("#e-kind").addEventListener("change", function (e) { p.kind = kindOf(e.target.value); touch(true); });
 
     el.querySelector("#e-del").addEventListener("click", function () {
       var after = state.pieces.length - 1 - state.pieces.findIndex(function (x) { return x.id === p.id; });
@@ -2404,7 +2422,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
           return {
             id: p.id, sku: p.sku, title: p.title || "", price: p.price || "",
             size: p.size || "", notes: p.notes || "", sold: !!p.sold,
-            kind: p.kind === "painting" ? "painting" : undefined,
+            kind: kindOf(p.kind) || undefined,
             description: p.description || "", keywords: p.keywords || [],
             photos: p.photos.filter(function (ph) { return ph.file; })
               .map(function (ph) { return { file: ph.file, w: ph.w, h: ph.h }; })
