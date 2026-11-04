@@ -3348,8 +3348,22 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
+      "description": "A small square canvas painting of a city skyline reflected in water, worked in dark greys and blacks with red drips running down the lower half, signed in the bottom right corner — ready to hang or stand on a shelf.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "small square",
+        "cityscape",
+        "skyline",
+        "reflection",
+        "red",
+        "black",
+        "grey",
+        "acrylic",
+        "signed",
+        "wall art",
+        "decorative"
+      ],
       "photos": [
         {
           "file": "photos/2026-11-04-zc-0137-mw1g3s0bk5e1x.jpg",
@@ -3384,9 +3398,28 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
-      "photos": []
+      "description": "A small square canvas painting of a woman's face in simple line work, with a mint green and dusty rose background, signed in the corner and ready to hang or stand on a shelf.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "portrait",
+        "face",
+        "mint green",
+        "pink",
+        "red lips",
+        "small art",
+        "wall art",
+        "decorative",
+        "signed",
+        "square"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0139-mw1g3svubwtea.jpg",
+          "w": 1300,
+          "h": 1293
+        }
+      ]
     },
     {
       "id": "mw1g3t0myvjqp",
@@ -3396,9 +3429,30 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "description": "",
-      "keywords": [],
-      "photos": []
+      "description": "A small square painting on canvas called \"The Dance\" — a crowd of little black stick figures moving together on a smoky dark patch, set against a warm coral-red background, signed in the corner and ready to hang or stand on a shelf.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "small square",
+        "red",
+        "coral",
+        "black figures",
+        "stick figures",
+        "dance",
+        "signed",
+        "wall art",
+        "decorative",
+        "acrylic",
+        "figurative",
+        "crowd"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0140-mw1g3t0mxy4r8.jpg",
+          "w": 1572,
+          "h": 1600
+        }
+      ]
     }
   ]
 }
