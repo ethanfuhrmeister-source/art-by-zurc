@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 104,
+  "nextSku": 116,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -2306,6 +2306,399 @@
           "file": "photos/2026-11-04-zc-0103-mw1depe6av2k3.jpg",
           "w": 977,
           "h": 1164
+        }
+      ]
+    },
+    {
+      "id": "mw1dxvc5f7k4n",
+      "sku": "ZC-0104",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A small square canvas painting of a stylised woman with dark upswept hair, closed eyes and red lips, set against a soft grey-blue washed background — one for hanging on a wall.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "portrait",
+        "woman",
+        "face",
+        "grey",
+        "blue",
+        "black hair",
+        "red lips",
+        "acrylic",
+        "wall art",
+        "decorative",
+        "square",
+        "figurative"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0104-mw1dxvc5gd9xm.jpg",
+          "w": 1289,
+          "h": 1300
+        }
+      ]
+    },
+    {
+      "id": "mw1dxvhpgtpv6",
+      "sku": "ZC-0105",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A square painted canvas showing a stylish woman in a black and white striped turtleneck with a mustard yellow beret, round sunglasses, big hoop earring and red lips, set against a soft grey brushed background — a ready-to-hang wall piece.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "portrait",
+        "woman",
+        "black and white",
+        "stripes",
+        "mustard yellow",
+        "grey background",
+        "sunglasses",
+        "fashion",
+        "wall art",
+        "decorative",
+        "square",
+        "acrylic"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0105-mw1dxvhpres7c.jpg",
+          "w": 1600,
+          "h": 1576
+        }
+      ]
+    },
+    {
+      "id": "mw1dxvtghqitg",
+      "sku": "ZC-0106",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A small square canvas painting of a woman with a blonde bob, blue eyes and red lips resting her chin on her hand, worked in soft muted oranges, blues and greys — a ready-to-hang piece for a wall.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "portrait",
+        "woman",
+        "face",
+        "blonde",
+        "blue eyes",
+        "red lips",
+        "orange",
+        "muted",
+        "textured",
+        "square",
+        "wall art",
+        "decorative"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0106-mw1dxvtg29fkz.jpg",
+          "w": 1289,
+          "h": 1300
+        }
+      ]
+    },
+    {
+      "id": "mw1dxw52ta4ql",
+      "sku": "ZC-0107",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "This is a square painting on canvas rather than a pot \"\" a portrait of a woman with long black hair resting her chin on her hand, wearing a mustard-yellow jacket over a green floral dress with red flowers, painted in muted earthy colours with a pale textured background, ready to hang on a wall.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "portrait",
+        "woman",
+        "figurative",
+        "black hair",
+        "yellow",
+        "green",
+        "red flowers",
+        "folk art",
+        "wall art",
+        "decorative",
+        "square"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0107-mw1dxw52nqy32.jpg",
+          "w": 1275,
+          "h": 1300
+        }
+      ]
+    },
+    {
+      "id": "mw1dxwgjrnwwm",
+      "sku": "ZC-0108",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A small square canvas painting of a woman with a black bob haircut, green eyes and red lips, wearing a grey polka-dot top against a soft green and pink background — signed in the bottom right and ready to hang.",
+      "keywords": [
+        "painting",
+        "portrait",
+        "woman",
+        "canvas",
+        "acrylic",
+        "black bob",
+        "green eyes",
+        "red lips",
+        "polka dot",
+        "pink",
+        "green",
+        "pastel background",
+        "wall art",
+        "decorative",
+        "signed"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0108-mw1dxwgjtfsn2.jpg",
+          "w": 1291,
+          "h": 1300
+        }
+      ]
+    },
+    {
+      "id": "mw1dxws0e43zv",
+      "sku": "ZC-0109",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A small square painting on canvas of a dark-haired woman with pink flower earrings and an embroidered striped jacket, done in soft greens and yellows — one to hang on the wall.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "portrait",
+        "woman",
+        "green",
+        "yellow",
+        "pink",
+        "flowers",
+        "figurative",
+        "wall art",
+        "decorative",
+        "square",
+        "folk art"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0109-mw1dxws0uae8q.jpg",
+          "w": 1300,
+          "h": 1282
+        }
+      ]
+    },
+    {
+      "id": "mw1dxx406sx4u",
+      "sku": "ZC-0110",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A square canvas painting of a woman's head in profile, built from flat geometric facets in ochre, rust, blue and black against a warm yellow background, with a red lip and a big drop earring \\u2014 ready to hang on a wall.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "portrait",
+        "woman",
+        "profile",
+        "yellow",
+        "ochre",
+        "rust",
+        "blue",
+        "black",
+        "geometric",
+        "cubist",
+        "wall art",
+        "decorative"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0110-mw1dxx40vqxzn.jpg",
+          "w": 1300,
+          "h": 1279
+        }
+      ]
+    },
+    {
+      "id": "mw1dxxfyzy98i",
+      "sku": "ZC-0111",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A square painting on canvas of a woman in a wide-brimmed dark blue hat, with long black hair, green eyes and bright red lips, set against a soft cream and pale background — ready to hang on the wall.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "portrait",
+        "woman",
+        "hat",
+        "red lips",
+        "blue",
+        "cream",
+        "black hair",
+        "wall art",
+        "decorative",
+        "square",
+        "figurative"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0111-mw1dxxfygc4tb.jpg",
+          "w": 1296,
+          "h": 1300
+        }
+      ]
+    },
+    {
+      "id": "mw1dxxr25ky0z",
+      "sku": "ZC-0112",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A square painted canvas portrait of a woman with a large black afro, gold hoop earrings and red lips against a soft grey background, ready to hang on the wall.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "portrait",
+        "wall art",
+        "black",
+        "grey",
+        "gold",
+        "red",
+        "afro",
+        "woman",
+        "acrylic",
+        "decorative",
+        "square",
+        "figurative"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0112-mw1dxxr2g4o8q.jpg",
+          "w": 1300,
+          "h": 1276
+        }
+      ]
+    },
+    {
+      "id": "mw1dxy2s8i6jr",
+      "sku": "ZC-0113",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A square painting on canvas of a woman's face in close-up, with grey bobbed hair, big orange-framed sunglasses and red lips holding a lit cigarette, painted in warm ochres and creams with visible brushwork — a wall piece, ready to hang.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "portrait",
+        "woman",
+        "face",
+        "orange",
+        "red",
+        "grey",
+        "ochre",
+        "sunglasses",
+        "cigarette",
+        "wall art",
+        "decorative",
+        "figurative"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0113-mw1dxy2s4vqsf.jpg",
+          "w": 1271,
+          "h": 1300
+        }
+      ]
+    },
+    {
+      "id": "mw1dxye4gw33g",
+      "sku": "ZC-0114",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A small square painting on canvas of a woman with a blue bob haircut, big round yellow sunglasses and bright red lips, wearing a blue turtleneck against a soft green background — ready to hang or prop on a shelf.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "portrait",
+        "woman",
+        "blue",
+        "green",
+        "yellow",
+        "red lips",
+        "sunglasses",
+        "retro",
+        "mod",
+        "square",
+        "wall art",
+        "decorative"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0114-mw1dxye4r0iwf.jpg",
+          "w": 1300,
+          "h": 1263
+        }
+      ]
+    },
+    {
+      "id": "mw1dxypk2ds84",
+      "sku": "ZC-0115",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A square canvas painting of a woman in a black headscarf, dark sunglasses and a black leather biker jacket, set against a warm gold background, ready to hang on the wall.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "portrait",
+        "gold",
+        "black",
+        "acrylic",
+        "square",
+        "wall art",
+        "decorative",
+        "figurative",
+        "sunglasses",
+        "headscarf",
+        "leather jacket"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0115-mw1dxypkifmlf.jpg",
+          "w": 1288,
+          "h": 1300
         }
       ]
     }
