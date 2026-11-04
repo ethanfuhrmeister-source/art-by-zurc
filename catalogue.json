@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 149,
+  "nextSku": 150,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -3732,6 +3732,39 @@
           "file": "photos/2026-11-04-zc-0148-mw1h3167fsrkb.jpg",
           "w": 1300,
           "h": 1032
+        }
+      ]
+    },
+    {
+      "id": "mw1hjalzuwlac",
+      "sku": "ZC-0149",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A long horizontal painting on canvas showing seven tall, thin figures in stripes and spots standing in a row against a soft green and ochre background, with a big red circle behind the middle figure — a wall piece for hanging.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "wall art",
+        "figures",
+        "folk art",
+        "whimsical",
+        "green",
+        "red",
+        "ochre",
+        "muted",
+        "horizontal",
+        "decorative",
+        "hanging",
+        "stripes"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0149-mw1hjalzjdrfq.jpg",
+          "w": 1600,
+          "h": 826
         }
       ]
     }
