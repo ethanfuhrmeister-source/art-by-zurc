@@ -3976,11 +3976,12 @@
     {
       "id": "mw1i0r1qinf8p",
       "sku": "ZC-0156",
-      "title": "",
-      "price": "",
-      "size": "",
+      "title": "Happiness on a string ",
+      "price": "$95",
+      "size": "10\"x10\"",
       "notes": "",
       "sold": false,
+      "kind": "painting",
       "description": "A small square canvas painted with a soft pink and cream wash, showing a fuzzy yellow chick holding a red balloon beside a patch of flowers made from bright button-like blooms in green, orange, pink and purple — a cheerful piece for a nursery or child's room wall.",
       "keywords": [
         "canvas",
@@ -4009,11 +4010,12 @@
     {
       "id": "mw1i0r4t1a4xo",
       "sku": "ZC-0157",
-      "title": "",
+      "title": "A little snack",
       "price": "",
-      "size": "",
+      "size": "10\"x10\"",
       "notes": "",
       "sold": false,
+      "kind": "painting",
       "description": "A small square canvas painting of a friendly orange giraffe nibbling green bamboo leaves, with purple flowers to one side and a soft mottled peach background — a cheerful piece for a child's room or nursery wall.",
       "keywords": [
         "painting",
