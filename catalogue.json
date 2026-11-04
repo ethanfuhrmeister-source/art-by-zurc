@@ -3119,9 +3119,10 @@
       "sku": "ZC-0128",
       "title": "Friends",
       "price": "",
-      "size": "",
+      "size": "16\"x20\"",
       "notes": "",
       "sold": false,
+      "kind": "painting",
       "description": "",
       "keywords": [],
       "photos": [
