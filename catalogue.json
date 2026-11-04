@@ -3671,7 +3671,7 @@
       "id": "mw1h30pg4al9f",
       "sku": "ZC-0147",
       "title": "The road less traveled",
-      "price": "",
+      "price": "$145",
       "size": "8\"x10\"",
       "notes": "",
       "sold": false,
@@ -3709,6 +3709,7 @@
       "size": "",
       "notes": "",
       "sold": false,
+      "kind": "painting",
       "description": "A small painting on canvas of a girl in a red top climbing a tall red ladder to reach the crescent moon, with blue clouds above and a field of little flowers below, in soft pinks, greys and greens — ready to hang on a wall.",
       "keywords": [
         "painting",
