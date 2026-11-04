@@ -789,7 +789,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
 
   var state = JSON.parse(JSON.stringify(DEFAULT_STATE));
   var root = document.getElementById("root");
-  var filter = "all";
+  var filter = "pottery";
   var searchQ = "";
   var viewPiece = -1, viewPhoto = 0;
   var studioOpen = false, studioView = "list", editingId = null;
@@ -972,18 +972,15 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
 
   function visible() {
     return state.pieces.filter(function (p) {
-      if (filter === "available") return !p.sold;
-      if (filter === "sold") return p.sold;
       if (filter === "paintings") return p.kind === "painting";
-      return true;
+      return p.kind !== "painting";
     });
   }
 
   function renderPage() {
     var list = visible();
-    var soldCount = state.pieces.filter(function (p) { return p.sold; }).length;
     var paintCount = state.pieces.filter(function (p) { return p.kind === "painting"; }).length;
-    if (filter === "paintings" && !paintCount) { filter = "all"; list = visible(); }
+    if (filter === "paintings" && !paintCount) { filter = "pottery"; list = visible(); }
     var h = "";
     h += '<header class="masthead">';
     h += '<button class="studio-link" id="open-studio">Studio</button>';
@@ -999,11 +996,10 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       h += '<p class="findnote" id="q-count"></p>';
     }
 
-    /* The Paintings tab appears once a piece is marked a painting in the studio. */
-    if ((soldCount || paintCount) && state.pieces.length) {
-      var tabs = [["all", "Everything", state.pieces.length]];
-      if (paintCount) tabs.push(["paintings", "Paintings", paintCount]);
-      if (soldCount) tabs.push(["available", "Available", state.pieces.length - soldCount], ["sold", "Sold", soldCount]);
+    /* Two tabs, Pottery and Paintings, once a piece is marked a painting in the
+       studio. Until then everything is pottery and no tabs are needed. */
+    if (paintCount) {
+      var tabs = [["pottery", "Pottery", state.pieces.length - paintCount], ["paintings", "Paintings", paintCount]];
       h += '<div class="filters">';
       tabs.forEach(function (f) {
         h += '<button class="chip" data-filter="' + f[0] + '" aria-pressed="' +
