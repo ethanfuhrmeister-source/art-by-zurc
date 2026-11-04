@@ -3639,9 +3639,10 @@
       "sku": "ZC-0146",
       "title": "Under the sea",
       "price": "",
-      "size": "",
+      "size": "8\"x10\"",
       "notes": "",
       "sold": false,
+      "kind": "painting",
       "description": "A small painted canvas showing three patterned fish swimming past blue seaweed and a school of tiny fish, in muted greens, blues, orange and pink — meant to hang on a wall.",
       "keywords": [
         "painting",
