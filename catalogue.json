@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 99,
+  "nextSku": 104,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -2136,6 +2136,172 @@
           "file": "photos/2026-10-24-zc-0098-mvmpc6zo6lhcp.jpg",
           "w": 1600,
           "h": 1032
+        }
+      ]
+    },
+    {
+      "id": "mw1deomiy77v9",
+      "sku": "ZC-0099",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "kind": "painting",
+      "description": "A framed mixed-media painting of a big red and black heart stitched together with black cross-stitches and a colourful patch, set against a soft green background with a flowering branch — made to hang on a wall.",
+      "keywords": [
+        "painting",
+        "mixed media",
+        "heart",
+        "red",
+        "black",
+        "green",
+        "stitched",
+        "patch",
+        "floral branch",
+        "framed",
+        "wall art",
+        "decorative",
+        "canvas"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0099-mw1deomiyrx4h.jpg",
+          "w": 1324,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mw1deoug9sy1a",
+      "sku": "ZC-0100",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A framed painting on canvas of a big heart in deep red and blue, stitched down the middle with gold cross-stitch marks, with a little fish and flowers worked around it on a soft mottled grey-pink background — one to hang on the wall.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "framed",
+        "wall art",
+        "heart",
+        "red",
+        "blue",
+        "grey",
+        "flowers",
+        "fish",
+        "stitching",
+        "folk art",
+        "decorative",
+        "mixed media"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0100-mw1deougfftqe.jpg",
+          "w": 1318,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mw1dep2k87gz4",
+      "sku": "ZC-0101",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A framed mixed-media collage painting of a big red patterned heart with the word LOVE across it, a smaller bright red heart stitched on top, and a row of little painted flowers along the bottom on a soft gold-green background — made to hang on a wall.",
+      "keywords": [
+        "mixed media",
+        "collage",
+        "heart",
+        "love",
+        "red",
+        "black",
+        "gold",
+        "framed",
+        "wall art",
+        "textile",
+        "stitched",
+        "flowers",
+        "decorative",
+        "valentine",
+        "romantic"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0101-mw1dep2kkiy7h.jpg",
+          "w": 1600,
+          "h": 1285
+        }
+      ]
+    },
+    {
+      "id": "mw1depblad1sq",
+      "sku": "ZC-0102",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A framed mixed-media painting on canvas of a big deep red heart covered in branching lines, leaves and flowers, with small stitched and beaded flowers and little gear shapes adding texture, set against a soft grey background — a wall piece for hanging.",
+      "keywords": [
+        "painting",
+        "mixed media",
+        "framed art",
+        "heart",
+        "red",
+        "grey",
+        "floral",
+        "botanical",
+        "textured",
+        "embroidery",
+        "wall art",
+        "decorative",
+        "canvas",
+        "black frame"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0102-mw1depblf0o8c.jpg",
+          "w": 1600,
+          "h": 1292
+        }
+      ]
+    },
+    {
+      "id": "mw1depe6e5xgy",
+      "sku": "ZC-0103",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A framed mixed-media painting on canvas of a big deep-red heart filled with feathers, flowers, mushrooms and bright orange and yellow brushwork, set against a mottled green and gold background — a one-off wall piece ready to hang.",
+      "keywords": [
+        "painting",
+        "mixed media",
+        "canvas",
+        "heart",
+        "red",
+        "green",
+        "gold",
+        "feathers",
+        "mushrooms",
+        "flowers",
+        "framed",
+        "wall art",
+        "decorative",
+        "textured"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-04-zc-0103-mw1depe6av2k3.jpg",
+          "w": 977,
+          "h": 1164
         }
       ]
     }
