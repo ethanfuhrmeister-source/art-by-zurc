@@ -3332,11 +3332,12 @@
     {
       "id": "mw1g3ros0bbxs",
       "sku": "ZC-0136",
-      "title": "",
+      "title": "Hidding",
       "price": "",
-      "size": "",
+      "size": "5\"x5\"",
       "notes": "",
       "sold": false,
+      "kind": "painting",
       "description": "",
       "keywords": [],
       "photos": [
