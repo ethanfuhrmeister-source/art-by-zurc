@@ -2142,10 +2142,10 @@
     {
       "id": "mw1deomiy77v9",
       "sku": "ZC-0099",
-      "title": "",
-      "price": "",
+      "title": "The Mended Heart",
+      "price": "$325",
       "size": "W: 16\"x20\"",
-      "notes": "Framed painting of a dark red heart stitched with black crosses, on a green ground with a flowering branch.",
+      "notes": "",
       "sold": false,
       "kind": "painting",
       "description": "A framed mixed-media painting of a big red and black heart stitched together with black cross-stitches and a colourful patch, set against a soft green background with a flowering branch — made to hang on a wall.",
@@ -2180,7 +2180,6 @@
       "size": "",
       "notes": "",
       "sold": false,
-      "kind": "painting",
       "description": "A framed painting on canvas of a big heart in deep red and blue, stitched down the middle with gold cross-stitch marks, with a little fish and flowers worked around it on a soft mottled grey-pink background — one to hang on the wall.",
       "keywords": [
         "painting",
