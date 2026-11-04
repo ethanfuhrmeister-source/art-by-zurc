@@ -3194,9 +3194,10 @@
       "sku": "ZC-0131",
       "title": "",
       "price": "",
-      "size": "",
+      "size": "5\"x5\"",
       "notes": "",
       "sold": false,
+      "kind": "painting",
       "description": "A small square canvas painting of a misty evergreen forest with a lone deer standing at the edge of a snowy clearing, done in soft greys, greens and browns, ready to hang or sit on a shelf.",
       "keywords": [
         "painting",
