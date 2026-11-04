@@ -2751,11 +2751,12 @@
     {
       "id": "mw1e0q7xm9tu0",
       "sku": "ZC-0117",
-      "title": "",
+      "title": "The part you don't see",
       "price": "",
       "size": "",
       "notes": "",
       "sold": false,
+      "kind": "painting",
       "description": "A framed abstract painting of a woman's face emerging from layered, drippy grey, olive and rust brushwork, with one striking blue eye and dark red lips, ready to hang on a wall.",
       "keywords": [
         "painting",
