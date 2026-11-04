@@ -3875,7 +3875,7 @@
       "id": "mw1hnq4hfzix1",
       "sku": "ZC-0153",
       "title": "Hen Solo",
-      "price": "",
+      "price": "$125",
       "size": "12\"x12\"",
       "notes": "",
       "sold": false,
@@ -3913,6 +3913,7 @@
       "size": "",
       "notes": "",
       "sold": false,
+      "kind": "painting",
       "description": "A small square canvas painting of a party llama wearing sunglasses and a striped party hat, with fabric bunting flags glued across the top and a soft mottled green background — ready to hang on a wall.",
       "keywords": [
         "painting",
