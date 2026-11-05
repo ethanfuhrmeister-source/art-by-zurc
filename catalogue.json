@@ -2988,10 +2988,10 @@
       "id": "mw1e0rk6e5imv",
       "sku": "ZC-0124",
       "title": "Urban Solitude",
-      "price": "$250",
+      "price": "$125",
       "size": "16\"x20\"",
       "notes": "",
-      "sold": false,
+      "sold": true,
       "kind": "painting",
       "description": "A framed abstract painting on canvas in moody greys, blacks and warm golden ochre with a band of olive green across the bottom and two small flashes of red, finished in a simple black frame and ready to hang.",
       "keywords": [
