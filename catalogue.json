@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 167,
+  "nextSku": 168,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -4300,6 +4300,38 @@
         {
           "file": "photos/2026-11-08-zc-0166-mw8bw5jrrlujm.jpg",
           "w": 1070,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mw8bwl1bf545g",
+      "sku": "ZC-0167",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "A framed wall piece where a length of clay has been draped and folded like fabric across a pale cream panel, finished in a soft off-white satin glaze and set in a simple black frame for hanging.",
+      "keywords": [
+        "wall piece",
+        "framed",
+        "sculptural",
+        "draped",
+        "folded",
+        "cream",
+        "off-white",
+        "satin glaze",
+        "black frame",
+        "decorative",
+        "wall art",
+        "relief",
+        "neutral"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-08-zc-0167-mw8bwl1bst1by.jpg",
+          "w": 1249,
           "h": 1600
         }
       ]
