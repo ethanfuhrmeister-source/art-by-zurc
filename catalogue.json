@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 165,
+  "nextSku": 170,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -481,7 +481,7 @@
       "id": "mu63z81kg07yo",
       "sku": "ZC-0027",
       "title": "Garden Nest Small Plate with Spoon",
-      "price": "$40",
+      "price": "$30",
       "size": "W: 5\" H:1\"",
       "notes": "Small green plate with a matching spoon. Food safe, Dishwasher safe, Oven safe.",
       "sold": false,
@@ -3509,7 +3509,7 @@
       "id": "mw1h2yr0sqhq2",
       "sku": "ZC-0142",
       "title": "Unexpected encounter",
-      "price": "$75",
+      "price": "$65",
       "size": "8\"x10\"",
       "notes": "",
       "sold": false,
@@ -3543,7 +3543,7 @@
       "id": "mw1h2z2tk0090",
       "sku": "ZC-0143",
       "title": "Where happiness grow ",
-      "price": "$75",
+      "price": "$65",
       "size": "8\"x10\"",
       "notes": "",
       "sold": false,
@@ -3644,7 +3644,7 @@
       "id": "mw1h309sjmvyj",
       "sku": "ZC-0146",
       "title": "Under the sea",
-      "price": "$80",
+      "price": "$65",
       "size": "8\"x10\"",
       "notes": "",
       "sold": false,
@@ -3677,7 +3677,7 @@
       "id": "mw1h30pg4al9f",
       "sku": "ZC-0147",
       "title": "The road less traveled",
-      "price": "$85",
+      "price": "$65",
       "size": "8\"x10\"",
       "notes": "",
       "sold": false,
@@ -3711,7 +3711,7 @@
       "id": "mw1h3167yr39e",
       "sku": "ZC-0148",
       "title": "Reaching for dreams",
-      "price": "$85",
+      "price": "$65",
       "size": "8\"x10\"",
       "notes": "",
       "sold": false,
@@ -3950,7 +3950,7 @@
       "id": "mw1hnqdd6pg9f",
       "sku": "ZC-0155",
       "title": "Prickly but sweet",
-      "price": "$90",
+      "price": "$70",
       "size": "12\"x12\"",
       "notes": "",
       "sold": false,
@@ -4237,6 +4237,172 @@
         {
           "file": "photos/2026-11-06-zc-0164-mw59lz3a6p37k.jpg",
           "w": 1200,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mw8bz8zjz07nv",
+      "sku": "ZC-0165",
+      "title": "Inhale and Exhale",
+      "price": "$325",
+      "size": "31.5\" x 25.5\"",
+      "notes": "",
+      "sold": false,
+      "kind": "painting",
+      "description": "A pair of framed wall panels in matte white, with a heavily folded, crumpled surface that catches the light differently across the day — purely decorative pieces meant to hang together.",
+      "keywords": [
+        "wall art",
+        "diptych",
+        "panel",
+        "white",
+        "matte",
+        "textured",
+        "folded",
+        "relief",
+        "sculptural",
+        "framed",
+        "decorative",
+        "pair",
+        "monochrome"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-08-zc-0165-mw8bz8zi1wkzh.jpg",
+          "w": 1600,
+          "h": 1041
+        }
+      ]
+    },
+    {
+      "id": "mw8bzsvdgoluw",
+      "sku": "ZC-0166",
+      "title": "Time",
+      "price": "$325",
+      "size": "31.5\" x 25.5\"",
+      "notes": "",
+      "sold": false,
+      "kind": "painting",
+      "description": "A pair of framed abstract paintings in black, warm ochre and white, with bold geometric shapes and sharp angles, made to hang together on a wall.",
+      "keywords": [
+        "painting",
+        "diptych",
+        "abstract",
+        "geometric",
+        "black",
+        "white",
+        "ochre",
+        "mustard",
+        "wall art",
+        "framed",
+        "modern",
+        "decorative",
+        "pair"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-08-zc-0166-mw8bzsvdk52d5.jpg",
+          "w": 1600,
+          "h": 1015
+        }
+      ]
+    },
+    {
+      "id": "mw8c05cw36m4u",
+      "sku": "ZC-0167",
+      "title": "Kaleidoscope",
+      "price": "$165",
+      "size": "24\"x36\"",
+      "notes": "",
+      "sold": false,
+      "kind": "painting",
+      "description": "A large vertical canvas painted with rows of hand-drawn circles in soft greens, pinks, yellows, reds and blues on a pale sky-blue ground, with thick textured paint and white outlines, ready to hang on a wall.",
+      "keywords": [
+        "painting",
+        "canvas",
+        "wall art",
+        "circles",
+        "abstract",
+        "blue",
+        "multicolored",
+        "pastel",
+        "textured",
+        "decorative",
+        "vertical",
+        "colorful",
+        "hanging"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-08-zc-0167-mw8c05cwhmkpe.jpg",
+          "w": 1070,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mw8c0kc04ubcy",
+      "sku": "ZC-0168",
+      "title": "Wildwoods Falls",
+      "price": "$225",
+      "size": "31.5\"x25.5\"",
+      "notes": "",
+      "sold": false,
+      "kind": "painting",
+      "description": "A framed abstract painting in blacks, whites and greys with a bold red horizontal band across the middle, full of scratchy drips and texture, meant to hang on a wall.",
+      "keywords": [
+        "abstract painting",
+        "framed art",
+        "black",
+        "white",
+        "red",
+        "grey",
+        "textured",
+        "drips",
+        "wall art",
+        "decorative",
+        "monochrome",
+        "canvas",
+        "contemporary"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-08-zc-0168-mw8c0kc0pvlo2.jpg",
+          "w": 1036,
+          "h": 1300
+        }
+      ]
+    },
+    {
+      "id": "mw8c1d4nmg870",
+      "sku": "ZC-0169",
+      "title": "Unfolding",
+      "price": "$225",
+      "size": "26\"x32",
+      "notes": "",
+      "sold": false,
+      "kind": "painting",
+      "description": "A framed wall piece where a length of clay has been draped and folded like fabric across a pale cream panel, glazed in a soft satin grey-white that catches the light along every crease, set in a simple black frame for hanging.",
+      "keywords": [
+        "wall piece",
+        "framed",
+        "sculpture",
+        "drapery",
+        "folded clay",
+        "grey",
+        "cream",
+        "satin glaze",
+        "matte",
+        "decorative",
+        "relief",
+        "black frame",
+        "neutral",
+        "art"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-08-zc-0169-mw8c1d4nickop.jpg",
+          "w": 1249,
           "h": 1600
         }
       ]
