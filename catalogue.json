@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 167,
+  "nextSku": 166,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -4242,39 +4242,8 @@
       ]
     },
     {
-      "id": "mw8bw5jr3nwlg",
-      "sku": "ZC-0165",
-      "title": "",
-      "price": "",
-      "size": "",
-      "notes": "",
-      "sold": false,
-      "description": "A tall canvas painting covered in rows of hand-painted circles in many colours — greens, pinks, ochres, reds and blues — floating on a light sky-blue ground, with thick textured paint that catches the light; made to hang on a wall.",
-      "keywords": [
-        "painting",
-        "canvas",
-        "wall art",
-        "circles",
-        "abstract",
-        "blue",
-        "multicoloured",
-        "pastel",
-        "textured",
-        "decorative",
-        "vertical",
-        "colourful"
-      ],
-      "photos": [
-        {
-          "file": "photos/2026-11-08-zc-0166-mw8bw5jrrlujm.jpg",
-          "w": 1070,
-          "h": 1600
-        }
-      ]
-    },
-    {
       "id": "mw8bwl1bf545g",
-      "sku": "ZC-0166",
+      "sku": "ZC-0165",
       "title": "",
       "price": "",
       "size": "",
