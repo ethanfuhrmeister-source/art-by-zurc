@@ -805,7 +805,8 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   var viewPiece = -1, viewPhoto = 0;
   var studioOpen = false, studioView = "list", editingId = null;
   var printOpen = false, printCols = 3, printSold = true, printQr = true;
-  var busy = false, message = null, dirty = false;
+  var busy = false, message = null, dirty = false, edits = 0;
+  var describing = null, describeStop = false;  /* the queue of a description run in progress */
   var autoTimer = null, autoDeadline = 0, autoQueued = false, autoStatus = "", publishFailed = false;
   var catalogueVersion = null;
   var catalogueSha = null;   /* the version this device last saw, for conflict detection */
@@ -1495,6 +1496,18 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     h += '<span class="note">Photos, item numbers and QR codes on paper.</span></div>';
     h += "</div>";
 
+    var bare = undescribed().length;
+    if (useApi() && canPublish() && (describing || bare)) {
+      h += '<div class="block"><h3>Descriptions</h3><div class="inline">';
+      h += describing
+        ? '<button class="btn plain" id="s-describe-stop"' + (describeStop ? " disabled>Stopping…" : ">Stop") + "</button>" +
+          '<span class="note">Writing descriptions. What is done so far is already saved.</span>'
+        : '<button class="btn plain" id="s-describe">Write missing descriptions (' + bare + ")</button>" +
+          '<span class="note">Writes a sentence and search words for each piece from its photo, ' +
+          "about 15 seconds a piece. Each one is saved as it is done.</span>";
+      h += "</div></div>";
+    }
+
     if (useApi()) {
       h += '<div class="block"><h3>Square</h3>';
       h += '<div class="inline"><button class="btn plain" id="s-square">Send pieces to Square</button>';
@@ -1528,7 +1541,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
          "> Show prices on the catalogue</label>";
     h += "</div>";
 
-    if (message) h += '<p class="note' + (message.bad ? " warn" : "") + '">' + esc(message.text) + "</p>";
+    if (message) h += '<p class="note msg' + (message.bad ? " warn" : "") + '">' + esc(message.text) + "</p>";
 
     if (!useApi()) h += '<details class="help"><summary>Where does the token come from?</summary><ol>' +
          "<li>On github.com, open Settings → Developer settings → Personal access tokens → Fine-grained tokens.</li>" +
@@ -1666,6 +1679,10 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     if (rows) bindRows(rows);
 
     el.querySelector("#s-print").addEventListener("click", openPrint);
+    var ds = el.querySelector("#s-describe");
+    if (ds) ds.addEventListener("click", function () { ds.disabled = true; describeThese(undescribed()); });
+    var dx = el.querySelector("#s-describe-stop");
+    if (dx) dx.addEventListener("click", function () { describeStop = true; dx.disabled = true; dx.textContent = "Stopping…"; });
     var sq = el.querySelector("#s-square");
     var sqp = el.querySelector("#s-square-photos"), sqn = el.querySelector("#s-square-note");
     if (sq) sq.addEventListener("click", function () { sendToSquare([sq, sqp], sqn); });
@@ -1698,7 +1715,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     var n = el.querySelector(sel);
     if (n) n.addEventListener("input", function () { fn(n.value); touch(); });
   }
-  function touch(urgent) { dirty = true; refreshSaveBar(); scheduleAuto(urgent); }
+  function touch(urgent) { dirty = true; edits++; refreshSaveBar(); scheduleAuto(urgent); }
 
   /* Changes go up on their own once she stops for a moment, so edits are
      batched rather than one publish per keystroke. */
@@ -1796,7 +1813,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     h += '<p class="note">Sold pieces stay on the catalogue with a Sold mark.</p>';
     h += "</div>";
 
-    if (message) h += '<p class="note' + (message.bad ? " warn" : "") + '">' + esc(message.text) + "</p>";
+    if (message) h += '<p class="note msg' + (message.bad ? " warn" : "") + '">' + esc(message.text) + "</p>";
 
     h += '<div class="block"><h3>Remove</h3><div class="inline">' +
          '<button class="btn plain" id="e-del">Delete this piece</button>' +
@@ -1911,46 +1928,78 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
 
   /* ---------------- descriptions ---------------- */
   /* One pass over everything without a description. Each one is saved as it
-     arrives, so stopping halfway keeps what was already done. */
+     arrives, so stopping halfway keeps what was already done. One run at a
+     time: pieces added during a run join the end of it. */
+  function undescribed() {
+    return state.pieces.filter(function (p) { return cover(p) && !String(p.description || "").trim(); });
+  }
+  /* Progress goes into the message line in place, so a long run does not
+     rebuild the studio under her while she types. */
+  function say(text, bad) {
+    message = { text: text, bad: !!bad };
+    var n = document.querySelector("#studio .msg");
+    if (n) { n.className = "note msg" + (bad ? " warn" : ""); n.textContent = text; }
+    else if (studioOpen) renderStudio();
+  }
   function describeThese(todo) {
     todo = (todo || []).filter(function (p) { return cover(p); });
     if (!todo.length || !useApi() || !canPublish()) return;
-    var done = 0, failed = 0;
+    if (describing) {
+      todo.forEach(function (p) { if (describing.indexOf(p) < 0) describing.push(p); });
+      return;
+    }
+    describing = todo; describeStop = false;
+    var done = 0, failed = 0, halt = "";
+    if (studioOpen) renderStudio();
 
     (function next(i) {
-      if (i >= todo.length) {
-        message = {
-          text: failed
-            ? done + " described, " + failed + " could not be read."
-            : done + " described.",
-          bad: failed > 0
-        };
-        renderStudio();
+      if (i >= todo.length || describeStop || halt || !canPublish()) {
+        var left = todo.length - i;
+        describing = null; describeStop = false;
+        var sum = (halt ? halt + " " : left ? "Stopped. " : "") + done + " described" +
+                  (failed ? ", " + failed + " could not be read" : "") + (left ? ", " + left + " left." : ".");
+        /* A failed save says what to do next, so it stays in front. */
+        message = publishFailed && message && message.bad ? { text: message.text + " " + sum, bad: true }
+                : { text: sum, bad: !!(failed || halt) };
+        if (studioOpen) renderStudio();
         return;
       }
       var p = todo[i];
-      message = { text: "Describing " + (i + 1) + " of " + todo.length + " — " + p.sku + "…" };
-      renderStudio();
+      /* Deleted, or given a description by hand, since the run began. */
+      if (state.pieces.indexOf(p) < 0 || String(p.description || "").trim()) return next(i + 1);
+      say("Describing " + (i + 1) + " of " + todo.length + " — " + p.sku + "…");
       photoBase64(p, 600).then(function (b64) {
         return fetch(apiBase() + "/describe", {
           method: "POST",
           headers: { Authorization: "Bearer " + session(), "Content-Type": "application/json" },
           body: JSON.stringify({
             image: b64,
-            piece: { sku: p.sku, title: p.title || "", size: p.size || "", notes: p.notes || "" }
+            piece: { sku: p.sku, title: p.title || "", size: p.size || "", notes: p.notes || "", kind: kindOf(p.kind) }
           })
         });
       }).then(function (r) {
         return r.json().catch(function () { return {}; }).then(function (j) {
-          if (!r.ok) throw new Error(j.error || ("Failed (" + r.status + ")"));
+          if (!r.ok || !j.description) {
+            var e = new Error(j.error || ("Failed (" + r.status + ")")); e.status = r.status; throw e;
+          }
           return j;
         });
       }).then(function (j) {
-        p.description = j.description || "";
-        p.keywords = Array.isArray(j.keywords) ? j.keywords : [];
-        touch(); done++;
+        if (!String(p.description || "").trim()) {
+          p.description = j.description;
+          p.keywords = Array.isArray(j.keywords) ? j.keywords : [];
+          touch();
+        }
+        done++;
         next(i + 1);
-      }).catch(function () { failed++; next(i + 1); });
+      }).catch(function (err) {
+        failed++;
+        /* No point asking 80 more times if every answer will be the same. */
+        var st = err && err.status;
+        if (st === 401) { signOut(); studioView = "list"; halt = "Your session ran out. Sign in and press the button again to carry on."; }
+        else if (st === 501) halt = (err.message || "Descriptions are not set up.");
+        next(i + 1);
+      });
     })(0);
   }
 
@@ -2442,7 +2491,11 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     });
     var step = 0;
 
-    function progress(t) { message = { text: t }; renderStudio(); }
+    /* Autosaves report in the save bar only, so they neither rebuild the studio
+       while she types nor wipe a message such as a description run's result. */
+    function progress(t) {
+      if (quiet) { autoStatus = t; refreshSaveBar(); } else { message = { text: t }; renderStudio(); }
+    }
     progress(jobs.length ? "Uploading photos…" : "Publishing…");
 
     (function upload(i) {
@@ -2487,6 +2540,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       /* Last line of defence: compare against what is actually on the website
          and refuse to write anything that would drop pieces this device did
          not delete. This holds even if the version check is somehow missed. */
+      var sent = edits;
       saveCatalogue(data)
         .then(function () {
           var dead = pendingDeletes.slice();
@@ -2495,12 +2549,12 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         })
         .then(function () {
           busy = false;
-          dirty = false;
+          dirty = edits !== sent;  /* edits made while this was in flight still need saving */
           publishFailed = false;
           autoStatus = "On the website.";
           if (!quiet) message = { text: "Published. The website updates in about a minute." };
           renderStudio();
-          if (autoQueued) { autoQueued = false; scheduleAuto(); }
+          if (autoQueued || dirty) { autoQueued = false; scheduleAuto(); }
         })
         .catch(function (err) { fail(err); });
     }
@@ -2515,6 +2569,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         text = "The website has " + err.stale + " piece" + (err.stale > 1 ? "s" : "") +
                " this screen has not seen, so nothing was changed. Reloading — " +
                "make your change again afterwards.";
+        describeStop = true;
         setTimeout(function () { location.reload(); }, 3500);
       } else if (/401|sign in/i.test(m) && useApi()) {
         signOut();
@@ -2536,6 +2591,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         catalogueSha = null;
         text = "This was changed on another device. Reloading so you do not lose their work — " +
                "make your change again.";
+        describeStop = true;  /* what is already saved stays; the button picks up the rest */
         setTimeout(function () { location.reload(); }, 2500);
       } else {
         text = "Publishing stopped: " + m + ". Your work is still here — try again.";
