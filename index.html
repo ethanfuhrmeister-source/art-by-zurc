@@ -1498,7 +1498,8 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     if (useApi()) {
       h += '<div class="block"><h3>Square</h3>';
       h += '<div class="inline"><button class="btn plain" id="s-square">Send pieces to Square</button>';
-      h += '<span class="note" id="s-square-note">Adds what is for sale to the Square item library and takes out anything sold. ' +
+      h += '<button class="btn ghost small" id="s-square-photos">Send photos only</button>';
+      h += '<span class="note" id="s-square-note">Adds what is for sale to the Square item library, with photos, and takes out anything sold. ' +
            'A piece rung up in Square is marked sold here by itself.</span></div>';
       h += '<p class="note" id="s-sales" style="margin-top:.6rem"></p>';
       h += "</div>";
@@ -1666,7 +1667,9 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
 
     el.querySelector("#s-print").addEventListener("click", openPrint);
     var sq = el.querySelector("#s-square");
-    if (sq) sq.addEventListener("click", function () { sendToSquare(sq, el.querySelector("#s-square-note")); });
+    var sqp = el.querySelector("#s-square-photos"), sqn = el.querySelector("#s-square-note");
+    if (sq) sq.addEventListener("click", function () { sendToSquare([sq, sqp], sqn); });
+    if (sqp) sqp.addEventListener("click", function () { sendSquarePhotos([sq, sqp], sqn, ""); });
     var sales = el.querySelector("#s-sales");
     if (sales && session()) loadSales(sales);
 
@@ -2070,12 +2073,10 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     });
   }
 
-  /* Square reads the published catalogue, so unpublished edits would not reach it. */
-  function sendToSquare(btn, note) {
-    if (dirty) { note.textContent = "Publish your changes first, then send to Square."; return; }
-    btn.disabled = true;
-    note.textContent = "Sending to Square…";
-    fetch(apiBase() + "/square-sync", {
+  /* Square reads the published catalogue, so unpublished edits would not reach it.
+     btns holds both Square buttons; they stay disabled until the photo step ends. */
+  function squarePost(path) {
+    return fetch(apiBase() + path, {
       method: "POST",
       headers: { Authorization: "Bearer " + session(), "Content-Type": "application/json" }
     }).then(function (r) {
@@ -2083,14 +2084,53 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         if (!r.ok) throw new Error(j.error || ("Could not reach Square (" + r.status + ")"));
         return j;
       });
-    }).then(function (j) {
-      note.textContent = "Done. " + (j.pushed || 0) + " piece" + (j.pushed === 1 ? "" : "s") + " for sale in Square" +
+    });
+  }
+  function squareBusy(btns, on) { btns.forEach(function (b) { if (b) b.disabled = on; }); }
+  function sendToSquare(btns, note) {
+    if (dirty) { note.textContent = "Publish your changes first, then send to Square."; return; }
+    squareBusy(btns, true);
+    note.textContent = "Sending to Square…";
+    squarePost("/square-sync").then(function (j) {
+      var head = "Done. " + (j.pushed || 0) + " piece" + (j.pushed === 1 ? "" : "s") + " for sale in Square" +
         (j.removed ? ", " + j.removed + " sold piece" + (j.removed === 1 ? "" : "s") + " taken out." : ".");
-      btn.disabled = false;
+      sendSquarePhotos(btns, note, head + " ");
     }).catch(function (err) {
       note.textContent = String((err && err.message) || err);
-      btn.disabled = false;
+      squareBusy(btns, false);
     });
+  }
+
+  /* The service uploads about 10 cover photos per call (Cloudflare limits outside
+     calls per request), so keep calling until none are left. */
+  function sendSquarePhotos(btns, note, head) {
+    var sent = 0, failed = [], last = -1;
+    squareBusy(btns, true);
+    note.textContent = head + "Photos: sending…";
+    note.removeAttribute("title");
+    function finish(msg) {
+      var f = failed.length ? " Failed: " + failed.map(function (x) { return x.sku; }).join(", ") + "." : "";
+      note.textContent = head + msg + f;
+      if (failed.length) note.title = failed.map(function (x) { return x.sku + ": " + (x.reason || "failed"); }).join("\n");
+      squareBusy(btns, false);
+    }
+    function step() {
+      squarePost("/square-photos").then(function (j) {
+        var up = j.uploaded || 0, left = j.left || 0;
+        sent += up;
+        (j.failed || []).forEach(function (x) {
+          if (x && x.sku && !failed.some(function (y) { return y.sku === x.sku; })) failed.push(x);
+        });
+        if (!left) return finish("Photos: " + sent + " sent, none left.");
+        if (!up && left === last) return finish("Photos: " + sent + " sent, " + left + " still without one. Stopped because nothing more would upload.");
+        last = left;
+        note.textContent = head + "Photos: " + sent + " sent, " + left + " left…";
+        step();
+      }).catch(function (err) {
+        finish("Photos: " + sent + " sent, then stopped: " + String((err && err.message) || err) + ".");
+      });
+    }
+    step();
   }
 
   function suggestPrice(p, el) {
