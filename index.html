@@ -811,6 +811,8 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   var catalogueVersion = null;
   var catalogueSha = null;   /* the version this device last saw, for conflict detection */
   var seenStamp = "", watchTimer = null;
+  var seenData = null;     /* the catalogue as the service held it at catalogueVersion */
+  var reloading = false;
   var deletedKeys = [];   /* pieces this session deliberately removed */
   var WATCH_EVERY = 15000;
   /* Saving no longer rebuilds the website, so this wait is only about not
@@ -897,6 +899,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       .then(function (c) {
         seenStamp = fingerprint(c.text);
         catalogueVersion = c.version;
+        seenData = JSON.parse(c.text);
         normalise(JSON.parse(c.text));
         renderPage(); openFromHash(); watch();
       })
@@ -936,23 +939,37 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     fetchCatalogue()
       .then(function (c) {
         var txt = c && c.text;
-        if (!txt) return;
-        catalogueVersion = c.version;
+        /* A save started meanwhile, or the service missed and this is the backup file. */
+        if (!txt || busy || (useApi() && c.version == null)) return;
         var f = fingerprint(txt);
-        if (!seenStamp) { seenStamp = f; return; }
+        if (!seenStamp) { seenStamp = f; seenData = JSON.parse(txt); catalogueVersion = c.version; return; }
         if (f === seenStamp) return;
         seenStamp = f;
+        if (c.version != null && c.version === catalogueVersion) return;  /* our own save */
 
-        /* Never throw away work that only exists on this screen. */
-        if (studioOpen && (dirty || pendingCount())) {
-          message = {
-            text: "Changed on another device. Your unsaved work is still here — it will go up as usual, " +
-                  "but reload to see what they changed.",
-            bad: true
-          };
-          renderStudio();
+        /* Never throw away work that only exists on this screen. A sale rung up
+           elsewhere is folded in; anything else keeps the old version, so the
+           next save is refused rather than undo their change. */
+        if (dirty || pendingCount()) {
+          var fresh = JSON.parse(txt);
+          if (c.version != null && onlySoldChanged(seenData, fresh)) {
+            takeSold(seenData, fresh, state.pieces);
+            seenData = fresh; catalogueVersion = c.version;
+            renderPage();
+            return;
+          }
+          if (studioOpen) {
+            message = {
+              text: "Changed on another device. Your unsaved work is still here — it will go up as usual, " +
+                    "but reload to see what they changed.",
+              bad: true
+            };
+            renderStudio();
+          }
           return;
         }
+        catalogueVersion = c.version;
+        seenData = JSON.parse(txt);
         var open = viewPiece > -1 ? state.pieces[viewPiece] : null;
         var openSku = open ? open.sku : null;
         normalise(JSON.parse(txt));
@@ -967,6 +984,23 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         if (studioOpen) renderStudio();
       })
       .catch(function () {});
+  }
+
+  /* Sold marks set by Square or Stripe while this screen had unsaved work. */
+  function withoutSold(d) {
+    var x = JSON.parse(JSON.stringify(d || {}));
+    (x.pieces || []).forEach(function (p) { delete p.sold; });
+    return JSON.stringify(x);
+  }
+  function onlySoldChanged(was, now) { return !!was && withoutSold(was) === withoutSold(now); }
+  function takeSold(was, now, into) {
+    var before = {};
+    (was.pieces || []).forEach(function (p) { before[p.id || p.sku] = !!p.sold; });
+    (now.pieces || []).forEach(function (p) {
+      var k = p.id || p.sku;
+      if (before[k] === !!p.sold) return;
+      into.forEach(function (q) { if ((q.id || q.sku) === k) q.sold = !!p.sold; });
+    });
   }
 
   /* ---------------- public catalogue ---------------- */
@@ -2421,22 +2455,35 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       ? Promise.resolve(catalogueVersion)
       : fetchCatalogue().then(function (c) { catalogueVersion = c.version; return c.version; });
 
-    return start.then(function (version) {
+    function put(version) {
       return fetch(apiBase() + "/catalogue", {
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: "Bearer " + session() },
         body: JSON.stringify({ data: data, version: version, deletedKeys: deletedKeys })
+      }).then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (j) {
+          if (!r.ok) {
+            var e = new Error((j && j.error) || ("Could not save (" + r.status + ")"));
+            if (j && j.stale) e.stale = j.stale;
+            if (j && j.conflict) e.conflict = true;
+            throw e;
+          }
+          catalogueVersion = j.version;
+        });
       });
-    }).then(function (r) {
-      return r.json().catch(function () { return {}; }).then(function (j) {
-        if (!r.ok) {
-          var e = new Error((j && j.error) || ("Could not save (" + r.status + ")"));
-          if (j && j.stale) e.stale = j.stale;
-          if (j && j.conflict) e.conflict = true;
-          throw e;
-        }
-        catalogueVersion = j.version;
-      });
+    }
+    return start.then(put).catch(function (e) {
+      /* A sale rung up since this screen last looked: fold it in and try once
+         more. Any other change still stops here. */
+      if (!e.conflict) throw e;
+      return fetchCatalogue().then(function (c) {
+        var fresh = c.version != null ? JSON.parse(c.text) : null;
+        if (!fresh || !onlySoldChanged(seenData, fresh)) throw e;
+        takeSold(seenData, fresh, state.pieces);
+        takeSold(seenData, fresh, data.pieces);
+        seenData = fresh; seenStamp = fingerprint(c.text); catalogueVersion = c.version;
+        return put(c.version);
+      }, function () { throw e; });
     });
   }
 
@@ -2460,7 +2507,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   }
 
   function publish(quiet) {
-    if (busy) return;
+    if (busy || reloading) return;
     clearTimeout(autoTimer);
     autoStatus = ""; publishFailed = false;
     if (!canPublish()) {
@@ -2552,8 +2599,9 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
           dirty = edits !== sent;  /* edits made while this was in flight still need saving */
           publishFailed = false;
           autoStatus = "On the website.";
-          if (!quiet) message = { text: "Published. The website updates in about a minute." };
-          renderStudio();
+          seenData = JSON.parse(JSON.stringify(data));
+          if (!quiet) { message = { text: "Published. The website updates in about a minute." }; renderStudio(); }
+          else refreshSaveBar();
           if (autoQueued || dirty) { autoQueued = false; scheduleAuto(); }
         })
         .catch(function (err) { fail(err); });
@@ -2569,8 +2617,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         text = "The website has " + err.stale + " piece" + (err.stale > 1 ? "s" : "") +
                " this screen has not seen, so nothing was changed. Reloading — " +
                "make your change again afterwards.";
-        describeStop = true;
-        setTimeout(function () { location.reload(); }, 3500);
+        reloadSoon(3500);
       } else if (/401|sign in/i.test(m) && useApi()) {
         signOut();
         studioView = "list"; /* the sign-in field lives on the list */
@@ -2591,8 +2638,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         catalogueSha = null;
         text = "This was changed on another device. Reloading so you do not lose their work — " +
                "make your change again.";
-        describeStop = true;  /* what is already saved stays; the button picks up the rest */
-        setTimeout(function () { location.reload(); }, 2500);
+        reloadSoon(2500);
       } else {
         text = "Publishing stopped: " + m + ". Your work is still here — try again.";
       }
@@ -2601,9 +2647,17 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     }
   }
 
+  /* After a refused save the work on this screen cannot go up anyway, so
+     leave without the "Leave site?" box. A description run stops here; what
+     it already saved stays, and the button picks up the rest. */
+  function reloadSoon(ms) {
+    describeStop = true; reloading = true;  /* and no more saves on the way out */
+    setTimeout(function () { dirty = false; location.reload(); }, ms);
+  }
+
   /* ---------------- go ---------------- */
   window.addEventListener("beforeunload", function (e) {
-    if (!dirty && !pendingCount()) return;
+    if (reloading || (!dirty && !pendingCount())) return;
     e.preventDefault();
     e.returnValue = "";
     return "";
