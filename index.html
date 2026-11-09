@@ -2106,7 +2106,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
      one photo as a check. The loop stops when left does not go down, or after
      ceil(first left / 10) + 3 more calls. SQ_SKIP_FAILED turns on ?skip= once the
      service supports it. */
-  var SQ_SKIP_FAILED = false;
+  var SQ_SKIP_FAILED = true;
   function squarePhotosPath(limit, skip) {
     var q = [];
     if (limit) q.push("limit=" + limit);
