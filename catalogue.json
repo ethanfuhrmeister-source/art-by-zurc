@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 170,
+  "nextSku": 178,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -5648,6 +5648,273 @@
           "file": "photos/2026-11-08-zc-0169-mw8c1d4nickop.jpg",
           "w": 1249,
           "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mw9miyj737jf6",
+      "sku": "ZC-0170",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Free-form bowl with ruffled edges in glossy brown and cream glaze, wrapped with twisted vine handles.",
+      "keywords": [
+        "bowl",
+        "pottery",
+        "decorative bowl",
+        "ruffled",
+        "brown",
+        "cream",
+        "glossy glaze",
+        "vine handle",
+        "rustic",
+        "organic",
+        "centerpiece",
+        "living room",
+        "gift",
+        "handmade"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-09-zc-0170-mw9miyj7qiycm.jpg",
+          "w": 1600,
+          "h": 1004
+        }
+      ]
+    },
+    {
+      "id": "mw9miyzb2e3wm",
+      "sku": "ZC-0171",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Pair of hand painted bowls with abstract figures in cream, mustard, green and red under a glossy glaze.",
+      "keywords": [
+        "bowl",
+        "bowl set",
+        "pottery",
+        "hand painted",
+        "abstract figures",
+        "cream",
+        "mustard",
+        "green",
+        "red",
+        "glossy glaze",
+        "serving",
+        "kitchen",
+        "gift",
+        "folk art"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-09-zc-0171-mw9miyzbnc9yt.jpg",
+          "w": 1600,
+          "h": 1416
+        }
+      ]
+    },
+    {
+      "id": "mw9mizawjln28",
+      "sku": "ZC-0172",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Set of three round rice bowls in speckled green and tan glaze with a gray band, each with a notched rim that holds chopsticks.",
+      "keywords": [
+        "rice bowl",
+        "bowl set",
+        "chopstick bowl",
+        "pottery",
+        "green",
+        "tan",
+        "gray",
+        "speckled",
+        "glossy glaze",
+        "noodle bowl",
+        "serving",
+        "kitchen",
+        "gift",
+        "rustic"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-09-zc-0172-mw9mizawikg01.jpg",
+          "w": 1600,
+          "h": 949
+        }
+      ]
+    },
+    {
+      "id": "mw9miznpq22lg",
+      "sku": "ZC-0173",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Round chip and dip platter with a built-in center bowl, hand carved folk flowers and scrolls in blue, red and green on a soft pink matte surface.",
+      "keywords": [
+        "platter",
+        "chip and dip",
+        "serving bowl",
+        "pottery",
+        "hand carved",
+        "floral",
+        "pink",
+        "blue",
+        "red",
+        "matte",
+        "folk art",
+        "kitchen",
+        "entertaining",
+        "gift"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-09-zc-0173-mw9miznpcw471.jpg",
+          "w": 1600,
+          "h": 1494
+        }
+      ]
+    },
+    {
+      "id": "mw9mizqr0bokh",
+      "sku": "ZC-0174",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Fish-shaped serving platter hand painted with orange stripes, blue dots and red spirals on a glossy green and white surface.",
+      "keywords": [
+        "platter",
+        "fish platter",
+        "serving platter",
+        "pottery",
+        "fish",
+        "hand painted",
+        "orange",
+        "blue",
+        "green",
+        "glossy",
+        "whimsical",
+        "folk art",
+        "kitchen",
+        "wall decor",
+        "gift"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-09-zc-0174-mw9mizqr04ofq.jpg",
+          "w": 960,
+          "h": 760
+        }
+      ]
+    },
+    {
+      "id": "mw9mj01fgvc7q",
+      "sku": "ZC-0175",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Square pottery plate with two small matching dishes, painted with a little girl in a red dress under blossoming willow branches in pink, green and blue on a glossy white surface.",
+      "keywords": [
+        "plate",
+        "square plate",
+        "small dish",
+        "trinket dish",
+        "pottery",
+        "hand painted",
+        "girl",
+        "cherry blossom",
+        "pink",
+        "red",
+        "white",
+        "glossy",
+        "serving",
+        "kitchen",
+        "gift"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-09-zc-0175-mw9mj01ejy1l6.jpg",
+          "w": 1600,
+          "h": 1058
+        }
+      ]
+    },
+    {
+      "id": "mw9mj06nj0zdv",
+      "sku": "ZC-0176",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Shallow bowl with twisted rope handles, glossy green and rust glaze with red lines in a stained glass pattern.",
+      "keywords": [
+        "bowl",
+        "serving bowl",
+        "pottery",
+        "handles",
+        "green",
+        "rust",
+        "red",
+        "glossy glaze",
+        "stained glass pattern",
+        "decorative bowl",
+        "table centerpiece",
+        "rustic",
+        "kitchen",
+        "gift"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-09-zc-0176-mw9mj06nxvyng.jpg",
+          "w": 1421,
+          "h": 1182
+        }
+      ]
+    },
+    {
+      "id": "mw9mj0hpxjcuj",
+      "sku": "ZC-0177",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Handbuilt pottery set of two footed cups on a turquoise tray, with a braided clay handle arching over and yellow flower and leaf details in green speckled glaze.",
+      "keywords": [
+        "pottery",
+        "cup set",
+        "tray",
+        "serving set",
+        "handbuilt",
+        "green",
+        "turquoise",
+        "yellow",
+        "speckled glaze",
+        "flower",
+        "leaf",
+        "whimsical",
+        "rustic",
+        "kitchen",
+        "gift"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-09-zc-0177-mw9mj0hpn6rgk.jpg",
+          "w": 1600,
+          "h": 1386
         }
       ]
     }
