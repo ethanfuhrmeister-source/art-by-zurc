@@ -5923,9 +5923,10 @@
       "sku": "ZC-0178",
       "title": "Noir 10",
       "price": "",
-      "size": "",
+      "size": "10",
       "notes": "",
       "sold": false,
+      "kind": "painting",
       "description": "Set of ten square wall tiles in off white with black marks, dots and scratched lines across a matte surface.",
       "keywords": [
         "wall tile",
