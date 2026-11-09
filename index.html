@@ -2102,9 +2102,19 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   }
 
   /* The service uploads about 10 cover photos per call (Cloudflare limits outside
-     calls per request), so keep calling until none are left. */
+     calls per request), so keep calling until none are left. The first call sends
+     one photo as a check. The loop stops when left does not go down, or after
+     ceil(first left / 10) + 3 more calls. SQ_SKIP_FAILED turns on ?skip= once the
+     service supports it. */
+  var SQ_SKIP_FAILED = false;
+  function squarePhotosPath(limit, skip) {
+    var q = [];
+    if (limit) q.push("limit=" + limit);
+    if (skip && skip.length) q.push("skip=" + skip.map(encodeURIComponent).join(","));
+    return "/square-photos" + (q.length ? "?" + q.join("&") : "");
+  }
   function sendSquarePhotos(btns, note, head) {
-    var sent = 0, failed = [], last = -1;
+    var sent = 0, failed = [], last = null, calls = 0, cap = 0;
     squareBusy(btns, true);
     note.textContent = head + "Photos: sending…";
     note.removeAttribute("title");
@@ -2115,14 +2125,19 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       squareBusy(btns, false);
     }
     function step() {
-      squarePost("/square-photos").then(function (j) {
-        var up = j.uploaded || 0, left = j.left || 0;
-        sent += up;
+      var skip = SQ_SKIP_FAILED ? failed.map(function (x) { return x.sku; }) : null;
+      squarePost(squarePhotosPath(calls ? 0 : 1, skip)).then(function (j) {
+        var left = j.left;
+        if (typeof left !== "number" || !isFinite(left) || left < 0) throw new Error("Square sent back no count of photos left");
+        sent += Math.max(0, +j.uploaded || 0);
         (j.failed || []).forEach(function (x) {
           if (x && x.sku && !failed.some(function (y) { return y.sku === x.sku; })) failed.push(x);
         });
+        calls++;
         if (!left) return finish("Photos: " + sent + " sent, none left.");
-        if (!up && left === last) return finish("Photos: " + sent + " sent, " + left + " still without one. Stopped because nothing more would upload.");
+        if (last !== null && left >= last) return finish("Photos: " + sent + " sent, " + left + " still without one. Stopped because the count stopped going down.");
+        if (calls === 1) cap = Math.ceil(left / 10) + 3;
+        else if (calls - 1 >= cap) return finish("Photos: " + sent + " sent, " + left + " still without one. Stopped after " + calls + " rounds.");
         last = left;
         note.textContent = head + "Photos: " + sent + " sent, " + left + " left…";
         step();
