@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 178,
+  "nextSku": 179,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -5915,6 +5915,39 @@
           "file": "photos/2026-11-09-zc-0177-mw9mj0hpn6rgk.jpg",
           "w": 1600,
           "h": 1386
+        }
+      ]
+    },
+    {
+      "id": "mw9o3uz05qv03",
+      "sku": "ZC-0178",
+      "title": "Noir 10",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Set of ten square wall tiles in off white with black marks, dots and scratched lines across a matte surface.",
+      "keywords": [
+        "wall tile",
+        "tile set",
+        "ceramic wall art",
+        "square tile",
+        "black and white",
+        "off white",
+        "matte",
+        "abstract",
+        "modern",
+        "mark making",
+        "living room",
+        "gallery wall",
+        "pottery",
+        "gift"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-09-zc-0178-mw9o3uz0jst16.jpg",
+          "w": 720,
+          "h": 1600
         }
       ]
     }
