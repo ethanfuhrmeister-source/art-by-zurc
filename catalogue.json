@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 179,
+  "nextSku": 191,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -5949,6 +5949,405 @@
           "file": "photos/2026-11-09-zc-0178-mw9o3uz0jst16.jpg",
           "w": 720,
           "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mwbayi973l2am",
+      "sku": "ZC-0179",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Long oval serving platter with wavy edges in mottled gray and white glaze with dark speckles and warm brown rims.",
+      "keywords": [
+        "platter",
+        "serving platter",
+        "tray",
+        "pottery",
+        "gray",
+        "white",
+        "brown",
+        "speckled",
+        "mottled glaze",
+        "oval",
+        "wavy edge",
+        "kitchen",
+        "serving",
+        "rustic",
+        "gift"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-10-zc-0179-mwbayi97v9w6o.jpg",
+          "w": 1600,
+          "h": 633
+        }
+      ]
+    },
+    {
+      "id": "mwbayih0mopf7",
+      "sku": "ZC-0180",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Large oval serving platter with a wavy edge, glazed in rust brown with a green stripe, dark spots and pale green lily pad shapes.",
+      "keywords": [
+        "platter",
+        "serving platter",
+        "oval platter",
+        "pottery",
+        "rust brown",
+        "green",
+        "lily pad",
+        "spotted",
+        "matte glaze",
+        "kitchen",
+        "serving",
+        "centerpiece",
+        "rustic",
+        "gift"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-10-zc-0180-mwbayih0uhvtw.jpg",
+          "w": 1600,
+          "h": 928
+        }
+      ]
+    },
+    {
+      "id": "mwbayio91a9ea",
+      "sku": "ZC-0181",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Large oval serving platter with a wavy edge, painted in smoky gray, lavender, rust and teal with black speckles and splatters.",
+      "keywords": [
+        "platter",
+        "serving platter",
+        "oval platter",
+        "pottery",
+        "ceramic",
+        "gray",
+        "lavender",
+        "rust",
+        "teal",
+        "abstract",
+        "glossy",
+        "serving",
+        "kitchen",
+        "centerpiece",
+        "gift"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-10-zc-0181-mwbayio9lxtub.jpg",
+          "w": 1600,
+          "h": 940
+        }
+      ]
+    },
+    {
+      "id": "mwbayit4uxrdd",
+      "sku": "ZC-0182",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Tall square footed vase in mottled cream and brown glaze with dark feet and a small round knob on one side.",
+      "keywords": [
+        "vase",
+        "pottery",
+        "square vase",
+        "footed vase",
+        "cream",
+        "brown",
+        "mottled glaze",
+        "matte",
+        "rustic",
+        "flowers",
+        "living room",
+        "gift",
+        "handmade"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-10-zc-0182-mwbayit4fjejt.jpg",
+          "w": 1128,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mwbayizsourdk",
+      "sku": "ZC-0183",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Square footed vase with two pink arm-like handles, finished in a speckled cream and brown glaze.",
+      "keywords": [
+        "vase",
+        "pottery",
+        "square vase",
+        "footed vase",
+        "handles",
+        "speckled",
+        "cream",
+        "brown",
+        "pink",
+        "matte glaze",
+        "flowers",
+        "whimsical",
+        "rustic",
+        "living room",
+        "gift"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-10-zc-0183-mwbayizsm6vb0.jpg",
+          "w": 1480,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mwbayj44iir5j",
+      "sku": "ZC-0184",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Two-handled vase with faceted sides in speckled cream and brown glaze with amber spots and pink handles.",
+      "keywords": [
+        "vase",
+        "pottery",
+        "two handle vase",
+        "speckled",
+        "cream",
+        "brown",
+        "amber",
+        "pink",
+        "matte glaze",
+        "flowers",
+        "rustic",
+        "handmade",
+        "living room",
+        "gift"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-10-zc-0184-mwbayj44iejao.jpg",
+          "w": 1376,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mwbayjae5itx4",
+      "sku": "ZC-0185",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Leaf-shaped serving bowl in speckled green and cream glaze with brown flecks and a curled stem handle.",
+      "keywords": [
+        "bowl",
+        "serving bowl",
+        "leaf bowl",
+        "platter",
+        "pottery",
+        "speckled",
+        "green",
+        "cream",
+        "brown",
+        "glossy glaze",
+        "fruit bowl",
+        "kitchen",
+        "centerpiece",
+        "rustic",
+        "gift"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-10-zc-0185-mwbayjaet7pmk.jpg",
+          "w": 1600,
+          "h": 888
+        }
+      ]
+    },
+    {
+      "id": "mwbayjgie5d7i",
+      "sku": "ZC-0186",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Long oval serving platter in glossy rose red glaze with white drips and black speckles, edged in dark brown.",
+      "keywords": [
+        "platter",
+        "oval platter",
+        "serving platter",
+        "pottery",
+        "red",
+        "white",
+        "brown",
+        "drip glaze",
+        "glossy",
+        "speckled",
+        "kitchen",
+        "serving",
+        "gift",
+        "rustic"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-10-zc-0186-mwbayjgi2kzyc.jpg",
+          "w": 1600,
+          "h": 898
+        }
+      ]
+    },
+    {
+      "id": "mwbayjkyay19h",
+      "sku": "ZC-0187",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Long oval serving platter with pointed ends, glossy glaze in mottled olive green, amber and brown.",
+      "keywords": [
+        "platter",
+        "serving platter",
+        "oval platter",
+        "pottery",
+        "glossy",
+        "green",
+        "amber",
+        "brown",
+        "mottled",
+        "serving",
+        "kitchen",
+        "table centerpiece",
+        "rustic",
+        "gift"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-10-zc-0187-mwbayjkyckctl.jpg",
+          "w": 1600,
+          "h": 617
+        }
+      ]
+    },
+    {
+      "id": "mwbayjobmqgaj",
+      "sku": "ZC-0188",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Set of three nesting noodle bowls in mottled brown and black glaze with red chopsticks resting on the rims.",
+      "keywords": [
+        "bowl",
+        "noodle bowl",
+        "rice bowl",
+        "bowl set",
+        "nesting bowls",
+        "pottery",
+        "brown",
+        "black",
+        "mottled glaze",
+        "chopsticks",
+        "serving",
+        "kitchen",
+        "rustic",
+        "gift"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-10-zc-0188-mwbayjobih8fd.jpg",
+          "w": 1600,
+          "h": 1147
+        }
+      ]
+    },
+    {
+      "id": "mwbayjqlfdtxb",
+      "sku": "ZC-0189",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Bird-shaped pitcher in blue and gray with painted feather scales, paired with four footed cups in speckled pale blue.",
+      "keywords": [
+        "pitcher",
+        "pottery",
+        "cup",
+        "bird",
+        "blue",
+        "gray",
+        "speckled",
+        "glossy",
+        "serving",
+        "kitchen",
+        "gift",
+        "set",
+        "folk art",
+        "whimsical"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-10-zc-0189-mwbayjql0bx0l.jpg",
+          "w": 1027,
+          "h": 1323
+        }
+      ]
+    },
+    {
+      "id": "mwbayjtg1aspb",
+      "sku": "ZC-0190",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Rectangular serving tray with ruffled corner accents and a small matching dip bowl, in speckled tan and brown glaze with glossy edges.",
+      "keywords": [
+        "tray",
+        "serving tray",
+        "platter",
+        "dip bowl",
+        "pottery",
+        "speckled",
+        "brown",
+        "tan",
+        "glossy glaze",
+        "appetizer",
+        "kitchen",
+        "entertaining",
+        "rustic",
+        "gift"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-10-zc-0190-mwbayjtgr9e6f.jpg",
+          "w": 1600,
+          "h": 946
         }
       ]
     }
