@@ -64,6 +64,12 @@ button{font:inherit;color:inherit}
   margin:0;font-family:var(--sans);font-size:.66rem;letter-spacing:.22em;
   text-transform:uppercase;color:var(--muted);text-align:center;
 }
+.phone{
+  display:inline-block;padding:.95rem 1rem;margin:-.9rem 0 -.95rem;
+  font-family:var(--sans);font-size:.72rem;letter-spacing:.08em;color:var(--muted);
+  text-decoration:none;
+}
+.phone:hover{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
 /* The logo is logo.png at the site root: swap that one file to change it. */
 .logo{display:block;width:120px;height:120px;object-fit:contain;margin:0 0 .35rem}
 @media (max-width:460px){.logo{width:88px;height:88px}}
@@ -821,7 +827,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     whenToday: "Today, 2 to 6 PM",
     where: "6 Slosman Dr, Asheville, NC 28806",
     about: "Ceramics, paintings and floral arrangements at Rocio's home. Venmo, card, cash or check.",
-    link: "Directions",
+    links: [["Apple Maps", "https://maps.apple.com/?address="], ["Google Maps", "https://www.google.com/maps/search/?api=1&query="]],
     todayFrom: Date.UTC(2026, 10, 21, 5),  /* 00:00 ET Nov 21 */
     endsAt: Date.UTC(2026, 10, 21, 23)     /* 18:00 ET Nov 21 */
   };
@@ -832,12 +838,12 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   function showBannerHtml() {
     var now = showNow();
     if (now >= SHOW.endsAt) return "";
-    var maps = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(SHOW.where);
     return '<aside class="showbar" aria-label="Show">' +
       "<p>" + esc(SHOW.name) + " · " + esc(now >= SHOW.todayFrom ? SHOW.whenToday : SHOW.when) +
       ' · <span class="nw">' + esc(SHOW.where) + "</span></p>" +
-      '<p class="about">' + esc(SHOW.about) + ' <a href="' + esc(maps) +
-      '" target="_blank" rel="noopener">' + esc(SHOW.link) + "</a></p></aside>";
+      '<p class="about">' + esc(SHOW.about) + " " + SHOW.links.map(function (l) {
+        return '<a href="' + esc(l[1] + encodeURIComponent(SHOW.where)) + '" target="_blank" rel="noopener">' + esc(l[0]) + "</a>";
+      }).join(" · ") + "</p></aside>";
   }
   /* What a piece is: [stored kind, catalogue tab, tab label, studio label].
      Pottery is stored as no kind at all, so older pieces need nothing. */
@@ -1090,6 +1096,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     h += '<img class="logo" src="logo.png" alt="Art By Zurc logo" width="280" height="280">';
     h += '<h1 class="mark" id="mark">' + esc(state.name) + "</h1>";
     if (state.trade) h += '<p class="trade">' + esc(state.trade) + "</p>";
+    FOOTER_CONTACT.forEach(function (c) { if (/^tel:/.test(c[1])) h += '<a class="phone" href="' + esc(c[1]) + '">' + esc(c[0]) + "</a>"; });
     h += "</header>";
     h += showBannerHtml();
 
