@@ -157,7 +157,7 @@ button{font:inherit;color:inherit}
 .price{font-family:var(--sans);font-size:.8rem;color:var(--muted);margin:.2rem 0 0}
 .price.is-sold{color:var(--clay)}
 
-.colophon{padding:3.5rem 1.25rem 4rem;text-align:center}
+.colophon{padding:3.5rem 1.25rem 4rem;text-align:center;display:flex;flex-wrap:wrap;justify-content:center;gap:.9rem 1.6rem}
 .colophon a,.colophon span{
   font-family:var(--sans);font-size:.78rem;letter-spacing:.1em;color:var(--muted);
   text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;
@@ -812,6 +812,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   var state = JSON.parse(JSON.stringify(DEFAULT_STATE));
   var root = document.getElementById("root");
   var filter = "pottery";
+  var FOOTER_CONTACT = [["zurc415@yahoo.com", "mailto:zurc415@yahoo.com"], ["(941) 780-1547", "tel:+19417801547"]];
   /* The show banner. Wording lives here so it is easy to change. Times are fixed
      UTC instants (Eastern is UTC-5 in November). Test with ?now=2026-11-21T22:59:00Z. */
   var SHOW = {
@@ -1148,7 +1149,11 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
 
     var href = contactHref(state.contact);
     h += '<footer class="colophon">';
-    if (state.contact) {
+    /* The artist's email and phone, always shown. The studio's contact field
+       still shows too, unless it repeats one of these. */
+    FOOTER_CONTACT.forEach(function (c) { h += '<a href="' + esc(c[1]) + '">' + esc(c[0]) + "</a>"; });
+    var dup = FOOTER_CONTACT.some(function (c) { return href && href.replace(/^tel:\+?1?/, "tel:") === c[1].replace(/^tel:\+?1?/, "tel:"); });
+    if (state.contact && !dup) {
       h += href ? '<a href="' + esc(href) + '">' + esc(state.contact) + "</a>"
                 : "<span>" + esc(state.contact) + "</span>";
     }
