@@ -43,7 +43,7 @@ button{font:inherit;color:inherit}
 .masthead{
   position:relative;
   display:flex;flex-direction:column;align-items:center;gap:.35rem;
-  padding:3.25rem 1.25rem 1.5rem;background:var(--paper);
+  padding:2.25rem 1.25rem 1.25rem;background:var(--paper);
 }
 .studio-link{
   position:absolute;top:1rem;right:1rem;
@@ -53,7 +53,7 @@ button{font:inherit;color:inherit}
 }
 .studio-link:hover{color:var(--ink);background:#faf8f6}
 @media (max-width:460px){
-  .masthead{padding-top:3.75rem}
+  .masthead{padding-top:2.5rem}
   .studio-link{top:.6rem;right:.4rem}
 }
 .mark{
@@ -64,6 +64,21 @@ button{font:inherit;color:inherit}
   margin:0;font-family:var(--sans);font-size:.66rem;letter-spacing:.22em;
   text-transform:uppercase;color:var(--muted);text-align:center;
 }
+/* The logo is logo.png at the site root: swap that one file to change it. */
+.logo{display:block;width:120px;height:120px;object-fit:contain;margin:0 0 .35rem}
+@media (max-width:460px){.logo{width:88px;height:88px}}
+
+/* ---------- show banner ---------- */
+.showbar{
+  margin:0 auto 1.4rem;max-width:40rem;padding:.65rem 1rem;
+  background:#f8f1e8;border:1px solid #eadfd2;border-radius:2px;
+  font-family:var(--sans);font-size:.8rem;line-height:1.5;color:var(--ink);text-align:center;
+}
+.showbar p{margin:0}
+.showbar .about{color:#5f564f}
+.showbar a,.showbar .nw{white-space:nowrap}
+.showbar a{color:var(--clay);text-underline-offset:2px}
+@media (max-width:460px){.showbar{margin:0 1rem 1.2rem;font-size:.76rem}}
 
 /* ---------- search ---------- */
 .findbar{
@@ -89,12 +104,18 @@ button{font:inherit;color:inherit}
   padding:0 1.25rem 2rem;font-family:var(--sans);
 }
 .chip{
-  border:1px solid var(--line);background:none;color:var(--muted);
+  --c:#5f564f;--t:#f4f1ee;
+  border:1px solid var(--c);background:var(--t);color:var(--c);
   border-radius:999px;padding:.4rem .95rem;font-size:.76rem;letter-spacing:.06em;
   cursor:pointer;
 }
-.chip:hover{color:var(--ink);border-color:#ded7cf}
-.chip[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+/* Tab colours from the show flyer; white on each fill and each colour on its tint pass WCAG AA. */
+.chip[data-filter=pottery]{--c:#9a4a2c;--t:#f6ebe4}
+.chip[data-filter=paintings]{--c:#3d5f73;--t:#e8eff3}
+.chip[data-filter=flowers]{--c:#8a3d52;--t:#f5e9ed}
+.chip[data-filter=sold]{--c:#4f6b4a;--t:#ebf0e8}
+.chip:hover{box-shadow:inset 0 0 0 1px var(--c)}
+.chip[aria-pressed=true]{background:var(--c);color:#fff}
 
 /* ---------- grid ---------- */
 /* A real grid, so pieces read left to right in item-number order.
@@ -373,6 +394,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   .pcard .thumb{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .pcard .c-sold{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .sheet-head{margin-bottom:.6rem}
+  .showbar,.logo{display:none!important}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -790,6 +812,32 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   var state = JSON.parse(JSON.stringify(DEFAULT_STATE));
   var root = document.getElementById("root");
   var filter = "pottery";
+  /* The show banner. Wording lives here so it is easy to change. Times are fixed
+     UTC instants (Eastern is UTC-5 in November). Test with ?now=2026-11-21T22:59:00Z. */
+  var SHOW = {
+    name: "Art By Zurc pottery show",
+    when: "Sat, Nov 21, 2 to 6 PM",
+    whenToday: "Today, 2 to 6 PM",
+    where: "6 Slosman Dr, Asheville, NC 28806",
+    about: "Ceramics, paintings and floral arrangements at Rocio's home. Venmo, card, cash or check.",
+    link: "Directions",
+    todayFrom: Date.UTC(2026, 10, 21, 5),  /* 00:00 ET Nov 21 */
+    endsAt: Date.UTC(2026, 10, 21, 23)     /* 18:00 ET Nov 21 */
+  };
+  function showNow() {
+    var m = /[?&]now=([^&]+)/.exec(location.search), t = m ? Date.parse(decodeURIComponent(m[1])) : NaN;
+    return isNaN(t) ? Date.now() : t;
+  }
+  function showBannerHtml() {
+    var now = showNow();
+    if (now >= SHOW.endsAt) return "";
+    var maps = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(SHOW.where);
+    return '<aside class="showbar" aria-label="Show">' +
+      "<p>" + esc(SHOW.name) + " · " + esc(now >= SHOW.todayFrom ? SHOW.whenToday : SHOW.when) +
+      ' · <span class="nw">' + esc(SHOW.where) + "</span></p>" +
+      '<p class="about">' + esc(SHOW.about) + ' <a href="' + esc(maps) +
+      '" target="_blank" rel="noopener">' + esc(SHOW.link) + "</a></p></aside>";
+  }
   /* What a piece is: [stored kind, catalogue tab, tab label, studio label].
      Pottery is stored as no kind at all, so older pieces need nothing. */
   var KINDS = [
@@ -1038,9 +1086,11 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     var h = "";
     h += '<header class="masthead">';
     h += '<button class="studio-link" id="open-studio">Studio</button>';
+    h += '<img class="logo" src="logo.png" alt="Art By Zurc logo" width="280" height="280">';
     h += '<h1 class="mark" id="mark">' + esc(state.name) + "</h1>";
     if (state.trade) h += '<p class="trade">' + esc(state.trade) + "</p>";
     h += "</header>";
+    h += showBannerHtml();
 
     if (state.pieces.length) {
       h += '<div class="findbar">';
