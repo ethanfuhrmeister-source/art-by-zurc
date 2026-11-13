@@ -169,6 +169,25 @@ button{font:inherit;color:inherit}
   text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;
 }
 .colophon a:hover{color:var(--ink)}
+/* footer email signup (Netlify form "show-list"); wording in SIGNUP */
+.signup{flex:1 0 100%;margin:0 0 1.6rem;text-align:left;font-family:var(--sans)}
+.signup>*{max-width:34rem;margin-left:auto;margin-right:auto}
+.signup h2{font-family:var(--serif);font-weight:300;font-size:1.35rem;color:var(--ink);margin:0 auto 1rem;text-align:center}
+.su-fields{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.su-f{display:flex;flex-direction:column;gap:.3rem;min-width:0}
+.su-f label{font-size:.72rem;letter-spacing:.08em;color:var(--muted)}
+.su-f input{font:inherit;font-size:1rem;width:100%;min-height:44px;padding:.55rem .7rem;
+  border:1px solid #ded7cf;border-radius:2px;background:var(--paper);color:var(--ink)}
+.su-f input:focus{border-color:var(--muted)}
+.su-btn{grid-column:1/-1;min-height:44px;padding:.6rem 1.2rem;border:1px solid var(--ink);border-radius:2px;
+  background:none;color:var(--ink);font-size:.85rem;letter-spacing:.06em;cursor:pointer}
+.su-btn:hover{background:#f7f4f0}
+.su-btn[disabled]{opacity:.45;cursor:default}
+.su-note{font-size:.74rem;line-height:1.5;color:var(--muted);margin:.7rem 0 0;text-align:center}
+.su-err{font-size:.8rem;line-height:1.5;color:var(--clay);margin:.6rem 0 0;text-align:center}
+.su-err[hidden],.su-hp{display:none}
+.su-done{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--ink);margin:0 auto;text-align:center}
+@media (max-width:560px){.su-fields{grid-template-columns:1fr}}
 .blank{padding:5rem 1.5rem 7rem;text-align:center;color:var(--muted);font-size:1.05rem;font-style:italic}
 
 /* ---------- viewer ---------- */
@@ -407,6 +426,13 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
 </head>
 <body>
 <div id="root"></div>
+<!-- Netlify Forms only sees forms in the static HTML, so this hidden copy registers
+     "show-list". The visible signup in the footer is drawn by JS and posts to it. -->
+<form name="show-list" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="email" name="email">
+  <input type="text" name="first_name">
+  <input type="text" name="bot-field">
+</form>
 
 <script>
 (function () {
@@ -715,6 +741,59 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   }
 
   /* ---------------- helpers ---------------- */
+  function signupHtml() {
+    var h = '<section class="signup" id="signup" aria-labelledby="su-h"><h2 id="su-h">' + esc(SIGNUP.heading) + "</h2>";
+    if (signup.done) return h + '<p class="su-done" role="status">' + esc(SIGNUP.thanks) + "</p></section>";
+    h += '<form id="su-form" name="show-list" method="post" action="/">';
+    h += '<p class="su-hp"><label>Leave this empty <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label></p>';
+    h += '<div class="su-fields">';
+    h += '<div class="su-f"><label for="su-email">' + esc(SIGNUP.emailLabel) + '</label>' +
+         '<input type="email" id="su-email" name="email" required autocomplete="email" value="' + esc(signup.email) + '"></div>';
+    h += '<div class="su-f"><label for="su-name">' + esc(SIGNUP.nameLabel) + '</label>' +
+         '<input type="text" id="su-name" name="first_name" autocomplete="given-name" value="' + esc(signup.name) + '"></div>';
+    h += '<button class="su-btn" type="submit"' + (signup.sending ? " disabled" : "") + ">" + esc(SIGNUP.button) + "</button>";
+    h += "</div>";
+    h += '<p class="su-note">' + esc(SIGNUP.consent) + "</p>";
+    h += '<p class="su-err" role="alert"' + (signup.failed ? "" : " hidden") + ">" + esc(SIGNUP.error) + "</p>";
+    return h + "</form></section>";
+  }
+
+  /* Posts to Netlify Forms. The browser's own check blocks an empty or invalid
+     email before this runs. */
+  function bindSignup() {
+    var f = document.getElementById("su-form");
+    if (!f) return;
+    f.addEventListener("input", function () {
+      signup.email = f.elements.email.value; signup.name = f.elements.first_name.value;
+    });
+    f.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (signup.sending) return;
+      var btn = f.querySelector(".su-btn"), err = f.querySelector(".su-err");
+      signup.sending = true; signup.failed = false;
+      btn.disabled = true; err.hidden = true;
+      var body = new URLSearchParams({
+        "form-name": "show-list",
+        "bot-field": f.elements["bot-field"].value,
+        email: f.elements.email.value.trim(),
+        first_name: f.elements.first_name.value.trim()
+      }).toString();
+      fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: body })
+        .then(function (r) {
+          if (!r.ok) throw new Error("HTTP " + r.status);
+          signup.done = true; signup.email = signup.name = "";
+        })
+        .catch(function () { signup.failed = true; })
+        .then(function () {
+          signup.sending = false;
+          if (!signup.done && document.body.contains(btn)) { btn.disabled = false; err.hidden = false; return; }
+          /* Success, or the page was redrawn mid-send: redraw just the signup. */
+          var sec = document.getElementById("signup");
+          if (sec) { sec.outerHTML = signupHtml(); bindSignup(); }
+        });
+    });
+  }
+
   function esc(s) {
     return String(s == null ? "" : s)
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
@@ -819,6 +898,18 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
   var root = document.getElementById("root");
   var filter = "pottery";
   var FOOTER_CONTACT = [["zurc415@yahoo.com", "mailto:zurc415@yahoo.com"], ["(941) 780-1547", "tel:+19417801547"]];
+  /* Footer email signup. All its wording lives here. */
+  var SIGNUP = {
+    heading: "Hear about my next show",
+    emailLabel: "Email",
+    nameLabel: "First name (optional)",
+    button: "Tell me about the next show",
+    consent: "I'll email you about new pieces and my next show. Unsubscribe anytime.",
+    thanks: "Thanks. You're on the list.",
+    error: "That didn't go through. Please try again, or email zurc415@yahoo.com."
+  };
+  /* Kept across re-renders (tab clicks redraw the page) so typing isn't lost. */
+  var signup = { email: "", name: "", done: false, failed: false, sending: false };
   /* The show banner. Wording lives here so it is easy to change. Times are fixed
      UTC instants (Eastern is UTC-5 in November). Test with ?now=2026-11-21T22:59:00Z. */
   var SHOW = {
@@ -1164,6 +1255,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
 
     var href = contactHref(state.contact);
     h += '<footer class="colophon">';
+    h += signupHtml();
     /* The artist's email and phone, always shown. The studio's contact field
        still shows too, unless it repeats one of these. */
     FOOTER_CONTACT.forEach(function (c) { h += '<a href="' + esc(c[1]) + '">' + esc(c[0]) + "</a>"; });
@@ -1179,6 +1271,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     h += '<div class="printview" id="printview" hidden></div>';
 
     root.innerHTML = h;
+    bindSignup();
 
     root.querySelectorAll("[data-open]").forEach(function (b) {
       b.addEventListener("click", function () { openPiece(b.getAttribute("data-open")); });
