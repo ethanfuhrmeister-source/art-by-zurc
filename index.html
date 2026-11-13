@@ -828,6 +828,9 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     where: "6 Slosman Dr, Asheville, NC 28806",
     about: "Ceramics, paintings and floral arrangements at Rocio's home. Venmo, card, cash or check.",
     links: [["Apple Maps", "https://maps.apple.com/?address="], ["Google Maps", "https://www.google.com/maps/search/?api=1&query="]],
+    /* Calendar row. show.ics holds the same details; update both for the next show. */
+    ics: "show.ics",
+    dates: "20261121T190000Z/20261121T230000Z",  /* 2 to 6 PM ET in UTC */
     todayFrom: Date.UTC(2026, 10, 21, 5),  /* 00:00 ET Nov 21 */
     endsAt: Date.UTC(2026, 10, 21, 23)     /* 18:00 ET Nov 21 */
   };
@@ -843,7 +846,12 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       ' · <span class="nw">' + esc(SHOW.where) + "</span></p>" +
       '<p class="about">' + esc(SHOW.about) + " " + SHOW.links.map(function (l) {
         return '<a href="' + esc(l[1] + encodeURIComponent(SHOW.where)) + '" target="_blank" rel="noopener">' + esc(l[0]) + "</a>";
-      }).join(" · ") + "</p></aside>";
+      }).join(" · ") + "</p>" + (now >= SHOW.todayFrom ? "" :
+      '<p class="about"><a href="' + esc(SHOW.ics) + '">Apple Calendar</a> · <a href="' +
+      esc("https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent(SHOW.name) +
+        "&dates=" + encodeURIComponent(SHOW.dates) + "&location=" + encodeURIComponent(SHOW.where) +
+        "&details=" + encodeURIComponent(SHOW.about)) +
+      '" target="_blank" rel="noopener">Google Calendar</a></p>') + "</aside>";
   }
   /* What a piece is: [stored kind, catalogue tab, tab label, studio label].
      Pottery is stored as no kind at all, so older pieces need nothing. */

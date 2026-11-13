@@ -29,3 +29,10 @@
   for = "/photos/*"
   [headers.values]
     Cache-Control = "public, max-age=3600, must-revalidate"
+
+# The show's calendar file. iPhone Safari offers "Add to Calendar" only when
+# the file arrives as text/calendar.
+[[headers]]
+  for = "/show.ics"
+  [headers.values]
+    Content-Type = "text/calendar; charset=utf-8"
