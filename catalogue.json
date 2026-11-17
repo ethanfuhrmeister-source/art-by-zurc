@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 190,
+  "nextSku": 191,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -6314,6 +6314,39 @@
           "file": "photos/2026-11-10-zc-0190-mwbayjtgr9e6f.jpg",
           "w": 1600,
           "h": 946
+        }
+      ]
+    },
+    {
+      "id": "mwkx45h1m8lal",
+      "sku": "ZC-009",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Square footed vase with two looping arm handles meeting at a small red flower, in honey gold and cream speckled glaze with dark feet.",
+      "keywords": [
+        "vase",
+        "pottery",
+        "flower vase",
+        "handles",
+        "square vase",
+        "honey",
+        "gold",
+        "cream",
+        "red",
+        "speckled",
+        "rustic",
+        "whimsical",
+        "living room",
+        "gift"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-17-zc-009-mwkx45h1cefmz.jpg",
+          "w": 1200,
+          "h": 1600
         }
       ]
     }
