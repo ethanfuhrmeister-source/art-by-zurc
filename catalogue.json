@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 191,
+  "nextSku": 192,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -6348,6 +6348,39 @@
           "file": "photos/2026-11-10-zc-0190-mwbayjtgr9e6f.jpg",
           "w": 1600,
           "h": 946
+        }
+      ]
+    },
+    {
+      "id": "mwkxpnh6pp5ho",
+      "sku": "ZC-0191",
+      "title": "Attitude",
+      "price": "$25",
+      "size": "4\"",
+      "notes": "",
+      "sold": false,
+      "description": "Square footed vase with two looping handles in glossy rust brown glaze with mottled gold patches.",
+      "keywords": [
+        "vase",
+        "pottery",
+        "two handles",
+        "square",
+        "footed",
+        "rust brown",
+        "gold",
+        "glossy",
+        "mottled",
+        "flowers",
+        "living room",
+        "gift",
+        "rustic",
+        "handmade"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-17-zc-0191-mwkxpnh6nzcz5.jpg",
+          "w": 1419,
+          "h": 1600
         }
       ]
     }
