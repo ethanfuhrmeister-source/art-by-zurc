@@ -7,7 +7,7 @@
   "skuPrefix": "ZC",
   "siteUrl": "https://zurccatalog.com/",
   "apiUrl": "https://zurc-catalog-studio.ethanentermedia.workers.dev",
-  "nextSku": 192,
+  "nextSku": 199,
   "pieces": [
     {
       "id": "mu63z4cabejv3",
@@ -6380,6 +6380,238 @@
         {
           "file": "photos/2026-11-17-zc-0191-mwkxpnh6nzcz5.jpg",
           "w": 1419,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mwmolno8ljnxf",
+      "sku": "ZC-0192",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Square pottery platter with a hand-painted woman's face in cream, green and red lips, framed by a glossy black border.",
+      "keywords": [
+        "platter",
+        "square platter",
+        "pottery",
+        "serving",
+        "wall art",
+        "face",
+        "woman",
+        "portrait",
+        "black",
+        "green",
+        "red",
+        "glossy",
+        "folk art",
+        "gift",
+        "kitchen"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-18-zc-0192-mwmolno84f8lq.jpg",
+          "w": 1292,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mwmolnt9caxz9",
+      "sku": "ZC-0193",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Long free-form cheese board in a dark olive brown glaze with a textured woven surface, served with two small matching cheese knives.",
+      "keywords": [
+        "cheese board",
+        "serving board",
+        "platter",
+        "pottery",
+        "brown",
+        "olive",
+        "textured",
+        "glossy",
+        "entertaining",
+        "kitchen",
+        "appetizer",
+        "gift",
+        "rustic",
+        "handmade"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-18-zc-0193-mwmolnt9dcewk.jpg",
+          "w": 1600,
+          "h": 667
+        }
+      ]
+    },
+    {
+      "id": "mwmolo10yisqx",
+      "sku": "ZC-0194",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Low triangular ikebana vase in glossy black, shown holding a pink orchid stem with moss and small white blooms.",
+      "keywords": [
+        "vase",
+        "ikebana vase",
+        "low vase",
+        "black",
+        "glossy",
+        "pottery",
+        "flower arrangement",
+        "orchid",
+        "centerpiece",
+        "living room",
+        "modern",
+        "gift",
+        "table decor"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-18-zc-0194-mwmolo10asasc.jpg",
+          "w": 1600,
+          "h": 973
+        }
+      ]
+    },
+    {
+      "id": "mwmolo933ocrb",
+      "sku": "ZC-0195",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Long rectangular tray with a matching small cup trimmed with a leaf and branch handle, in glossy brown and amber glaze with cream edges.",
+      "keywords": [
+        "tray",
+        "platter",
+        "cup",
+        "serving tray",
+        "pottery",
+        "brown",
+        "amber",
+        "cream",
+        "glossy glaze",
+        "leaf",
+        "rustic",
+        "kitchen",
+        "appetizer",
+        "gift"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-18-zc-0195-mwmolo93i58ph.jpg",
+          "w": 1600,
+          "h": 686
+        }
+      ]
+    },
+    {
+      "id": "mwmolod1qkmho",
+      "sku": "ZC-0196",
+      "title": "The Litt",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Small slab-built pitcher with a pulled spout, glossy cream and green glaze streaked with black and rust over a dark unglazed base.",
+      "keywords": [
+        "pitcher",
+        "creamer",
+        "vase",
+        "pottery",
+        "cream",
+        "green",
+        "black",
+        "rust",
+        "glossy glaze",
+        "drip glaze",
+        "rustic",
+        "kitchen",
+        "flowers",
+        "gift",
+        "handmade"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-18-zc-0196-mwmolod1lzc7c.jpg",
+          "w": 1398,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mwmoloifhm3ev",
+      "sku": "ZC-0197",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Tall footed pitcher with a pulled spout and tall loop handle, glossy brown glaze streaked with green and cream over a dark clay base.",
+      "keywords": [
+        "pitcher",
+        "creamer",
+        "jug",
+        "pottery",
+        "brown",
+        "green",
+        "cream",
+        "glossy glaze",
+        "drip glaze",
+        "rustic",
+        "kitchen",
+        "serving",
+        "handmade",
+        "gift"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-18-zc-0197-mwmoloifz12u9.jpg",
+          "w": 1591,
+          "h": 1600
+        }
+      ]
+    },
+    {
+      "id": "mwmololqcf1ri",
+      "sku": "ZC-0198",
+      "title": "",
+      "price": "",
+      "size": "",
+      "notes": "",
+      "sold": false,
+      "description": "Tall slab-built vase in glossy rust and amber glaze with cream mottling and a dark unglazed foot.",
+      "keywords": [
+        "vase",
+        "pottery",
+        "flower vase",
+        "bud vase",
+        "rust",
+        "amber",
+        "brown",
+        "cream",
+        "glossy glaze",
+        "mottled",
+        "rustic",
+        "living room",
+        "gift",
+        "handmade"
+      ],
+      "photos": [
+        {
+          "file": "photos/2026-11-18-zc-0198-mwmololqx8872.jpg",
+          "w": 739,
           "h": 1600
         }
       ]
