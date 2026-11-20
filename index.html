@@ -120,6 +120,24 @@ button{font:inherit;color:inherit}
 .chip[data-filter=paintings]{--c:#3d5f73;--t:#e8eff3}
 .chip[data-filter=flowers]{--c:#8a3d52;--t:#f5e9ed}
 .chip[data-filter=sold]{--c:#4f6b4a;--t:#ebf0e8}
+.chip[data-filter=reviews]{--c:#6b5524;--t:#f4efe1}
+
+/* ---------- reviews ---------- */
+.reviews{max-width:40rem;margin:0 auto;padding:0 1.25rem 3rem;font-family:var(--sans)}
+.review{border-top:1px solid var(--line);padding:1.3rem 0}
+.review blockquote{margin:0;font-family:var(--serif);font-size:1.12rem;line-height:1.6;color:var(--ink);white-space:pre-line}
+.review .by{margin:.55rem 0 0;font-size:.8rem;color:var(--muted);letter-spacing:.03em}
+.review .about{background:none;border:0;padding:0;font:inherit;color:var(--clay);cursor:pointer;text-decoration:underline}
+.leave{border-top:1px solid var(--line);margin-top:.5rem;padding-top:1.5rem;display:flex;flex-direction:column;gap:.8rem}
+.leave h2{margin:0;font-family:var(--serif);font-weight:400;font-size:1.35rem}
+.leave .trap{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.leave .done{font-family:var(--serif);font-size:1.05rem;color:var(--ink);margin:0}
+.leave .err{color:var(--clay);font-size:.85rem;margin:0}
+/* studio review list */
+.rv{border-bottom:1px solid var(--line);padding:.7rem 0}
+.rv p{margin:0 0 .35rem;font-size:.9rem;line-height:1.5;white-space:pre-line}
+.rv .rvmeta{font-size:.74rem;color:var(--muted)}
+.rv .inline{margin-top:.35rem}
 .chip:hover{box-shadow:inset 0 0 0 1px var(--c)}
 .chip[aria-pressed=true]{background:var(--c);color:#fff}
 
@@ -956,6 +974,8 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     return "";
   }
   var searchQ = "";
+  /* Approved reviews, read from the publishing service; null until loaded. */
+  var reviews = null, reviewSent = false, reviewErr = "", reviewBusy = false;
   var viewPiece = -1, viewPhoto = 0;
   var studioOpen = false, studioView = "list", editingId = null;
   var printOpen = false, printCols = 3, printSold = true, printQr = true;
@@ -1055,7 +1075,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
         catalogueVersion = c.version;
         seenData = JSON.parse(c.text);
         normalise(JSON.parse(c.text));
-        renderPage(); openFromHash(); watch();
+        renderPage(); openFromHash(); watch(); loadReviews();
       })
       .catch(function () { renderPage(); openFromHash(); watch(); });
   }
@@ -1187,7 +1207,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     });
     var others = counts.slice(1).reduce(function (a, n) { return a + n; }, 0);
     var shown = KINDS.some(function (k, i) { return k[1] === filter && (i === 0 || counts[i]); }) ||
-                (filter === "sold" && soldCount);
+                (filter === "sold" && soldCount) || (filter === "reviews" && useApi());
     if (!shown) { filter = "pottery"; list = visible(); }
     var h = "";
     h += '<header class="masthead">';
@@ -1199,7 +1219,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     h += "</header>";
     h += showBannerHtml();
 
-    if (state.pieces.length) {
+    if (state.pieces.length && filter !== "reviews") {
       h += '<div class="findbar">';
       h += '<input type="search" id="q" value="' + esc(searchQ) +
            '" placeholder="Search by name or description" autocomplete="off" spellcheck="false">';
@@ -1210,19 +1230,23 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     /* One tab per kind of work, holding what is still for sale; Sold holds the
        rest. A kind's tab appears once a piece of that kind is for sale, Sold
        once something has sold. */
-    if (others || soldCount) {
+    if (others || soldCount || useApi()) {
       var tabs = [];
       KINDS.forEach(function (k, i) { if (i === 0 || counts[i]) tabs.push([k[1], k[2], counts[i]]); });
       if (soldCount) tabs.push(["sold", "Sold", soldCount]);
+      /* Reviews is always there when the service is, so a buyer can leave the first one. */
+      if (useApi()) tabs.push(["reviews", "Reviews", reviews ? reviews.length : ""]);
       h += '<div class="filters">';
       tabs.forEach(function (f) {
         h += '<button class="chip" data-filter="' + f[0] + '" aria-pressed="' +
-             (filter === f[0]) + '">' + esc(f[1]) + " · " + f[2] + "</button>";
+             (filter === f[0]) + '">' + esc(f[1]) + (f[2] === "" ? "" : " · " + f[2]) + "</button>";
       });
       h += "</div>";
     }
 
-    if (!list.length) {
+    if (filter === "reviews") {
+      h += reviewsHtml();
+    } else if (!list.length) {
       h += '<p class="blank">' + (state.pieces.length ? "Nothing here just now."
             : "New pieces are on their way.") + "</p>";
     } else {
@@ -1288,10 +1312,102 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     }
     var studioBtn = document.getElementById("open-studio");
     if (studioBtn) studioBtn.addEventListener("click", openStudio);
+    if (filter === "reviews") bindReviews();
 
     if (viewPiece > -1) renderViewer();
     if (studioOpen) renderStudio();
     if (printOpen) renderPrint();
+  }
+
+  /* ---------------- reviews ---------------- */
+  /* Buyers send reviews; she approves them in the studio before they show. */
+  function loadReviews() {
+    if (!useApi()) return;
+    fetch(apiBase() + "/reviews", { cache: "no-store" }).then(function (r) { return r.json(); }).then(function (j) {
+      reviews = Array.isArray(j.reviews) ? j.reviews : [];
+      if (filter === "reviews") { renderPage(); return; }
+      var chip = root.querySelector('[data-filter="reviews"]');
+      if (chip) chip.textContent = "Reviews · " + reviews.length;
+    }).catch(function () { reviews = reviews || []; });
+  }
+
+  function pieceBySku(sku) {
+    for (var i = 0; i < state.pieces.length; i++) if (state.pieces[i].sku === sku) return state.pieces[i];
+    return null;
+  }
+
+  function reviewsHtml() {
+    var h = '<section class="reviews">';
+    if (reviews === null) h += '<p class="blank">Loading reviews…</p>';
+    else if (!reviews.length) h += '<p class="blank">No reviews yet. Be the first.</p>';
+    reviews && reviews.forEach(function (r) {
+      var p = r.sku ? pieceBySku(r.sku) : null;
+      var when = new Date(r.created_at);
+      h += '<article class="review"><blockquote>' + esc(r.text) + "</blockquote>";
+      h += '<p class="by">' + esc(r.name) +
+           (isNaN(when) ? "" : " · " + esc(when.toLocaleDateString(undefined, { month: "long", year: "numeric" }))) +
+           (p ? ' · about <button class="about" data-review-piece="' + esc(p.id) + '">' +
+                esc(p.title || p.sku) + "</button>" : "") + "</p></article>";
+    });
+    h += '<form class="leave" id="rv-form" novalidate>';
+    h += "<h2>Leave a review</h2>";
+    if (reviewSent) {
+      h += '<p class="done">Thank you. Your review will show here once it is approved.</p>';
+    } else {
+      h += '<div class="field"><label for="rv-name">Your name, as you would like it shown</label>' +
+           '<input type="text" id="rv-name" maxlength="60" autocomplete="name"></div>';
+      h += '<div class="field"><label for="rv-text">Your review</label>' +
+           '<textarea id="rv-text" maxlength="1000" rows="4"></textarea></div>';
+      h += '<div class="field"><label for="rv-sku">Item number, if it is about one piece (optional)</label>' +
+           '<input type="text" id="rv-sku" maxlength="12" placeholder="ZC-0001" spellcheck="false"></div>';
+      h += '<div class="trap" aria-hidden="true"><label for="rv-web">Leave this empty</label>' +
+           '<input type="text" id="rv-web" tabindex="-1" autocomplete="off"></div>';
+      if (reviewErr) h += '<p class="err">' + esc(reviewErr) + "</p>";
+      h += '<div><button class="btn" type="submit"' + (reviewBusy ? " disabled" : "") + ">" +
+           (reviewBusy ? "Sending…" : "Send review") + "</button></div>";
+    }
+    h += "</form></section>";
+    return h;
+  }
+
+  function bindReviews() {
+    root.querySelectorAll("[data-review-piece]").forEach(function (b) {
+      b.addEventListener("click", function () { openPiece(b.getAttribute("data-review-piece")); });
+    });
+    var form = document.getElementById("rv-form");
+    if (!form || reviewSent) return;
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var body = {
+        name: form.querySelector("#rv-name").value,
+        text: form.querySelector("#rv-text").value,
+        sku: form.querySelector("#rv-sku").value,
+        website: form.querySelector("#rv-web").value
+      };
+      if (!body.name.trim()) { reviewErr = "Please add your name."; keep(body); return; }
+      if (body.text.trim().length < 10) { reviewErr = "Please write a little more."; keep(body); return; }
+      reviewBusy = true; reviewErr = ""; keep(body);
+      fetch(apiBase() + "/reviews", {
+        method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body)
+      }).then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (j) {
+          if (!r.ok) throw new Error(j.error || "Could not send the review. Please try again.");
+        });
+      }).then(function () {
+        reviewBusy = false; reviewSent = true; renderPage();
+      }).catch(function (err) {
+        reviewBusy = false; reviewErr = String((err && err.message) || err); keep(body);
+      });
+    });
+    /* Re-rendering must not lose what they typed. */
+    function keep(b) {
+      renderPage();
+      var f = document.getElementById("rv-form");
+      if (!f || reviewSent) return;
+      f.querySelector("#rv-name").value = b.name;
+      f.querySelector("#rv-text").value = b.text;
+      f.querySelector("#rv-sku").value = b.sku;
+    }
   }
 
   /* ---------------- search ---------------- */
@@ -1713,6 +1829,7 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
            'A piece rung up in Square is marked sold here by itself.</span></div>';
       h += '<p class="note" id="s-sales" style="margin-top:.6rem"></p>';
       h += "</div>";
+      h += '<div class="block"><h3>Reviews</h3><div id="s-reviews"><p class="note">Loading reviews…</p></div></div>';
     }
 
     h += '<div class="block"><h3>Heading and contact</h3>';
@@ -1886,6 +2003,8 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
     if (sqp) sqp.addEventListener("click", function () { sendSquarePhotos([sq, sqp], sqn, ""); });
     var sales = el.querySelector("#s-sales");
     if (sales && session()) loadSales(sales);
+    var rvBox = el.querySelector("#s-reviews");
+    if (rvBox) loadStudioReviews(rvBox);
 
     bindText(el, "#s-name", function (v) { state.name = v; });
     bindText(el, "#s-trade", function (v) { state.trade = v; });
@@ -2294,6 +2413,62 @@ details.help code{background:#f5f2ee;padding:.05rem .3rem;border-radius:2px;font
       hint.className = "hint";
       hint.textContent = String((err && err.message) || err);
       btn.disabled = false;
+    });
+  }
+
+  /* Reviews waiting for her, and the ones already showing. Nothing a buyer
+     sends shows on the website until she approves it here. */
+  function loadStudioReviews(box) {
+    if (!session()) { box.innerHTML = '<p class="note">Sign in to see reviews.</p>'; return; }
+    fetch(apiBase() + "/reviews/all", { headers: { Authorization: "Bearer " + session() } }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) {
+        if (!r.ok) throw new Error(j.error || ("Could not read the reviews (" + r.status + ")"));
+        return j.reviews || [];
+      });
+    }).then(function (list) {
+      var order = { pending: 0, approved: 1, hidden: 2 };
+      list.sort(function (a, b) { return order[a.status] - order[b.status]; });
+      var waiting = list.filter(function (r) { return r.status === "pending"; }).length;
+      var h = '<p class="note">' + (list.length
+        ? waiting + " waiting for you, " + (list.length - waiting) + " already handled. Approved reviews show on the Reviews tab."
+        : "No reviews yet. Buyers can leave one on the Reviews tab.") + "</p>";
+      list.forEach(function (r) {
+        var when = new Date(r.created_at);
+        h += '<div class="rv"><p>' + esc(r.text) + "</p>";
+        h += '<div class="rvmeta">' + esc(r.name) + (r.sku ? " · " + esc(r.sku) : "") +
+             (isNaN(when) ? "" : " · " + esc(when.toLocaleDateString())) + " · " +
+             (r.status === "pending" ? "<b>Waiting</b>" : r.status === "approved" ? "Showing" : "Hidden") + "</div>";
+        h += '<div class="inline">';
+        if (r.status !== "approved") h += '<button class="btn small" data-rv="approve" data-id="' + esc(r.id) + '">Approve</button>';
+        if (r.status === "approved") h += '<button class="btn plain small" data-rv="hide" data-id="' + esc(r.id) + '">Hide</button>';
+        h += '<button class="btn plain small" data-rv="delete" data-id="' + esc(r.id) + '">Delete</button>';
+        h += "</div></div>";
+      });
+      box.innerHTML = h;
+      box.querySelectorAll("[data-rv]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          var action = b.getAttribute("data-rv");
+          if (action === "delete" && !confirm("Delete this review for good?")) return;
+          b.disabled = true;
+          fetch(apiBase() + "/reviews/moderate", {
+            method: "POST",
+            headers: { Authorization: "Bearer " + session(), "Content-Type": "application/json" },
+            body: JSON.stringify({ id: b.getAttribute("data-id"), action: action })
+          }).then(function (r) {
+            return r.json().catch(function () { return {}; }).then(function (j) {
+              if (!r.ok) throw new Error(j.error || "Could not update the review.");
+            });
+          }).then(function () {
+            loadStudioReviews(box);
+            loadReviews();
+          }).catch(function (err) {
+            b.disabled = false;
+            alert(String((err && err.message) || err));
+          });
+        });
+      });
+    }).catch(function (err) {
+      box.innerHTML = '<p class="note">' + esc(String((err && err.message) || err)) + "</p>";
     });
   }
 
