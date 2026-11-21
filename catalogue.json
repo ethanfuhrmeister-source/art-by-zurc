@@ -1429,7 +1429,7 @@
       "price": "$165",
       "size": "W: 9.5\" L:21.5\" H:2\"",
       "notes": "Long navy blue oval fruit bowl with a carved textured panel. Food safe, Dishwasher safe, Oven safe.",
-      "sold": false,
+      "sold": true,
       "description": "Long oval fruit bowl in glossy navy blue with a woven lattice texture across the base.",
       "keywords": [
         "fruit bowl",
@@ -3124,7 +3124,7 @@
       "price": "$110",
       "size": "W: 12.5\" L:12.5\" H:.75\"",
       "notes": "",
-      "sold": false,
+      "sold": true,
       "description": "A wide round platter with a creamy speckled glaze that breaks to warm brown and rust around the rim, good for serving bread, cheese, or fruit at the table.",
       "keywords": [
         "platter",
