@@ -1495,7 +1495,7 @@
       "price": "$100",
       "size": "W: 4.5\" L:7\" H:.75\"",
       "notes": "Set of four square dessert plates in near-black midnight glaze. Food safe, Dishwasher safe, Oven safe.",
-      "sold": false,
+      "sold": true,
       "description": "Set of four small rectangular dessert plates in a glossy near-black glaze with soft gray and blue spotting.",
       "keywords": [
         "dessert plate",
@@ -2665,7 +2665,7 @@
       "price": "$140",
       "size": "W: 6\" L:6\" H:2.5\"",
       "notes": "",
-      "sold": false,
+      "sold": true,
       "description": "A set of four square-ish bowls with softly rounded corners, glazed in mossy greens and browns with a pooled glossy centre, and a band of pressed flowers around the outside picked out in dusty pink — good for soup, cereal or serving sides.",
       "keywords": [
         "bowl",
@@ -2896,7 +2896,7 @@
       "price": "$95",
       "size": "W: 8\" L:8\" H:4\"",
       "notes": "",
-      "sold": false,
+      "sold": true,
       "description": "A hand-built squared bowl with a glossy green and rust-brown glaze pooling inside, and a rough red-earth exterior painted with simple flowers — good for serving salad or fruit, or just sitting out as a centrepiece.",
       "keywords": [
         "bowl",
@@ -4200,7 +4200,7 @@
       "price": "$125",
       "size": "16\"x20\"",
       "notes": "",
-      "sold": false,
+      "sold": true,
       "kind": "painting",
       "description": "A framed painting of a figure seen from behind, worked in dark greys, blacks and olive-gold with a heavily textured, crackled surface, set in a simple black frame and meant to hang on a wall.",
       "keywords": [
