@@ -3628,7 +3628,7 @@
       "price": "$65",
       "size": "10\"x10\"",
       "notes": "",
-      "sold": false,
+      "sold": true,
       "kind": "painting",
       "description": "A square canvas painting of a woman's head in profile, built from flat geometric facets in ochre, rust, blue and black against a warm yellow background, with a red lip and a big drop earring \\u2014 ready to hang on a wall.",
       "keywords": [
