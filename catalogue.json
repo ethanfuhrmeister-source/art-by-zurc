@@ -180,7 +180,7 @@
       "price": "$135",
       "size": "W: 13.5\" H:2.25\"",
       "notes": "Shallow round bowl in swirled grey and blue, like moving water. Food safe, Dishwasher safe, Oven safe.",
-      "sold": false,
+      "sold": true,
       "description": "Wide shallow serving bowl in swirled gray and blue glossy glaze that looks like moving water.",
       "keywords": [
         "bowl",
@@ -937,7 +937,7 @@
       "price": "$120",
       "size": "W: 9.75\" L:10.5\" H:1.5\" Bowl W: 5\" H: 1.25\"",
       "notes": "Square black brie platter with a small round dipping bowl. Food safe, Dishwasher safe, Oven safe.",
-      "sold": false,
+      "sold": true,
       "description": "Square black serving platter with a built-in round dipping well, finished in a satin black glaze with soft gray streaks.",
       "keywords": [
         "platter",
