@@ -147,7 +147,7 @@
       "price": "$145",
       "size": "W: 13\" H:3.75\"",
       "notes": "Wide ruffled bowl, purple and cream glaze with a frilled rim. Food safe, Dishwasher safe, Oven safe.",
-      "sold": false,
+      "sold": true,
       "description": "Wide ruffled serving bowl in glossy purple, cream and brown glaze with a frilled, wavy rim.",
       "keywords": [
         "bowl",
@@ -2197,7 +2197,7 @@
       "price": "$145",
       "size": " W: 11.25\"  H:3\"",
       "notes": "Bowl hand painted with a single large red poppy. Food safe, Dishwasher safe.",
-      "sold": false,
+      "sold": true,
       "description": "Wide serving bowl hand painted with a single large red poppy inside, with small red flowers scattered over a crackled gray outside.",
       "keywords": [
         "bowl",
@@ -6325,7 +6325,7 @@
       "price": "$110",
       "size": "13\"x6.5\"",
       "notes": "",
-      "sold": false,
+      "sold": true,
       "description": "Rectangular serving tray with ruffled corner accents and a small matching dip bowl, in speckled tan and brown glaze with glossy edges.",
       "keywords": [
         "tray",
