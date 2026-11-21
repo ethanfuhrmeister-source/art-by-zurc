@@ -377,7 +377,7 @@
       "price": "$130",
       "size": "W: 12\"  H:4.5\"",
       "notes": "Folded brown bowl with a glossy, softly pleated rim. Food safe, Dishwasher safe, Oven safe.",
-      "sold": false,
+      "sold": true,
       "description": "Wide folded serving bowl in glossy brown and bronze glaze with a softly pleated, wavy rim.",
       "keywords": [
         "bowl",
@@ -6126,7 +6126,7 @@
       "price": "$25",
       "size": "6\" tall",
       "notes": "",
-      "sold": false,
+      "sold": true,
       "description": "Two-handled vase with faceted sides in speckled cream and brown glaze with amber spots and pink handles.",
       "keywords": [
         "vase",
