@@ -311,7 +311,7 @@
       "price": "$120",
       "size": "W: 11\"  H:2\"",
       "notes": "Speckled brown and cream bowl with a rough, frosted surface. Food safe, Dishwasher safe, Oven safe.",
-      "sold": false,
+      "sold": true,
       "description": "Wide shallow serving bowl in speckled cream and brown glaze with a dark gray base and a glossy frosted interior.",
       "keywords": [
         "bowl",
@@ -1396,7 +1396,7 @@
       "price": "$35",
       "size": "W: 5\" L:5.75\" H:2.5\"",
       "notes": "Small white ruffled bowl, heavily speckled. Food safe, Dishwasher safe, Oven safe.",
-      "sold": false,
+      "sold": true,
       "description": "Small ruffled bowl in glossy white glaze with heavy black speckles and a soft lilac blush, with wavy pinched edges.",
       "keywords": [
         "bowl",
