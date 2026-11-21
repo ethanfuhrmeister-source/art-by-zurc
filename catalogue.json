@@ -3156,7 +3156,7 @@
       "price": "$120",
       "size": "W: 8\" L: 8\" H:.75\"",
       "notes": "",
-      "sold": false,
+      "sold": true,
       "description": "A set of small scalloped-edge plates glazed in soft green and cream with brown speckling that streaks out from the centre like petals, handy for side salads, desserts or little bites.",
       "keywords": [
         "plate",
@@ -5083,7 +5083,7 @@
       "price": "$70",
       "size": "12\"x12\"",
       "notes": "",
-      "sold": false,
+      "sold": true,
       "kind": "painting",
       "description": "A small square canvas with a stitched fabric applique bird in beige and blue floral prints, standing among hand-painted blue cornflowers on a soft pink and white washed background, ready to hang on the wall.",
       "keywords": [
@@ -5151,7 +5151,7 @@
       "price": "$70",
       "size": "12\"x12\"",
       "notes": "Painting with pale green, pompom flowers in red, pink, blue and yellow with a hedgehog watering can below.",
-      "sold": false,
+      "sold": true,
       "kind": "painting",
       "description": "A square painted canvas on a soft pale green background, showing two tall flower stems with round pom-pom blooms in red, pink, teal, purple and navy, each one stitched over with thread, and a little hedgehog with a watering can at the bottom — a piece to hang on the wall.",
       "keywords": [
